@@ -1,13 +1,13 @@
 # fnOS Apps（Helenvin 定制版）
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Apps](https://img.shields.io/badge/apps-160-2ea44f)
+![Apps](https://img.shields.io/badge/apps-161-2ea44f)
 ![Platform](https://img.shields.io/badge/fnOS-third--party-orange)
 
 飞牛 fnOS 第三方应用仓库（个人定制版）。fork 自 [conversun/fnos-apps](https://github.com/conversun/fnos-apps)：
 
 - 保留其 156 款应用的自动跟踪构建体系，并**全量镜像上游 Release 到本仓库**——即使上游删库，所有应用仍可正常安装与更新
-- 新增自有应用：MDC / AVdb（Docker 版）+ LitePan、清理精灵（原生版；MDC-NG 原生版已下架，见下方说明）
+- 新增自有应用：MDC / AVdb（Docker 版）+ LitePan、清理精灵（原生版；MDC-NG 原生版已下架，见下方说明）+ SQMusic（Docker 版，含自研发现页）
 - 配套**定制版应用中心**：在飞牛窗口内嵌打开，应用目录与安装包全部来自本仓库
 
 > ⭐️ 如果觉得本项目对你有帮助，请右上角点个 Star！
@@ -20,7 +20,7 @@
 
 | | App | 端口 | 说明 | 来源 | 下载 |
 |:---:|---|---:|---|:---:|:---:|
-| <img src="apps/fnos-apps-store/fnos/ICON.PNG" width="28"> | **fnOS Apps** | `8011` | **定制版第三方应用中心**：飞牛窗口内嵌打开，目录指向本仓库（160 应用），一键安装与更新、自动检测升级 | [GitHub](https://github.com/Helenvin/fnos-store) | [Release][r-store] |
+| <img src="apps/fnos-apps-store/fnos/ICON.PNG" width="28"> | **fnOS Apps** | `8011` | **定制版第三方应用中心**：飞牛窗口内嵌打开，目录指向本仓库（161 应用），一键安装与更新、自动检测升级 | [GitHub](https://github.com/Helenvin/fnos-store) | [Release][r-store] |
 
 ### ⭐ 自有应用（本仓库新增）
 
@@ -30,6 +30,7 @@
 | <img src="apps/avdb/fnos/ICON.PNG" width="28"> | **AVdb** | `8000` | AVdb 媒体库（Docker 版，数据在 /vol1/1000/docker/avdb/data，与 MDC 容器联动） | [GitHub](https://github.com/li-peifeng/AVdb-Only) | [Release][r-avdb] |
 | <img src="https://raw.githubusercontent.com/Helenvin/LitePan-fpk/main/LitePan-x86/ICON.PNG" width="28"> | **LitePan（原生）** | `5211` | 网盘聚合挂载 + STRM 刮削（Go 单二进制原生版，无需 Docker）；由 [Helenvin/LitePan-fpk](https://github.com/Helenvin/LitePan-fpk) 自动同步 | [GitHub](https://github.com/Helenvin/LitePan-fpk) | [Release][r-litepan] |
 | <img src="https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fnclearup/ICON_256.PNG" width="28"> | **清理精灵（原生）** | fnOS 桌面 | 智能扫描已卸载应用、网盘挂载与 Docker 残留目录及重复文件，一键安全清理（Node.js 版，root 运行，**需先在应用中心安装 nodejs_v24**）；每日自动同步 [FnDepot](https://github.com/Wyf841015/FnDepot) | [GitHub](https://github.com/Wyf841015/FnDepot) | [Release][r-fnclearup] |
+| <img src="apps/sqmusic/fnos/ICON.PNG" width="28"> | **SQMusic** | `8097` | 七源音乐下载站（Docker 版，上游 simple_sq_music_plus + 自研「发现」页：QQ 25 榜单匿名浏览与逐首/整榜下载、歌单广场解析，音乐按歌手/专辑落盘适配 Emby/Jellyfin） | [GitHub](https://github.com/59799517/simple_sq_music_plus) | [Release][r-sqmusic] |
 
 > [!NOTE]
 > **MDC-NG 原生版已下架**：实测上游 Release 仅提供 API 后端二进制（默认端口 9207，无任何网页），Web 界面（Next.js，需 Node.js 22）只存在于 Docker 镜像 `mdcng/mdc` 中，原生 fpk 无法提供可用界面，构建流水线已停用。请安装上方 **Docker 版 MDC**，数据目录 `/var/apps/mdc/shares/mdc/data` 自动继承。
@@ -295,6 +296,7 @@ fnos-apps/
 [r-avdb]: https://github.com/Helenvin/fnos-apps/releases?q=avdb
 [r-litepan]: https://github.com/Helenvin/fnos-apps/releases?q=LitePan
 [r-fnclearup]: https://github.com/Helenvin/fnos-apps/releases?q=fnclearup
+[r-sqmusic]: https://github.com/Helenvin/fnos-apps/releases?q=sqmusic
 [r-plex]: https://github.com/Helenvin/fnos-apps/releases?q=plex
 [r-emby]: https://github.com/Helenvin/fnos-apps/releases?q=emby
 [r-jellyfin]: https://github.com/Helenvin/fnos-apps/releases?q=jellyfin
