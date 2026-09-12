@@ -3,7 +3,7 @@
 基于 [mdcng/mdc](https://github.com/Helenvin/mdc-ng) Docker 镜像（`docker.io/mdcng/mdc`，amd64/arm64 多架构）的 fnOS 应用包。
 
 - **WebUI**: 端口 9208
-- **原地替换（drop-in）**: 安装向导的配置目录默认指向手动部署常见路径 `/var/apps/mdc/shares/mdc/data`，容器名保持 `mdc`，原配置、数据库、刮削结果无缝继承，外部联动不受影响
+- **平滑迁移**: 数据默认存放在应用专属数据空间（TRIM_PKGVAR，fnOS 自动管理，卸载时可选择清除）；在安装向导中填写旧配置目录绝对路径即可原地继承手动部署的数据，容器名保持 `mdc`，外部联动不受影响
 - **媒体库**: 安装向导填写一次（默认 `/vol1/1000`），挂载为容器 `/media`
 - **自动跟踪**: CI 每日检查 Docker Hub `mdcng/mdc` 的新 semver tag（`v1.36.0` → manifest `1.36.0`），自动重打包发布
 

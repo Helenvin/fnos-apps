@@ -4,15 +4,16 @@ services:
     container_name: mdc
     restart: unless-stopped
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=${TRIM_UID:-1000}
+      - PGID=${TRIM_GID:-1000}
       - TZ=Asia/Shanghai
       - MDC_USERNAME=${wizard_username:-admin}
       - MDC_PASSWORD=${wizard_password:-admin}
     ports:
       - "${TRIM_SERVICE_PORT}:9208"
     volumes:
-      # drop-in：默认接管手动部署的既有配置/数据库，安装向导可修改
-      - ${wizard_config_dir:-/var/apps/mdc/shares/mdc/data}:/config
-      # 媒体库目录：安装向导填写一次，挂载为容器 /media
+      # 配置目录：向导留空时使用应用专属数据空间（TRIM_PKGVAR，fnOS 自动管理）；
+      # 填写旧路径可原地继承手动部署的既有配置/数据库
+      - ${wizard_config_dir:-${TRIM_PKGVAR:?}/config}:/config
+      # 媒体库目录：向导留空默认挂载存储空间根目录 /vol1/1000
       - ${wizard_media_dir:-/vol1/1000}:/media

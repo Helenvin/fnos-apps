@@ -6,14 +6,15 @@ services:
     ports:
       - "${TRIM_SERVICE_PORT}:8000"
     volumes:
-      # drop-in：默认接管手动部署的既有数据库/规则/下载记录，安装向导可修改
-      - ${wizard_data_dir:-/vol1/1000/docker/avdb/data}:/data
+      # 数据目录：向导留空时使用应用专属数据空间（TRIM_PKGVAR，fnOS 自动管理）；
+      # 填写旧路径（如 /vol1/1000/docker/avdb/data）可原地继承手动部署的数据库/规则/下载记录
+      - ${wizard_data_dir:-${TRIM_PKGVAR:?}/data}:/data
       # 联动 MDC-NG：映射表变更后自动重启 MDC 容器
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - DATABASE_URL=sqlite:////data/avdb.db
-      - PUID=1000
-      - PGID=1000
+      - PUID=${TRIM_UID:-1000}
+      - PGID=${TRIM_GID:-1000}
       - TZ=Asia/Shanghai
     mem_limit: 4G
     networks:

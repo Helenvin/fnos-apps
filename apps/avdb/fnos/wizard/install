@@ -4,19 +4,12 @@
         "items": [
             {
                 "type": "tips",
-                "helpText": "原地替换：数据目录默认指向手动部署的既有路径，原有 avdb.db 数据库、采集规则、下载记录自动继承，无需重新设置。"
+                "helpText": "数据目录留空时，数据存放在应用专属空间（fnOS 自动管理，卸载时可选择清除）。如需继承手动部署的旧数据，请填写旧数据目录的绝对路径（如 /vol1/1000/docker/avdb/data，原样填入即可原地接管）。"
             },
             {
                 "type": "text",
                 "field": "wizard_data_dir",
-                "label": "数据目录（挂载到容器 /data）",
-                "initValue": "/vol1/1000/docker/avdb/data",
-                "rules": [
-                    {
-                        "required": true,
-                        "message": "请输入数据目录，例如 /vol1/1000/docker/avdb/data"
-                    }
-                ]
+                "label": "数据目录（挂载到容器 /data，留空使用应用默认）"
             },
             {
                 "type": "tips",

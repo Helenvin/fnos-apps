@@ -4,31 +4,17 @@
         "items": [
             {
                 "type": "tips",
-                "helpText": "原地替换：配置目录默认指向手动部署的既有路径，原有配置、数据库、刮削结果自动继承，无需重新设置。"
+                "helpText": "配置目录留空时，数据存放在应用专属空间（fnOS 自动管理，卸载时可选择清除）。如需继承手动 Docker 部署的既有数据，请填写旧配置目录的绝对路径（原样填入即可原地接管）。"
             },
             {
                 "type": "text",
                 "field": "wizard_config_dir",
-                "label": "配置目录（挂载到容器 /config）",
-                "initValue": "/var/apps/mdc/shares/mdc/data",
-                "rules": [
-                    {
-                        "required": true,
-                        "message": "请输入配置目录"
-                    }
-                ]
+                "label": "配置目录（挂载到容器 /config，留空使用应用默认）"
             },
             {
                 "type": "text",
                 "field": "wizard_media_dir",
-                "label": "媒体库目录（挂载到容器 /media）",
-                "initValue": "/vol1/1000",
-                "rules": [
-                    {
-                        "required": true,
-                        "message": "请输入媒体库目录"
-                    }
-                ]
+                "label": "媒体库目录（挂载到容器 /media，留空默认 /vol1/1000）"
             },
             {
                 "type": "tips",
