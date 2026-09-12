@@ -1,22 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# shellcheck source=../../lib/gh-api.sh
-source "$SCRIPT_DIR/../../lib/gh-api.sh"
-
-INPUT_VERSION="${1:-}"
-
-TAG=$(gh_latest_tag "conversun/fnos-store") || { echo "Failed to resolve version for fnos-apps-store" >&2; exit 1; }
-
-if [ -n "$INPUT_VERSION" ]; then
-  VERSION="$INPUT_VERSION"
-else
-  VERSION=$(echo "$TAG" | sed 's/^v//')
-fi
-
-[ -z "$VERSION" ] || [ "$VERSION" = "null" ] && { echo "Failed to resolve version for fnos-apps-store" >&2; exit 1; }
-
+# Helenvin patch: the store app is published manually as fnos-apps-store/v1.9.5-hv1
+# (patched binary pointing the catalog at this fork). Do not track upstream here,
+# otherwise the daily cron would rebuild the official store and flip the catalog
+# entry back to conversun. Bump VERSION manually when republishing.
+VERSION="1.9.5-hv1"
 echo "VERSION=$VERSION"
 
 if [ -n "${GITHUB_OUTPUT:-}" ]; then
