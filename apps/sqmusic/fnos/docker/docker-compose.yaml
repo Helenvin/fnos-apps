@@ -1,6 +1,7 @@
 services:
   sqmusic_main:
-    image: registry.cn-hangzhou.aliyuncs.com/sqdockler/simple_sq_music_plus:${VERSION}
+    # GHCR 官方镜像（与作者 aliyun 源同一构建产物）：实测国内直连 ~3.2MB/s，aliyun OSS 仅 ~0.5MB/s
+    image: ghcr.io/59799517/simple_sq_music_plus:${VERSION}
     container_name: sqmusic_main
     restart: unless-stopped
     environment:

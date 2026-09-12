@@ -8,7 +8,7 @@
 
 | 容器 | 镜像 | 作用 |
 |---|---|---|
-| `sqmusic_main` | `sqdockler/simple_sq_music_plus:v<ver>` (aliyun) | Java 多源下载引擎（kw/qq/qqvip/mg/netease/kg/tidal） |
+| `sqmusic_main` | `ghcr.io/59799517/simple_sq_music_plus:v<ver>`（GHCR 官方源，国内直连 ~3.2MB/s，实测比作者 aliyun 源快 6 倍） | Java 多源下载引擎（kw/qq/qqvip/mg/netease/kg/tidal） |
 | `sqmusic_web` | `nginx:1.27-alpine` | 托管补丁版前端 + `/api` 反代后端 + `/qq/` 代理（注入 Referer 访问 QQ fcg 接口） |
 | `sqmusic_mysql` | `mysql:5.7` | 下载记录/账号（mysql:5.7 仅 amd64，故 `SUPPORTED_ARCH=x86`） |
 
