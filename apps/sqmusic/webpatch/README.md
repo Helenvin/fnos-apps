@@ -4,6 +4,11 @@
 **v3 分支**构建产物的补丁版打包，包含 `dist/`（Vue 构建产物）+ `nginx.conf`（含 `/qq/` 代理）。
 `scripts/apps/sqmusic/build.sh` 在打 app.tgz 时解包到 `webdist/` 目录，由 `sqmusic_web` 容器只读挂载。
 
+> **补丁源码仓库（2026-09-13 起，以此为准）**：[Helenvin/simple_sq_music_plus_web](https://github.com/Helenvin/simple_sq_music_plus_web)（v3 分支）。
+> 4 个补丁已合入 fork 源码，仓库内含 `PATCHES.md`（补丁清单 + 上游同步/冲突重放说明）、`build-dist.sh`（一键构建）、
+> Actions「Build dist」（在线产 dist.tgz）。以后更新流程：fork 页 Sync fork → 有冲突按 PATCHES.md 重放 →
+> 本地 build-dist.sh 或跑 Actions 产 dist.tgz → 放回本目录（apps/sqmusic/webdist/dist.tgz）→ fnos-apps 发新版。
+
 ## 本目录内容（保持上游目录结构，重建时直接覆盖同名文件）
 
 | 文件 | 说明 |
