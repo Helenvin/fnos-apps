@@ -146,7 +146,7 @@ done
 
 
 # --- Helenvin patch: native apps synced from fpk repos (built externally via fnpack) ---
-for slug in mdcng LitePan; do
+for slug in LitePan; do
   latest_release=$(echo "$ALL_RELEASES" | jq -r \
     --arg prefix "${slug}/" \
     '[.[] | select(.tagName | startswith($prefix))] | sort_by(.publishedAt) | last // empty')
@@ -162,12 +162,6 @@ for slug in mdcng LitePan; do
   fpk_version="$tag_version"
 
   case "$slug" in
-    mdcng)
-      FILE_PREFIX="MDC_ng"; APPNAME="mdcng"; DISPLAY="MDC-NG 媒体刮削（原生）"
-      DESC="MDC-NG 原生版（Rust 单文件二进制，无需 Docker）：媒体刮削整理，端口 9208。由 Helenvin/mdc-ng-fpk 自动同步。"
-      PORT=9208; HOMEPAGE="https://github.com/Helenvin/mdc-ng-fpk"
-      ICON="https://raw.githubusercontent.com/Helenvin/mdc-ng-fpk/main/mdc-x86/ICON_256.PNG"; CATEGORY="media"
-      ;;
     LitePan)
       FILE_PREFIX="LitePan"; APPNAME="LitePan"; DISPLAY="LitePan（原生）"
       DESC="LitePan 原生版（Go 单二进制，无需 Docker）：网盘聚合挂载、STRM 刮削、目录整理，默认端口 5211。由 Helenvin/LitePan-fpk 自动同步。"
