@@ -1,6 +1,6 @@
 # SQMusic 音乐下载站
 
-基于 [59799517/simple_sq_music_plus](https://github.com/59799517/simple_sq_music_plus) 的 fnOS Docker 打包，
+基于 [Helenvin/simple_sq_music_plus](https://github.com/Helenvin/simple_sq_music_plus)（上游 [59799517/simple_sq_music_plus](https://github.com/59799517/simple_sq_music_plus) 的自研重构版，新增**酷我/酷狗/QQ音乐歌单监听下载**）的 fnOS Docker 打包，
 外加自研的**「发现」页补丁**（`webpatch/`）：在官方 v3 前端里新增 QQ 音乐发现页，
 打开应用即歌单广场/榜单，无需登录即可逐首或整榜下载。
 
@@ -8,7 +8,7 @@
 
 | 容器 | 镜像 | 作用 |
 |---|---|---|
-| `sqmusic_main` | `ghcr.io/59799517/simple_sq_music_plus:v<ver>`（GHCR 官方源，国内直连 ~3.2MB/s，实测比作者 aliyun 源快 6 倍） | Java 多源下载引擎（kw/qq/qqvip/mg/netease/kg/tidal） |
+| `sqmusic_main` | `ghcr.io/helenvin/simple_sq_music_plus:v<ver>`（自研版，fork CI 自动构建双架构镜像） | Java 多源下载引擎（kw/qq/qqvip/mg/netease/kg/tidal）+ 多平台歌单监听 |
 | `sqmusic_web` | `nginx:1.27-alpine` | 托管补丁版前端 + `/api` 反代后端 + `/qq/` 代理（注入 Referer 访问 QQ fcg 接口） |
 | `sqmusic_mysql` | `mysql:5.7` | 下载记录/账号（mysql:5.7 仅 amd64，故 `SUPPORTED_ARCH=x86`） |
 

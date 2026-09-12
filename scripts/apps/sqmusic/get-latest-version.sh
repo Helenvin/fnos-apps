@@ -1,8 +1,8 @@
 #!/bin/bash
 set -euo pipefail
 
-# Resolve latest simple_sq_music_plus version from GitHub releases.
-# Upstream tags look like 3.1.29 (no v prefix); the aliyun docker image tag is v3.1.29.
+# Resolve latest simple_sq_music_plus version from GitHub releases (self-maintained fork).
+# Release tags look like 3.1.29 (no v prefix); the GHCR docker image tag is v<version>.
 # Output: VERSION=x.y.z, UPSTREAM_TAG=x.y.z (+ GITHUB_OUTPUT when running in CI)
 
 INPUT_VERSION="${1:-}"
@@ -15,7 +15,7 @@ else
         CURL_AUTH=(-H "Authorization: Bearer ${GH_TOKEN}")
     fi
     VERSION=$(curl -fsSL "${CURL_AUTH[@]}" \
-        "https://api.github.com/repos/59799517/simple_sq_music_plus/releases/latest" \
+        "https://api.github.com/repos/Helenvin/simple_sq_music_plus/releases/latest" \
         | jq -r '.tag_name' | sed 's/^v//')
 fi
 
