@@ -4,7 +4,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
-REPO="conversun/fnos-apps"
+REPO="Helenvin/fnos-apps"
 OUTPUT="${REPO_ROOT}/apps.json"
 
 command -v jq >/dev/null 2>&1 || { echo "[ERROR] jq is required" >&2; exit 1; }
@@ -142,6 +142,67 @@ for app_dir in "${REPO_ROOT}"/scripts/apps/*/; do
 
   APPS_JSON=$(echo "$APPS_JSON" | jq --argjson app "$app_obj" '. + [$app]')
   echo "  ✓ ${slug} → ${release_tag}"
+done
+
+
+# --- Helenvin patch: native apps synced from fpk repos (built externally via fnpack) ---
+for slug in mdcng LitePan; do
+  latest_release=$(echo "$ALL_RELEASES" | jq -r \
+    --arg prefix "${slug}/" \
+    '[.[] | select(.tagName | startswith($prefix))] | sort_by(.publishedAt) | last // empty')
+  if [ -z "$latest_release" ] || [ "$latest_release" = "null" ]; then
+    echo "[WARN] No native release found for ${slug}, skipping" >&2
+    continue
+  fi
+
+  release_tag=$(echo "$latest_release" | jq -r '.tagName')
+  updated_at=$(echo "$latest_release" | jq -r '.publishedAt')
+  tag_version="${release_tag#${slug}/v}"
+  version="${tag_version%%-r[0-9]*}"
+  fpk_version="$tag_version"
+
+  case "$slug" in
+    mdcng)
+      FILE_PREFIX="MDC_ng"; APPNAME="mdcng"; DISPLAY="MDC-NG 媒体刮削（原生）"
+      DESC="MDC-NG 原生版（Rust 单文件二进制，无需 Docker）：媒体刮削整理，端口 9208。由 Helenvin/mdc-ng-fpk 自动同步。"
+      PORT=9208; HOMEPAGE="https://github.com/Helenvin/mdc-ng-fpk"
+      ICON="https://raw.githubusercontent.com/Helenvin/mdc-ng-fpk/main/mdc-x86/ICON_256.PNG"; CATEGORY="media"
+      ;;
+    LitePan)
+      FILE_PREFIX="LitePan"; APPNAME="LitePan"; DISPLAY="LitePan（原生）"
+      DESC="LitePan 原生版（Go 单二进制，无需 Docker）：网盘聚合挂载、STRM 刮削、目录整理，默认端口 5211。由 Helenvin/LitePan-fpk 自动同步。"
+      PORT=5211; HOMEPAGE="https://github.com/Helenvin/LitePan-fpk"
+      ICON="https://raw.githubusercontent.com/Helenvin/LitePan-fpk/main/LitePan-x86/ICON_256.PNG"; CATEGORY="media"
+      ;;
+  esac
+
+  app_obj=$(jq -n \
+    --arg slug "$slug" \
+    --arg appname "$APPNAME" \
+    --arg file_prefix "$FILE_PREFIX" \
+    --arg display_name "$DISPLAY" \
+    --arg description "$DESC" \
+    --arg version "$version" \
+    --arg fpk_version "$fpk_version" \
+    --arg release_tag "$release_tag" \
+    --argjson service_port "$PORT" \
+    --arg homepage_url "$HOMEPAGE" \
+    --arg icon_url "$ICON" \
+    --arg updated_at "$updated_at" \
+    --argjson download_count 0 \
+    --arg app_type "native" \
+    --arg category "$CATEGORY" \
+    '{
+      slug: $slug, appname: $appname, file_prefix: $file_prefix,
+      display_name: $display_name, description: $description,
+      version: $version, fpk_version: $fpk_version, release_tag: $release_tag,
+      service_port: $service_port, homepage_url: $homepage_url, icon_url: $icon_url,
+      platforms: ["x86", "arm"], updated_at: $updated_at, download_count: $download_count,
+      app_type: $app_type, category: $category
+    }')
+
+  APPS_JSON=$(echo "$APPS_JSON" | jq --argjson app "$app_obj" '. + [$app]')
+  echo "  + native ${slug} -> ${release_tag}"
 done
 
 APPS_JSON=$(echo "$APPS_JSON" | jq 'sort_by(.slug)')
