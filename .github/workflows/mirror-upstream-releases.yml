@@ -92,13 +92,14 @@ jobs:
             done
           }
 
-          MDCTAG=$(gh api repos/Helenvin/mdc-ng-fpk/releases/latest --jq '.tag_name')
-          MDCVER=$(echo "$MDCTAG" | sed 's/^v//; s/-fpk.*//')
-          sync_native "Helenvin/mdc-ng-fpk" "$MDCTAG" "mdcng" "MDC_ng" "$MDCVER"
-
-          LPTAG=$(gh api repos/Helenvin/LitePan-fpk/releases/latest --jq '.tag_name')
-          LPVER=$(echo "$LPTAG" | sed 's/^v//; s/-fpk.*//')
-          sync_native "Helenvin/LitePan-fpk" "$LPTAG" "LitePan" "LitePan" "$LPVER"
+          # mdcng: source repo Helenvin/mdc-ng-fpk was deleted (native MDC-NG retired) - no sync
+          LPTAG=$(gh api repos/Helenvin/LitePan-fpk/releases/latest --jq '.tag_name' 2>/dev/null || echo "")
+          if [ -n "$LPTAG" ]; then
+            LPVER=$(echo "$LPTAG" | sed 's/^v//; s/-fpk.*//')
+            sync_native "Helenvin/LitePan-fpk" "$LPTAG" "LitePan" "LitePan" "$LPVER"
+          else
+            echo "[WARN] LitePan-fpk latest release not found, skip sync"
+          fi
 
           # --- fnclearup: single all-platform fpk stored inside the FnDepot git repo ---
           # Upstream has no GitHub Releases; version + sha256 come from its fnpack.json index.
