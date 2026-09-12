@@ -1,10 +1,14 @@
-# fnOS Apps
+# fnOS Apps（Helenvin 定制版）
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Apps](https://img.shields.io/badge/apps-157-2ea44f)
+![Apps](https://img.shields.io/badge/apps-160-2ea44f)
 ![Platform](https://img.shields.io/badge/fnOS-third--party-orange)
 
-面向飞牛 fnOS 的第三方应用打包仓库。自动跟踪上游版本，构建可直接安装的 `.fpk` 包。
+飞牛 fnOS 第三方应用仓库（个人定制版）。fork 自 [conversun/fnos-apps](https://github.com/conversun/fnos-apps)：
+
+- 保留其 156 款应用的自动跟踪构建体系，并**全量镜像上游 Release 到本仓库**——即使上游删库，所有应用仍可正常安装与更新
+- 新增自有应用：MDC / AVdb（Docker 版）+ MDC-NG 原生版 / LitePan 原生版
+- 配套**定制版应用中心**：在飞牛窗口内嵌打开，应用目录与安装包全部来自本仓库
 
 > ⭐️ 如果觉得本项目对你有帮助，请右上角点个 Star！
 
@@ -16,7 +20,16 @@
 
 | | App | 端口 | 说明 | 来源 | 下载 |
 |:---:|---|---:|---|:---:|:---:|
-| <img src="apps/fnos-apps-store/fnos/ICON.PNG" width="28"> | **fnOS Apps** | `8011` | 第三方应用中心，一键安装与更新 | [GitHub](https://github.com/conversun/fnos-store) | [Release][r-store] |
+| <img src="apps/fnos-apps-store/fnos/ICON.PNG" width="28"> | **fnOS Apps** | `8011` | **定制版第三方应用中心**：飞牛窗口内嵌打开，目录指向本仓库（160 应用），一键安装与更新、自动检测升级 | [GitHub](https://github.com/Helenvin/fnos-store) | [Release][r-store] |
+
+### ⭐ 自有应用（本仓库新增）
+
+| | App | 端口 | 说明 | 来源 | 下载 |
+|:---:|---|---:|---|:---:|:---:|
+| <img src="apps/mdc/fnos/ICON.PNG" width="28"> | **MDC** | `9208` | MDC-NG 媒体刮削整理（Docker 版，drop-in 原地替换，配置与数据自动继承） | [GitHub](https://github.com/mdc-ng/mdc-ng) | [Release][r-mdc] |
+| <img src="apps/avdb/fnos/ICON.PNG" width="28"> | **AVdb** | `8000` | AVdb 媒体库（Docker 版，数据在 /vol1/1000/docker/avdb/data，与 MDC 容器联动） | [GitHub](https://github.com/li-peifeng/AVdb-Only) | [Release][r-avdb] |
+| <img src="https://raw.githubusercontent.com/Helenvin/mdc-ng-fpk/main/mdc-x86/ICON.PNG" width="28"> | **MDC-NG 媒体刮削（原生）** | `9208` | Rust 单二进制原生版，无需 Docker；由 [Helenvin/mdc-ng-fpk](https://github.com/Helenvin/mdc-ng-fpk) CI 构建并每日同步 | [GitHub](https://github.com/Helenvin/mdc-ng-fpk) | [Release][r-mdcng] |
+| <img src="https://raw.githubusercontent.com/Helenvin/LitePan-fpk/main/LitePan-x86/ICON.PNG" width="28"> | **LitePan（原生）** | `5211` | 网盘聚合挂载 + STRM 刮削（Go 单二进制原生版，无需 Docker）；由 [Helenvin/LitePan-fpk](https://github.com/Helenvin/LitePan-fpk) 自动同步 | [GitHub](https://github.com/Helenvin/LitePan-fpk) | [Release][r-litepan] |
 
 ### 🤖 AI
 
@@ -189,11 +202,25 @@
 - 新应用请求：[Open App Request](https://github.com/conversun/fnos-apps/issues/new?template=new-app-request.yml)
 - 问题反馈：[Open Bug Report](https://github.com/conversun/fnos-apps/issues/new?template=bug-report.yml)
 
+## 自动化
+
+| Workflow | 触发 | 作用 |
+|---|---|---|
+| `mirror-upstream-releases` | 每日 02:20 UTC + 手动 | 镜像 conversun/fnos-apps 每个应用的最新 Release 到本仓库（跳过官方商店）；同步 mdcng / LitePan 原生 fpk 并按商店规范改名 |
+| `build-apps.yml`（继承上游） | 每日 08:00 UTC / push / 手动 | 跟踪上游版本自动重建，动态矩阵构建，`-rN` 修订自动递增 |
+| `update-apps-json.yml`（继承上游） | Release 发布 / 手动 | 重新生成 `apps.json` 应用目录（当前 160 个应用） |
+
+### 与上游的差异
+
+- `scripts/ci/generate-apps-json.sh`：目录扫描指向**本仓库** Releases，并在尾部注入 mdcng / LitePan 原生条目（上游硬编码 conversun，fork 应用会丢失目录条目）
+- `scripts/apps/fnos-apps-store/get-latest-version.sh`：锁定商店版本 `1.9.5-hv1`，防止每日构建用官方版回滚目录条目
+- 商店本体为定制构建：服务端补丁见 [Helenvin/fnos-store](https://github.com/Helenvin/fnos-store)，fpk 发布于 `fnos-apps-store/v1.9.5-hv1`
+
 ## 快速开始
 
 ### 安装
 
-1. 下载对应 App 的 [Release](https://github.com/conversun/fnos-apps/releases) 页面中的 `.fpk` 文件
+1. 推荐安装上方**定制版应用中心**，在商店内一键安装；或下载对应 App 的 [Release](https://github.com/Helenvin/fnos-apps/releases) 页面中的 `.fpk` 文件
 2. 在 fnOS 应用中心选择「手动安装」
 3. 上传 `.fpk` 并完成安装
 
@@ -260,124 +287,128 @@ fnos-apps/
 - 构建脚本、CI 流程与发布记录均公开可审计
 
 <!-- Release Links -->
-[r-store]: https://github.com/conversun/fnos-apps/releases?q=fnos-apps-store
-[r-plex]: https://github.com/conversun/fnos-apps/releases?q=plex
-[r-emby]: https://github.com/conversun/fnos-apps/releases?q=emby
-[r-jellyfin]: https://github.com/conversun/fnos-apps/releases?q=jellyfin
-[r-navidrome]: https://github.com/conversun/fnos-apps/releases?q=navidrome
-[r-metatube]: https://github.com/conversun/fnos-apps/releases?q=metatube
-[r-kavita]: https://github.com/conversun/fnos-apps/releases?q=kavita
-[r-tmm]: https://github.com/conversun/fnos-apps/releases?q=tinymediamanager
-[r-qb]: https://github.com/conversun/fnos-apps/releases?q=qbittorrent
-[r-transmission]: https://github.com/conversun/fnos-apps/releases?q=transmission
-[r-gopeed]: https://github.com/conversun/fnos-apps/releases?q=gopeed
-[r-syncthing]: https://github.com/conversun/fnos-apps/releases?q=syncthing
-[r-ani]: https://github.com/conversun/fnos-apps/releases?q=ani-rss
-[r-abs]: https://github.com/conversun/fnos-apps/releases?q=audiobookshelf
-[r-mp]: https://github.com/conversun/fnos-apps/releases?q=moviepilot
-[r-openlist]: https://github.com/conversun/fnos-apps/releases?q=openlist
-[r-kodbox]: https://github.com/conversun/fnos-apps/releases?q=kodbox
-[r-sunpanel]: https://github.com/conversun/fnos-apps/releases?q=sun-panel
-[r-certimate]: https://github.com/conversun/fnos-apps/releases?q=certimate
-[r-vw]: https://github.com/conversun/fnos-apps/releases?q=vaultwarden
-[r-nginx]: https://github.com/conversun/fnos-apps/releases?q=nginx
-[r-nginx-ui]: https://github.com/conversun/fnos-apps/releases?q=nginx-ui
-[r-gotify]: https://github.com/conversun/fnos-apps/releases?q=gotify
-[r-ddnsgo]: https://github.com/conversun/fnos-apps/releases?q=ddns-go
-[r-wolgoweb]: https://github.com/conversun/fnos-apps/releases?q=wolgoweb
-[r-adguardhome]: https://github.com/conversun/fnos-apps/releases?q=adguardhome
-[r-firefox]: https://github.com/conversun/fnos-apps/releases?q=firefox
-[r-chromium]: https://github.com/conversun/fnos-apps/releases?q=chromium
-[r-ab]: https://github.com/conversun/fnos-apps/releases?q=auto-bangumi
-[r-immich]: https://github.com/conversun/fnos-apps/releases?q=immich
-[r-koel]: https://github.com/conversun/fnos-apps/releases?q=koel
-[r-photoprism]: https://github.com/conversun/fnos-apps/releases?q=photoprism
-[r-jellyseerr]: https://github.com/conversun/fnos-apps/releases?q=jellyseerr
-[r-csf]: https://github.com/conversun/fnos-apps/releases?q=chinesesubfinder
-[r-freshrss]: https://github.com/conversun/fnos-apps/releases?q=freshrss
-[r-miniflux]: https://github.com/conversun/fnos-apps/releases?q=miniflux
-[r-linkwarden]: https://github.com/conversun/fnos-apps/releases?q=linkwarden
-[r-wikijs]: https://github.com/conversun/fnos-apps/releases?q=wikijs
-[r-mealie]: https://github.com/conversun/fnos-apps/releases?q=mealie
-[r-paperless]: https://github.com/conversun/fnos-apps/releases?q=paperless-ngx
-[r-sonarr]: https://github.com/conversun/fnos-apps/releases?q=sonarr
-[r-radarr]: https://github.com/conversun/fnos-apps/releases?q=radarr
-[r-lidarr]: https://github.com/conversun/fnos-apps/releases?q=lidarr
-[r-readarr]: https://github.com/conversun/fnos-apps/releases?q=readarr
-[r-prowlarr]: https://github.com/conversun/fnos-apps/releases?q=prowlarr
-[r-bazarr]: https://github.com/conversun/fnos-apps/releases?q=bazarr
-[r-homepage]: https://github.com/conversun/fnos-apps/releases?q=homepage
-[r-homarr]: https://github.com/conversun/fnos-apps/releases?q=homarr
-[r-uptimekuma]: https://github.com/conversun/fnos-apps/releases?q=uptime-kuma
-[r-beszel]: https://github.com/conversun/fnos-apps/releases?q=beszel
-[r-filebrowser]: https://github.com/conversun/fnos-apps/releases?q=filebrowser
-[r-stirlingpdf]: https://github.com/conversun/fnos-apps/releases?q=stirling-pdf
-[r-actual]: https://github.com/conversun/fnos-apps/releases?q=actual-budget
-[r-lucky]: https://github.com/conversun/fnos-apps/releases?q=lucky
-[r-smartdns]: https://github.com/conversun/fnos-apps/releases?q=smartdns
-[r-mihomo]: https://github.com/conversun/fnos-apps/releases?q=mihomo
-[r-mosdns]: https://github.com/conversun/fnos-apps/releases?q=mosdns
-[r-tautulli]: https://github.com/conversun/fnos-apps/releases?q=tautulli
-[r-seerr]: https://github.com/conversun/fnos-apps/releases?q=seerr
-[r-ente]: https://github.com/conversun/fnos-apps/releases?q=ente
-[r-sunshine]: https://github.com/conversun/fnos-apps/releases?q=sunshine
-[r-frigate]: https://github.com/conversun/fnos-apps/releases?q=frigate
-[r-alist]: https://github.com/conversun/fnos-apps/releases?q=alist
-[r-rclone]: https://github.com/conversun/fnos-apps/releases?q=rclone
-[r-cloudreve]: https://github.com/conversun/fnos-apps/releases?q=cloudreve
-[r-appflowy]: https://github.com/conversun/fnos-apps/releases?q=appflowy
-[r-jackett]: https://github.com/conversun/fnos-apps/releases?q=jackett
-[r-1panel]: https://github.com/conversun/fnos-apps/releases?q=1panel
-[r-grafana]: https://github.com/conversun/fnos-apps/releases?q=grafana
-[r-prometheus]: https://github.com/conversun/fnos-apps/releases?q=prometheus
-[r-loki]: https://github.com/conversun/fnos-apps/releases?q=loki
-[r-glances]: https://github.com/conversun/fnos-apps/releases?q=glances
-[r-n8n]: https://github.com/conversun/fnos-apps/releases?q=n8n
-[r-ntfy]: https://github.com/conversun/fnos-apps/releases?q=ntfy
-[r-gitea]: https://github.com/conversun/fnos-apps/releases?q=gitea
-[r-duplicati]: https://github.com/conversun/fnos-apps/releases?q=duplicati
-[r-it-tools]: https://github.com/conversun/fnos-apps/releases?q=it-tools
-[r-mattermost]: https://github.com/conversun/fnos-apps/releases?q=mattermost
-[r-homeassistant]: https://github.com/conversun/fnos-apps/releases?q=homeassistant
-[r-localai]: https://github.com/conversun/fnos-apps/releases?q=localai
-[r-librechat]: https://github.com/conversun/fnos-apps/releases?q=librechat
-[r-pihole]: https://github.com/conversun/fnos-apps/releases?q=pihole
-[r-wg-easy]: https://github.com/conversun/fnos-apps/releases?q=wg-easy
-[r-headscale]: https://github.com/conversun/fnos-apps/releases?q=headscale
-[r-netbird]: https://github.com/conversun/fnos-apps/releases?q=netbird
-[r-komga]: https://github.com/conversun/fnos-apps/releases?q=komga
-[r-koodo]: https://github.com/conversun/fnos-apps/releases?q=koodo-reader
-[r-handbrake]: https://github.com/conversun/fnos-apps/releases?q=handbrake
-[r-suwayomi]: https://github.com/conversun/fnos-apps/releases?q=suwayomi
-[r-lanraragi]: https://github.com/conversun/fnos-apps/releases?q=lanraragi
-[r-jellystat]: https://github.com/conversun/fnos-apps/releases?q=jellystat
-[r-ombi]: https://github.com/conversun/fnos-apps/releases?q=ombi
-[r-wizarr]: https://github.com/conversun/fnos-apps/releases?q=wizarr
-[r-medusa]: https://github.com/conversun/fnos-apps/releases?q=medusa
-[r-sabnzbd]: https://github.com/conversun/fnos-apps/releases?q=sabnzbd
-[r-copyparty]: https://github.com/conversun/fnos-apps/releases?q=copyparty
-[r-reactive-resume]: https://github.com/conversun/fnos-apps/releases?q=reactive-resume
-[r-npm]: https://github.com/conversun/fnos-apps/releases?q=nginx-proxy-manager
-[r-dpanel]: https://github.com/conversun/fnos-apps/releases?q=dpanel
-[r-netdata]: https://github.com/conversun/fnos-apps/releases?q=netdata
-[r-nodered]: https://github.com/conversun/fnos-apps/releases?q=node-red
-[r-forgejo]: https://github.com/conversun/fnos-apps/releases?q=forgejo
-[r-clamav]: https://github.com/conversun/fnos-apps/releases?q=clamav
-[r-openwebui]: https://github.com/conversun/fnos-apps/releases?q=open-webui
-[r-ollama]: https://github.com/conversun/fnos-apps/releases?q=ollama
-[r-maxkb]: https://github.com/conversun/fnos-apps/releases?q=maxkb
-[r-tailscale]: https://github.com/conversun/fnos-apps/releases?q=tailscale
-[r-nvidia-driver]: https://github.com/conversun/fnos-apps/releases?q=nvidia-driver
-[r-zeroclaw]: https://github.com/conversun/fnos-apps/releases?q=zeroclaw
-[r-picoclaw]: https://github.com/conversun/fnos-apps/releases?q=picoclaw
-[r-nanobot]: https://github.com/conversun/fnos-apps/releases?q=nanobot
-[r-copaw]: https://github.com/conversun/fnos-apps/releases?q=copaw
-[r-cowagent]: https://github.com/conversun/fnos-apps/releases?q=cowagent
-[r-qwenpaw]: https://github.com/conversun/fnos-apps/releases?q=qwenpaw
-[r-lyranest]: https://github.com/conversun/fnos-apps/releases?q=lyranest
-[r-arcane]: https://github.com/conversun/fnos-apps/releases?q=arcane
-[r-miair-next]: https://github.com/conversun/fnos-apps/releases?q=miair-next
-[r-surface-battery]: https://github.com/conversun/fnos-apps/releases?q=surface-battery
-[r-danmu-api]: https://github.com/conversun/fnos-apps/releases?q=danmu-api
-[r-aria2-next]: https://github.com/conversun/fnos-apps/releases?q=aria2-next
-[r-opensurge]: https://github.com/conversun/fnos-apps/releases?q=opensurge
+[r-store]: https://github.com/Helenvin/fnos-apps/releases/tag/fnos-apps-store/v1.9.5-hv1
+[r-mdc]: https://github.com/Helenvin/fnos-apps/releases?q=mdc&expanded=false
+[r-avdb]: https://github.com/Helenvin/fnos-apps/releases?q=avdb
+[r-mdcng]: https://github.com/Helenvin/fnos-apps/releases?q=mdcng
+[r-litepan]: https://github.com/Helenvin/fnos-apps/releases?q=LitePan
+[r-plex]: https://github.com/Helenvin/fnos-apps/releases?q=plex
+[r-emby]: https://github.com/Helenvin/fnos-apps/releases?q=emby
+[r-jellyfin]: https://github.com/Helenvin/fnos-apps/releases?q=jellyfin
+[r-navidrome]: https://github.com/Helenvin/fnos-apps/releases?q=navidrome
+[r-metatube]: https://github.com/Helenvin/fnos-apps/releases?q=metatube
+[r-kavita]: https://github.com/Helenvin/fnos-apps/releases?q=kavita
+[r-tmm]: https://github.com/Helenvin/fnos-apps/releases?q=tinymediamanager
+[r-qb]: https://github.com/Helenvin/fnos-apps/releases?q=qbittorrent
+[r-transmission]: https://github.com/Helenvin/fnos-apps/releases?q=transmission
+[r-gopeed]: https://github.com/Helenvin/fnos-apps/releases?q=gopeed
+[r-syncthing]: https://github.com/Helenvin/fnos-apps/releases?q=syncthing
+[r-ani]: https://github.com/Helenvin/fnos-apps/releases?q=ani-rss
+[r-abs]: https://github.com/Helenvin/fnos-apps/releases?q=audiobookshelf
+[r-mp]: https://github.com/Helenvin/fnos-apps/releases?q=moviepilot
+[r-openlist]: https://github.com/Helenvin/fnos-apps/releases?q=openlist
+[r-kodbox]: https://github.com/Helenvin/fnos-apps/releases?q=kodbox
+[r-sunpanel]: https://github.com/Helenvin/fnos-apps/releases?q=sun-panel
+[r-certimate]: https://github.com/Helenvin/fnos-apps/releases?q=certimate
+[r-vw]: https://github.com/Helenvin/fnos-apps/releases?q=vaultwarden
+[r-nginx]: https://github.com/Helenvin/fnos-apps/releases?q=nginx
+[r-nginx-ui]: https://github.com/Helenvin/fnos-apps/releases?q=nginx-ui
+[r-gotify]: https://github.com/Helenvin/fnos-apps/releases?q=gotify
+[r-ddnsgo]: https://github.com/Helenvin/fnos-apps/releases?q=ddns-go
+[r-wolgoweb]: https://github.com/Helenvin/fnos-apps/releases?q=wolgoweb
+[r-adguardhome]: https://github.com/Helenvin/fnos-apps/releases?q=adguardhome
+[r-firefox]: https://github.com/Helenvin/fnos-apps/releases?q=firefox
+[r-chromium]: https://github.com/Helenvin/fnos-apps/releases?q=chromium
+[r-ab]: https://github.com/Helenvin/fnos-apps/releases?q=auto-bangumi
+[r-immich]: https://github.com/Helenvin/fnos-apps/releases?q=immich
+[r-koel]: https://github.com/Helenvin/fnos-apps/releases?q=koel
+[r-photoprism]: https://github.com/Helenvin/fnos-apps/releases?q=photoprism
+[r-jellyseerr]: https://github.com/Helenvin/fnos-apps/releases?q=jellyseerr
+[r-csf]: https://github.com/Helenvin/fnos-apps/releases?q=chinesesubfinder
+[r-freshrss]: https://github.com/Helenvin/fnos-apps/releases?q=freshrss
+[r-miniflux]: https://github.com/Helenvin/fnos-apps/releases?q=miniflux
+[r-linkwarden]: https://github.com/Helenvin/fnos-apps/releases?q=linkwarden
+[r-wikijs]: https://github.com/Helenvin/fnos-apps/releases?q=wikijs
+[r-mealie]: https://github.com/Helenvin/fnos-apps/releases?q=mealie
+[r-paperless]: https://github.com/Helenvin/fnos-apps/releases?q=paperless-ngx
+[r-sonarr]: https://github.com/Helenvin/fnos-apps/releases?q=sonarr
+[r-radarr]: https://github.com/Helenvin/fnos-apps/releases?q=radarr
+[r-lidarr]: https://github.com/Helenvin/fnos-apps/releases?q=lidarr
+[r-readarr]: https://github.com/Helenvin/fnos-apps/releases?q=readarr
+[r-prowlarr]: https://github.com/Helenvin/fnos-apps/releases?q=prowlarr
+[r-bazarr]: https://github.com/Helenvin/fnos-apps/releases?q=bazarr
+[r-homepage]: https://github.com/Helenvin/fnos-apps/releases?q=homepage
+[r-homarr]: https://github.com/Helenvin/fnos-apps/releases?q=homarr
+[r-uptimekuma]: https://github.com/Helenvin/fnos-apps/releases?q=uptime-kuma
+[r-beszel]: https://github.com/Helenvin/fnos-apps/releases?q=beszel
+[r-filebrowser]: https://github.com/Helenvin/fnos-apps/releases?q=filebrowser
+[r-stirlingpdf]: https://github.com/Helenvin/fnos-apps/releases?q=stirling-pdf
+[r-actual]: https://github.com/Helenvin/fnos-apps/releases?q=actual-budget
+[r-lucky]: https://github.com/Helenvin/fnos-apps/releases?q=lucky
+[r-smartdns]: https://github.com/Helenvin/fnos-apps/releases?q=smartdns
+[r-mihomo]: https://github.com/Helenvin/fnos-apps/releases?q=mihomo
+[r-mosdns]: https://github.com/Helenvin/fnos-apps/releases?q=mosdns
+[r-tautulli]: https://github.com/Helenvin/fnos-apps/releases?q=tautulli
+[r-seerr]: https://github.com/Helenvin/fnos-apps/releases?q=seerr
+[r-ente]: https://github.com/Helenvin/fnos-apps/releases?q=ente
+[r-sunshine]: https://github.com/Helenvin/fnos-apps/releases?q=sunshine
+[r-frigate]: https://github.com/Helenvin/fnos-apps/releases?q=frigate
+[r-alist]: https://github.com/Helenvin/fnos-apps/releases?q=alist
+[r-rclone]: https://github.com/Helenvin/fnos-apps/releases?q=rclone
+[r-cloudreve]: https://github.com/Helenvin/fnos-apps/releases?q=cloudreve
+[r-appflowy]: https://github.com/Helenvin/fnos-apps/releases?q=appflowy
+[r-jackett]: https://github.com/Helenvin/fnos-apps/releases?q=jackett
+[r-1panel]: https://github.com/Helenvin/fnos-apps/releases?q=1panel
+[r-grafana]: https://github.com/Helenvin/fnos-apps/releases?q=grafana
+[r-prometheus]: https://github.com/Helenvin/fnos-apps/releases?q=prometheus
+[r-loki]: https://github.com/Helenvin/fnos-apps/releases?q=loki
+[r-glances]: https://github.com/Helenvin/fnos-apps/releases?q=glances
+[r-n8n]: https://github.com/Helenvin/fnos-apps/releases?q=n8n
+[r-ntfy]: https://github.com/Helenvin/fnos-apps/releases?q=ntfy
+[r-gitea]: https://github.com/Helenvin/fnos-apps/releases?q=gitea
+[r-duplicati]: https://github.com/Helenvin/fnos-apps/releases?q=duplicati
+[r-it-tools]: https://github.com/Helenvin/fnos-apps/releases?q=it-tools
+[r-mattermost]: https://github.com/Helenvin/fnos-apps/releases?q=mattermost
+[r-homeassistant]: https://github.com/Helenvin/fnos-apps/releases?q=homeassistant
+[r-localai]: https://github.com/Helenvin/fnos-apps/releases?q=localai
+[r-librechat]: https://github.com/Helenvin/fnos-apps/releases?q=librechat
+[r-pihole]: https://github.com/Helenvin/fnos-apps/releases?q=pihole
+[r-wg-easy]: https://github.com/Helenvin/fnos-apps/releases?q=wg-easy
+[r-headscale]: https://github.com/Helenvin/fnos-apps/releases?q=headscale
+[r-netbird]: https://github.com/Helenvin/fnos-apps/releases?q=netbird
+[r-komga]: https://github.com/Helenvin/fnos-apps/releases?q=komga
+[r-koodo]: https://github.com/Helenvin/fnos-apps/releases?q=koodo-reader
+[r-handbrake]: https://github.com/Helenvin/fnos-apps/releases?q=handbrake
+[r-suwayomi]: https://github.com/Helenvin/fnos-apps/releases?q=suwayomi
+[r-lanraragi]: https://github.com/Helenvin/fnos-apps/releases?q=lanraragi
+[r-jellystat]: https://github.com/Helenvin/fnos-apps/releases?q=jellystat
+[r-ombi]: https://github.com/Helenvin/fnos-apps/releases?q=ombi
+[r-wizarr]: https://github.com/Helenvin/fnos-apps/releases?q=wizarr
+[r-medusa]: https://github.com/Helenvin/fnos-apps/releases?q=medusa
+[r-sabnzbd]: https://github.com/Helenvin/fnos-apps/releases?q=sabnzbd
+[r-copyparty]: https://github.com/Helenvin/fnos-apps/releases?q=copyparty
+[r-reactive-resume]: https://github.com/Helenvin/fnos-apps/releases?q=reactive-resume
+[r-npm]: https://github.com/Helenvin/fnos-apps/releases?q=nginx-proxy-manager
+[r-dpanel]: https://github.com/Helenvin/fnos-apps/releases?q=dpanel
+[r-netdata]: https://github.com/Helenvin/fnos-apps/releases?q=netdata
+[r-nodered]: https://github.com/Helenvin/fnos-apps/releases?q=node-red
+[r-forgejo]: https://github.com/Helenvin/fnos-apps/releases?q=forgejo
+[r-clamav]: https://github.com/Helenvin/fnos-apps/releases?q=clamav
+[r-openwebui]: https://github.com/Helenvin/fnos-apps/releases?q=open-webui
+[r-ollama]: https://github.com/Helenvin/fnos-apps/releases?q=ollama
+[r-maxkb]: https://github.com/Helenvin/fnos-apps/releases?q=maxkb
+[r-tailscale]: https://github.com/Helenvin/fnos-apps/releases?q=tailscale
+[r-nvidia-driver]: https://github.com/Helenvin/fnos-apps/releases?q=nvidia-driver
+[r-zeroclaw]: https://github.com/Helenvin/fnos-apps/releases?q=zeroclaw
+[r-picoclaw]: https://github.com/Helenvin/fnos-apps/releases?q=picoclaw
+[r-nanobot]: https://github.com/Helenvin/fnos-apps/releases?q=nanobot
+[r-copaw]: https://github.com/Helenvin/fnos-apps/releases?q=copaw
+[r-cowagent]: https://github.com/Helenvin/fnos-apps/releases?q=cowagent
+[r-qwenpaw]: https://github.com/Helenvin/fnos-apps/releases?q=qwenpaw
+[r-lyranest]: https://github.com/Helenvin/fnos-apps/releases?q=lyranest
+[r-arcane]: https://github.com/Helenvin/fnos-apps/releases?q=arcane
+[r-miair-next]: https://github.com/Helenvin/fnos-apps/releases?q=miair-next
+[r-surface-battery]: https://github.com/Helenvin/fnos-apps/releases?q=surface-battery
+[r-danmu-api]: https://github.com/Helenvin/fnos-apps/releases?q=danmu-api
+[r-aria2-next]: https://github.com/Helenvin/fnos-apps/releases?q=aria2-next
+[r-opensurge]: https://github.com/Helenvin/fnos-apps/releases?q=opensurge
