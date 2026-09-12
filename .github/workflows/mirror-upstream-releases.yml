@@ -1,0 +1,101 @@
+name: Mirror upstream releases
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 2 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror latest releases per app from conversun/fnos-apps
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          UPSTREAM="conversun/fnos-apps"
+          FORK="Helenvin/fnos-apps"
+
+          gh api "repos/${UPSTREAM}/releases?per_page=100" --paginate > /tmp/upstream.json
+          gh api "repos/${FORK}/tags?per_page=100" --paginate > /tmp/existing.json
+          EXISTING=$(jq -r '.[].name' /tmp/existing.json)
+
+          # latest release per slug (same rule as generate-apps-json.sh),
+          # skip the store app itself - we publish our own patched build
+          mapfile -t RELS < <(jq -r '
+            [.[] | select(.draft == false)]
+            | group_by(.tag_name | split("/")[0])
+            | map(sort_by(.published_at) | last)
+            | .[] | select(.tag_name | startswith("fnos-apps-store/") | not)
+            | [.tag_name] | @tsv' /tmp/upstream.json)
+          echo "releases to consider: ${#RELS[@]}"
+
+          for TAG in "${RELS[@]}"; do
+            if grep -qxF "$TAG" <<< "$EXISTING"; then echo "exists: $TAG"; continue; fi
+            echo "mirroring $TAG"
+            TITLE=$(jq -r --arg t "$TAG" '.[] | select(.tag_name == $t) | .name // ""' /tmp/upstream.json)
+            REL_ID=$(gh api -X POST "repos/${FORK}/releases" \
+              -f tag_name="$TAG" -f name="$TITLE" \
+              -f body="Mirrored from ${UPSTREAM}" --jq '.id') || { echo "  create FAILED"; continue; }
+            while IFS=$'\t' read -r NAME BURL; do
+              [ -z "$NAME" ] && continue
+              code=$(curl -sL -o /tmp/asset.bin -w '%{http_code}' "$BURL")
+              if [ "$code" != "200" ]; then echo "  download failed $NAME ($code)"; continue; fi
+              up=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+                --header "Authorization: Bearer $GH_TOKEN" \
+                --header "Content-Type: application/octet-stream" \
+                --data-binary "@/tmp/asset.bin" \
+                "https://uploads.github.com/repos/${FORK}/releases/${REL_ID}/assets?name=${NAME}")
+              echo "  ${NAME} upload=${up}"
+              rm -f /tmp/asset.bin
+            done < <(jq -r --arg t "$TAG" '.[] | select(.tag_name == $t) | .assets[] | [.name, .browser_download_url] | @tsv' /tmp/upstream.json)
+          done
+          echo "upstream mirror done"
+
+      - name: Sync native app releases (renamed for store convention)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          FORK="Helenvin/fnos-apps"
+
+          sync_native() {
+            local SRC_REPO="$1" SRC_TAG="$2" SLUG="$3" PREFIX="$4" VER="$5"
+            local DST_TAG="${SLUG}/v${VER}"
+            if gh api "repos/${FORK}/releases/tags/${DST_TAG}" >/dev/null 2>&1; then
+              echo "native exists: ${DST_TAG}"; return
+            fi
+            echo "sync native ${SRC_REPO}@${SRC_TAG} -> ${DST_TAG}"
+            local REL_ID
+            REL_ID=$(gh api -X POST "repos/${FORK}/releases" \
+              -f tag_name="${DST_TAG}" -f name="${DST_TAG}" \
+              -f body="Native app fpk synced from ${SRC_REPO}" --jq '.id') || { echo "  create FAILED"; return; }
+            for ARCH in x86 arm; do
+              local SRC_NAME="${PREFIX}_${ARCH}_${VER}.fpk"
+              local DST_NAME="${PREFIX}_${VER}_${ARCH}.fpk"
+              local code
+              code=$(curl -sL -o /tmp/native.fpk -w '%{http_code}' \
+                "https://github.com/${SRC_REPO}/releases/download/${SRC_TAG}/${SRC_NAME}")
+              if [ "$code" != "200" ]; then echo "  download failed ${SRC_NAME} ($code)"; continue; fi
+              local up
+              up=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+                --header "Authorization: Bearer $GH_TOKEN" \
+                --header "Content-Type: application/octet-stream" \
+                --data-binary "@/tmp/native.fpk" \
+                "https://uploads.github.com/repos/${FORK}/releases/${REL_ID}/assets?name=${DST_NAME}")
+              echo "  ${DST_NAME} upload=${up}"
+              rm -f /tmp/native.fpk
+            done
+          }
+
+          MDCTAG=$(gh api repos/Helenvin/mdc-ng-fpk/releases/latest --jq '.tag_name')
+          MDCVER=$(echo "$MDCTAG" | sed 's/^v//; s/-fpk.*//')
+          sync_native "Helenvin/mdc-ng-fpk" "$MDCTAG" "mdcng" "MDC_ng" "$MDCVER"
+
+          LPTAG=$(gh api repos/Helenvin/LitePan-fpk/releases/latest --jq '.tag_name')
+          LPVER=$(echo "$LPTAG" | sed 's/^v//; s/-fpk.*//')
+          sync_native "Helenvin/LitePan-fpk" "$LPTAG" "LitePan" "LitePan" "$LPVER"
