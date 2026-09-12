@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-12T12:52:53Z",
+  "generated_at": "2026-09-12T14:53:58Z",
   "source": {
-    "name": "conversun/fnos-apps",
-    "url": "https://github.com/conversun/fnos-apps"
+    "name": "Helenvin/fnos-apps",
+    "url": "https://github.com/Helenvin/fnos-apps"
   },
   "apps": [
     {
@@ -13,16 +13,16 @@
       "display_name": "1Panel",
       "description": "开源服务器运维管理面板，提供可视化的 Linux 服务器管理。",
       "version": "1.10.34-lts",
-      "fpk_version": "1.10.34-lts-r8",
-      "release_tag": "1panel/v1.10.34-lts-r8",
+      "fpk_version": "1.10.34-lts-r9",
+      "release_tag": "1panel/v1.10.34-lts-r9",
       "service_port": 10086,
       "homepage_url": "https://1panel.cn",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/1panel/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/1panel/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:06:32Z",
+      "updated_at": "2026-09-12T14:48:48Z",
       "download_count": 229,
       "app_type": "native",
       "category": "system"
@@ -38,12 +38,12 @@
       "release_tag": "actual-budget/v26.9.0",
       "service_port": 5006,
       "homepage_url": "https://actualbudget.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/actual-budget/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/actual-budget/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-02T08:02:25Z",
+      "updated_at": "2026-09-12T14:43:45Z",
       "download_count": 73,
       "app_type": "docker",
       "category": "system"
@@ -59,12 +59,12 @@
       "release_tag": "adguardhome/v0.107.79",
       "service_port": 3080,
       "homepage_url": "https://adguard.com/adguard-home/overview.html",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/adguardhome/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/adguardhome/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-19T08:08:59Z",
+      "updated_at": "2026-09-12T14:43:48Z",
       "download_count": 114,
       "app_type": "docker",
       "category": "system"
@@ -80,12 +80,12 @@
       "release_tag": "alist/v3.64.0",
       "service_port": 5246,
       "homepage_url": "https://github.com/AlistGo/alist",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/alist/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/alist/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-03T08:07:46Z",
+      "updated_at": "2026-09-12T14:43:51Z",
       "download_count": 254,
       "app_type": "native",
       "category": "download"
@@ -97,16 +97,16 @@
       "display_name": "ANI-RSS",
       "description": "动漫 RSS 自动追番、订阅、下载和刮削工具，支持自动识别季数集数和重命名。默认用户名admin，密码admin。",
       "version": "3.2.31",
-      "fpk_version": "3.2.31",
-      "release_tag": "ani-rss/v3.2.31",
+      "fpk_version": "3.2.31-r1",
+      "release_tag": "ani-rss/v3.2.31-r1",
       "service_port": 7789,
       "homepage_url": "https://github.com/wushuo894/ani-rss",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ani-rss/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ani-rss/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:29Z",
+      "updated_at": "2026-09-12T14:48:51Z",
       "download_count": 205,
       "app_type": "docker",
       "category": "content"
@@ -118,16 +118,16 @@
       "display_name": "AppFlowy",
       "description": "开源 Notion 替代品，支持自托管的协作文档平台。",
       "version": "0.9.64",
-      "fpk_version": "0.9.64-r4",
-      "release_tag": "appflowy/v0.9.64-r4",
+      "fpk_version": "0.9.64",
+      "release_tag": "appflowy/v0.9.64",
       "service_port": 8501,
       "homepage_url": "https://appflowy.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/appflowy/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/appflowy/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:13Z",
+      "updated_at": "2026-09-12T14:48:30Z",
       "download_count": 53,
       "app_type": "docker",
       "category": "content",
@@ -144,12 +144,12 @@
       "release_tag": "arcane/v2.11.0",
       "service_port": 3552,
       "homepage_url": "https://github.com/getarcaneapp/arcane",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/arcane/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/arcane/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:15Z",
+      "updated_at": "2026-09-12T14:44:06Z",
       "download_count": 49,
       "app_type": "docker",
       "category": "system"
@@ -165,12 +165,12 @@
       "release_tag": "aria2-next/v2.7.5",
       "service_port": 6800,
       "homepage_url": "https://github.com/AnInsomniacy/aria2-next",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/aria2-next/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/aria2-next/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:38Z",
+      "updated_at": "2026-09-12T14:44:09Z",
       "download_count": 66,
       "app_type": "docker",
       "category": "download"
@@ -186,12 +186,12 @@
       "release_tag": "astrbot/v4.28.0",
       "service_port": 6185,
       "homepage_url": "https://github.com/AstrBotDevs/AstrBot",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/astrbot/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/astrbot/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-08T08:02:28Z",
+      "updated_at": "2026-09-12T14:44:12Z",
       "download_count": 160,
       "app_type": "docker",
       "category": "ai"
@@ -203,16 +203,16 @@
       "display_name": "Audiobookshelf",
       "description": "自托管的有声书和播客服务器，支持多用户管理、进度同步和丰富的元数据管理。",
       "version": "2.36.0",
-      "fpk_version": "2.36.0-r3",
-      "release_tag": "audiobookshelf/v2.36.0-r3",
+      "fpk_version": "2.36.0",
+      "release_tag": "audiobookshelf/v2.36.0",
       "service_port": 13378,
       "homepage_url": "https://www.audiobookshelf.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/audiobookshelf/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/audiobookshelf/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:12Z",
+      "updated_at": "2026-09-12T14:48:17Z",
       "download_count": 71,
       "app_type": "docker",
       "category": "content"
@@ -224,19 +224,40 @@
       "display_name": "AutoBangumi",
       "description": "基于 RSS 的全自动追番下载整理工具，支持 Mikan 等数据源，自动下载并重命名为 Plex/Jellyfin 兼容格式。",
       "version": "3.3.5",
-      "fpk_version": "3.3.5-r4",
-      "release_tag": "auto-bangumi/v3.3.5-r4",
+      "fpk_version": "3.3.5",
+      "release_tag": "auto-bangumi/v3.3.5",
       "service_port": 7892,
       "homepage_url": "https://github.com/EstrellaXD/Auto_Bangumi",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/auto-bangumi/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/auto-bangumi/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:16Z",
+      "updated_at": "2026-09-12T14:48:11Z",
       "download_count": 75,
       "app_type": "docker",
       "category": "automation"
+    },
+    {
+      "slug": "avdb",
+      "appname": "avdb",
+      "file_prefix": "avdb",
+      "display_name": "AVdb 影音自动化",
+      "description": "AVdb 影音自动化：串接 MDC-NG 刮削信息自动归档、维护映射表，并通过 docker.sock 联动重启 MDC。基于 leolitaly/avdb 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的数据库与规则数据。",
+      "version": "2026.9.9-1521",
+      "fpk_version": "2026.9.9-1521-r2",
+      "release_tag": "avdb/v2026.9.9-1521-r2",
+      "service_port": 8000,
+      "homepage_url": "https://github.com/Helenvin/AVdb-Only",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/avdb/fnos/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-12T14:48:07Z",
+      "download_count": 0,
+      "app_type": "docker",
+      "category": "media"
     },
     {
       "slug": "bazarr",
@@ -245,16 +266,16 @@
       "display_name": "Bazarr",
       "description": "字幕自动化管理工具，与 Sonarr/Radarr 集成自动下载匹配字幕",
       "version": "1.6.0",
-      "fpk_version": "1.6.0-r3",
-      "release_tag": "bazarr/v1.6.0-r3",
+      "fpk_version": "1.6.0",
+      "release_tag": "bazarr/v1.6.0",
       "service_port": 6767,
       "homepage_url": "https://www.bazarr.media",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/bazarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/bazarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:39Z",
+      "updated_at": "2026-09-12T14:48:35Z",
       "download_count": 81,
       "app_type": "docker",
       "category": "automation"
@@ -270,12 +291,12 @@
       "release_tag": "beszel/v0.19.0",
       "service_port": 18090,
       "homepage_url": "https://github.com/henrygd/beszel",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/beszel/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/beszel/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-04T08:02:23Z",
+      "updated_at": "2026-09-12T14:44:23Z",
       "download_count": 69,
       "app_type": "native",
       "category": "system"
@@ -291,12 +312,12 @@
       "release_tag": "bililive-go/v0.8.2",
       "service_port": 8680,
       "homepage_url": "https://github.com/bililive-go/bililive-go",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/bililive-go/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/bililive-go/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-04T08:02:26Z",
+      "updated_at": "2026-09-12T14:44:28Z",
       "download_count": 113,
       "app_type": "native",
       "category": "media"
@@ -308,16 +329,16 @@
       "display_name": "Calibre-Web",
       "description": "Calibre 电子书库 Web 管理与在线阅读",
       "version": "0.6.27",
-      "fpk_version": "0.6.27-r2",
-      "release_tag": "calibre-web/v0.6.27-r2",
+      "fpk_version": "0.6.27",
+      "release_tag": "calibre-web/v0.6.27",
       "service_port": 8083,
       "homepage_url": "https://github.com/janeczku/calibre-web",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/calibre-web/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/calibre-web/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:22:13Z",
+      "updated_at": "2026-09-12T14:48:10Z",
       "download_count": 34,
       "app_type": "docker",
       "category": ""
@@ -333,12 +354,12 @@
       "release_tag": "certimate/v0.4.32",
       "service_port": 8090,
       "homepage_url": "https://github.com/certimate-go/certimate",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/certimate/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/certimate/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-31T08:02:47Z",
+      "updated_at": "2026-09-12T14:44:36Z",
       "download_count": 43,
       "app_type": "native",
       "category": "system"
@@ -350,16 +371,16 @@
       "display_name": "ChineseSubFinder",
       "description": "中文字幕自动下载工具，支持 Emby/Jellyfin/Plex",
       "version": "0.55.2",
-      "fpk_version": "0.55.2-r7",
-      "release_tag": "chinesesubfinder/v0.55.2-r7",
+      "fpk_version": "0.55.2",
+      "release_tag": "chinesesubfinder/v0.55.2",
       "service_port": 19035,
       "homepage_url": "https://github.com/ChineseSubFinder/ChineseSubFinder",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/chinesesubfinder/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/chinesesubfinder/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:28Z",
+      "updated_at": "2026-09-12T14:48:22Z",
       "download_count": 180,
       "app_type": "native",
       "category": "automation"
@@ -375,12 +396,12 @@
       "release_tag": "chromium/v26.08.3",
       "service_port": 5802,
       "homepage_url": "https://github.com/jlesage/docker-chromium",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/chromium/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/chromium/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-27T11:16:54Z",
+      "updated_at": "2026-09-12T14:44:51Z",
       "download_count": 823,
       "app_type": "docker",
       "category": "browser"
@@ -392,16 +413,16 @@
       "display_name": "ClamAV",
       "description": "开源杀毒引擎，提供文件扫描和病毒检测服务。",
       "version": "1.5.4",
-      "fpk_version": "1.5.4-r3",
-      "release_tag": "clamav/v1.5.4-r3",
+      "fpk_version": "1.5.4",
+      "release_tag": "clamav/v1.5.4",
       "service_port": 3310,
       "homepage_url": "https://github.com/Cisco-Talos/clamav",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/clamav/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/clamav/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:02Z",
+      "updated_at": "2026-09-12T14:48:39Z",
       "download_count": 42,
       "app_type": "docker",
       "category": "system"
@@ -417,12 +438,12 @@
       "release_tag": "clouddrive2/v1.0.16",
       "service_port": 19798,
       "homepage_url": "https://www.clouddrive2.com/",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/clouddrive2/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/clouddrive2/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-03T08:07:38Z",
+      "updated_at": "2026-09-12T14:44:55Z",
       "download_count": 233,
       "app_type": "docker",
       "category": "system"
@@ -438,12 +459,12 @@
       "release_tag": "cloudflared/v2026.9.1",
       "service_port": 14333,
       "homepage_url": "https://github.com/WisdomSky/Cloudflared-web",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/cloudflared/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/cloudflared/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:10Z",
+      "updated_at": "2026-09-12T14:44:58Z",
       "download_count": 158,
       "app_type": "docker",
       "category": "network"
@@ -455,16 +476,16 @@
       "display_name": "Cloudreve",
       "description": "国产云盘系统，支持多种存储策略和离线下载。",
       "version": "3.8.3",
-      "fpk_version": "3.8.3-r4",
-      "release_tag": "cloudreve/v3.8.3-r4",
+      "fpk_version": "3.8.3",
+      "release_tag": "cloudreve/v3.8.3",
       "service_port": 5212,
       "homepage_url": "https://cloudreve.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/cloudreve/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/cloudreve/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T07:35:37Z",
+      "updated_at": "2026-09-12T14:48:45Z",
       "download_count": 159,
       "app_type": "native",
       "category": "download"
@@ -480,12 +501,12 @@
       "release_tag": "coolercontrol/v5.0.0",
       "service_port": 11987,
       "homepage_url": "https://github.com/codifryed/coolercontrol",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/coolercontrol/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/coolercontrol/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-07T08:02:24Z",
+      "updated_at": "2026-09-12T14:45:09Z",
       "download_count": 175,
       "app_type": "docker",
       "category": "system"
@@ -501,12 +522,12 @@
       "release_tag": "copaw/v2.2.1",
       "service_port": 8088,
       "homepage_url": "https://github.com/agentscope-ai/CoPaw",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/copaw/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/copaw/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:31Z",
+      "updated_at": "2026-09-12T14:45:11Z",
       "download_count": 195,
       "app_type": "docker",
       "category": "ai"
@@ -522,12 +543,12 @@
       "release_tag": "copyparty/v1.20.23",
       "service_port": 3923,
       "homepage_url": "https://github.com/9001/copyparty",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/copyparty/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/copyparty/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-07T08:02:22Z",
+      "updated_at": "2026-09-12T14:45:14Z",
       "download_count": 42,
       "app_type": "docker",
       "category": "download"
@@ -543,12 +564,12 @@
       "release_tag": "cowagent/v2.1.8",
       "service_port": 9899,
       "homepage_url": "https://github.com/zhayujie/chatgpt-on-wechat",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/cowagent/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/cowagent/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:28Z",
+      "updated_at": "2026-09-12T14:45:17Z",
       "download_count": 190,
       "app_type": "docker",
       "category": "ai"
@@ -559,17 +580,17 @@
       "file_prefix": "daidai-panel",
       "display_name": "Daidai Panel",
       "description": "轻量现代的定时任务与脚本管理面板",
-      "version": "3.2.6",
-      "fpk_version": "3.2.6",
-      "release_tag": "daidai-panel/v3.2.6",
+      "version": "3.2.7",
+      "fpk_version": "3.2.7",
+      "release_tag": "daidai-panel/v3.2.7",
       "service_port": 5701,
       "homepage_url": "https://github.com/linzixuanzz/daidai-panel",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/daidai-panel/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/daidai-panel/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-09T08:02:36Z",
+      "updated_at": "2026-09-12T14:48:26Z",
       "download_count": 58,
       "app_type": "docker",
       "category": "system"
@@ -585,12 +606,12 @@
       "release_tag": "danmu-api/v1.21.0",
       "service_port": 9321,
       "homepage_url": "https://github.com/huangxd-/danmu_api",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/danmu-api/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/danmu-api/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:11Z",
+      "updated_at": "2026-09-12T14:45:23Z",
       "download_count": 69,
       "app_type": "docker",
       "category": "content"
@@ -606,12 +627,12 @@
       "release_tag": "ddns-go/v6.17.7",
       "service_port": 9876,
       "homepage_url": "https://github.com/jeessy2/ddns-go",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ddns-go/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ddns-go/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-05T08:02:33Z",
+      "updated_at": "2026-09-12T14:45:26Z",
       "download_count": 68,
       "app_type": "native",
       "category": "system"
@@ -627,12 +648,12 @@
       "release_tag": "docsify/v1.31.5",
       "service_port": 4001,
       "homepage_url": "https://github.com/docsifyjs/docsify",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/docsify/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/docsify/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-03T08:07:43Z",
+      "updated_at": "2026-09-12T14:45:31Z",
       "download_count": 40,
       "app_type": "docker",
       "category": "content"
@@ -648,12 +669,12 @@
       "release_tag": "dpanel/v1.10.9",
       "service_port": 8807,
       "homepage_url": "https://github.com/donknap/dpanel",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/dpanel/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/dpanel/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:11Z",
+      "updated_at": "2026-09-12T14:45:34Z",
       "download_count": 185,
       "app_type": "docker",
       "category": "system"
@@ -669,12 +690,12 @@
       "release_tag": "duplicati/v2.4.0.0_stable_2026-09-03",
       "service_port": 8200,
       "homepage_url": "https://duplicati.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/duplicati/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/duplicati/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-04T08:02:23Z",
+      "updated_at": "2026-09-12T14:45:37Z",
       "download_count": 83,
       "app_type": "docker",
       "category": "system"
@@ -686,16 +707,16 @@
       "display_name": "EasyTier",
       "description": "简单安全的去中心化异地组网方案，支持 Web 管理和子网代理",
       "version": "2.6.4",
-      "fpk_version": "2.6.4-r6",
-      "release_tag": "easytier/v2.6.4-r6",
+      "fpk_version": "2.6.4",
+      "release_tag": "easytier/v2.6.4",
       "service_port": 11210,
       "homepage_url": "https://github.com/EasyTier/EasyTier",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/easytier/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/easytier/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:32Z",
+      "updated_at": "2026-09-12T14:48:34Z",
       "download_count": 138,
       "app_type": "native",
       "category": "network"
@@ -711,12 +732,12 @@
       "release_tag": "emby/v4.10.0.40",
       "service_port": 8096,
       "homepage_url": "https://emby.media",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/emby/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/emby/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-09T08:03:54Z",
+      "updated_at": "2026-09-12T14:45:44Z",
       "download_count": 794,
       "app_type": "native",
       "category": "media"
@@ -732,12 +753,12 @@
       "release_tag": "ente/vlatest-2026.09.12",
       "service_port": 8510,
       "homepage_url": "https://ente.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ente/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ente/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:05Z",
+      "updated_at": "2026-09-12T14:46:13Z",
       "download_count": 60,
       "app_type": "docker",
       "category": "media",
@@ -750,16 +771,16 @@
       "display_name": "EZBookkeeping",
       "description": "轻量级个人记账应用，支持多币种、多账户和预算管理",
       "version": "1.6.1",
-      "fpk_version": "1.6.1-r5",
-      "release_tag": "ezbookkeeping/v1.6.1-r5",
+      "fpk_version": "1.6.1",
+      "release_tag": "ezbookkeeping/v1.6.1",
       "service_port": 8580,
       "homepage_url": "https://github.com/mayswind/ezbookkeeping",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ezbookkeeping/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ezbookkeeping/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:07Z",
+      "updated_at": "2026-09-12T14:48:37Z",
       "download_count": 98,
       "app_type": "native",
       "category": "system"
@@ -771,16 +792,16 @@
       "display_name": "Feigram",
       "description": "非官方 Telegram Web 客户端，支持多账号、聊天、媒体预览和下载缓存",
       "version": "2.0.19",
-      "fpk_version": "2.0.19-r5",
-      "release_tag": "feigram/v2.0.19-r5",
+      "fpk_version": "2.0.19",
+      "release_tag": "feigram/v2.0.19",
       "service_port": 3088,
       "homepage_url": "https://github.com/g-star1024/Feigram-Public",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/feigram/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/feigram/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:56Z",
+      "updated_at": "2026-09-12T14:49:01Z",
       "download_count": 276,
       "app_type": "native",
       "category": "content"
@@ -792,16 +813,16 @@
       "display_name": "FileBrowser",
       "description": "轻量级网页文件管理器，支持文件上传、下载和分享",
       "version": "2.63.23",
-      "fpk_version": "2.63.23-r3",
-      "release_tag": "filebrowser/v2.63.23-r3",
+      "fpk_version": "2.63.23",
+      "release_tag": "filebrowser/v2.63.23",
       "service_port": 8082,
       "homepage_url": "https://filebrowser.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/filebrowser/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/filebrowser/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:45:45Z",
+      "updated_at": "2026-09-12T14:48:10Z",
       "download_count": 162,
       "app_type": "native",
       "category": "download"
@@ -813,16 +834,16 @@
       "display_name": "Fileview",
       "description": "新一代通用型在线文件预览引擎，支持 Office、PDF、OFD、CAD、图片、代码文件等格式。",
       "version": "1.5.2",
-      "fpk_version": "1.5.2-r5",
-      "release_tag": "fileview/v1.5.2-r5",
+      "fpk_version": "1.5.2",
+      "release_tag": "fileview/v1.5.2",
       "service_port": 9000,
       "homepage_url": "https://github.com/basemetas/fileview",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/fileview/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/fileview/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:14Z",
+      "updated_at": "2026-09-12T14:48:38Z",
       "download_count": 66,
       "app_type": "docker",
       "category": "content"
@@ -838,12 +859,12 @@
       "release_tag": "firefox/v26.08.3",
       "service_port": 5801,
       "homepage_url": "https://github.com/jlesage/docker-firefox",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/firefox/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/firefox/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-27T11:16:53Z",
+      "updated_at": "2026-09-12T14:46:40Z",
       "download_count": 987,
       "app_type": "docker",
       "category": "browser"
@@ -859,12 +880,12 @@
       "release_tag": "fnos-apps-store/v1.9.4",
       "service_port": 8011,
       "homepage_url": "https://github.com/conversun/fnos-store",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/fnos-apps-store/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/fnos-apps-store/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-31T15:33:16Z",
+      "updated_at": "2026-09-12T14:48:08Z",
       "download_count": 6290,
       "app_type": "native",
       "category": "store"
@@ -880,12 +901,12 @@
       "release_tag": "forgejo/v16.0.4",
       "service_port": 3005,
       "homepage_url": "https://codeberg.org/forgejo/forgejo",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/forgejo/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/forgejo/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:42Z",
+      "updated_at": "2026-09-12T14:46:43Z",
       "download_count": 61,
       "app_type": "native",
       "category": "system"
@@ -901,12 +922,12 @@
       "release_tag": "freshrss/v1.30.0",
       "service_port": 8180,
       "homepage_url": "https://freshrss.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/freshrss/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/freshrss/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:31Z",
+      "updated_at": "2026-09-12T14:46:52Z",
       "download_count": 83,
       "app_type": "docker",
       "category": "content"
@@ -917,17 +938,17 @@
       "file_prefix": "frigate",
       "display_name": "Frigate",
       "description": "AI 视频监控系统，支持实时物体检测和录像管理。",
-      "version": "0.17.2",
-      "fpk_version": "0.17.2-r3",
-      "release_tag": "frigate/v0.17.2-r3",
+      "version": "0.18.0",
+      "fpk_version": "0.18.0",
+      "release_tag": "frigate/v0.18.0",
       "service_port": 8971,
       "homepage_url": "https://frigate.video",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/frigate/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/frigate/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:08Z",
+      "updated_at": "2026-09-12T14:48:09Z",
       "download_count": 104,
       "app_type": "docker",
       "category": "media"
@@ -943,12 +964,12 @@
       "release_tag": "gitea/v1.27.3",
       "service_port": 3033,
       "homepage_url": "https://gitea.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/gitea/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/gitea/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-30T08:02:25Z",
+      "updated_at": "2026-09-12T14:46:59Z",
       "download_count": 192,
       "app_type": "native",
       "category": "system"
@@ -960,16 +981,16 @@
       "display_name": "Glances",
       "description": "系统监控工具，提供 Web UI 的实时系统资源监控。",
       "version": "latest-full",
-      "fpk_version": "latest-full-r4",
-      "release_tag": "glances/vlatest-full-r4",
+      "fpk_version": "latest-full",
+      "release_tag": "glances/vlatest-full",
       "service_port": 61208,
       "homepage_url": "https://nicolargo.github.io/glances/",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/glances/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/glances/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:22Z",
+      "updated_at": "2026-09-12T14:48:15Z",
       "download_count": 55,
       "app_type": "docker",
       "category": "system"
@@ -981,16 +1002,16 @@
       "display_name": "Gopeed",
       "description": "Gopeed是一款支持HTTP、BitTorrent、Magnet等协议的高速下载器。",
       "version": "1.9.3",
-      "fpk_version": "1.9.3-r6",
-      "release_tag": "gopeed/v1.9.3-r6",
+      "fpk_version": "1.9.3",
+      "release_tag": "gopeed/v1.9.3",
       "service_port": 9999,
       "homepage_url": "https://gopeed.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/gopeed/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/gopeed/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:45:59Z",
+      "updated_at": "2026-09-12T14:48:34Z",
       "download_count": 275,
       "app_type": "native",
       "category": "download"
@@ -1006,12 +1027,12 @@
       "release_tag": "gotify/v3.1.0",
       "service_port": 8070,
       "homepage_url": "https://gotify.net",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/gotify/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/gotify/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-28T11:43:27Z",
+      "updated_at": "2026-09-12T14:47:19Z",
       "download_count": 43,
       "app_type": "native",
       "category": "system"
@@ -1027,12 +1048,12 @@
       "release_tag": "grafana/v13.2.1",
       "service_port": 3010,
       "homepage_url": "https://grafana.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/grafana/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/grafana/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-02T08:04:39Z",
+      "updated_at": "2026-09-12T14:47:25Z",
       "download_count": 225,
       "app_type": "native",
       "category": "system"
@@ -1048,12 +1069,12 @@
       "release_tag": "handbrake/v26.08.2",
       "service_port": 5800,
       "homepage_url": "https://github.com/jlesage/docker-handbrake",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/handbrake/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/handbrake/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-18T08:08:07Z",
+      "updated_at": "2026-09-12T14:48:27Z",
       "download_count": 65,
       "app_type": "docker",
       "category": "media"
@@ -1065,16 +1086,16 @@
       "display_name": "Headscale",
       "description": "Tailscale 自托管控制服务器，构建私有 VPN 网络。",
       "version": "0.29.3",
-      "fpk_version": "0.29.3-r4",
-      "release_tag": "headscale/v0.29.3-r4",
+      "fpk_version": "0.29.3",
+      "release_tag": "headscale/v0.29.3",
       "service_port": 8480,
       "homepage_url": "https://github.com/juanfont/headscale",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/headscale/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/headscale/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:45:57Z",
+      "updated_at": "2026-09-12T14:49:01Z",
       "download_count": 74,
       "app_type": "native",
       "category": "network"
@@ -1090,12 +1111,12 @@
       "release_tag": "homarr/v1.77.1",
       "service_port": 7575,
       "homepage_url": "https://homarr.dev",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/homarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/homarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:11Z",
+      "updated_at": "2026-09-12T14:48:10Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "system"
@@ -1111,12 +1132,12 @@
       "release_tag": "homeassistant/v2026.9.2",
       "service_port": 8123,
       "homepage_url": "https://www.home-assistant.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/homeassistant/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/homeassistant/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:19Z",
+      "updated_at": "2026-09-12T14:48:35Z",
       "download_count": 269,
       "app_type": "docker",
       "category": "system"
@@ -1132,12 +1153,12 @@
       "release_tag": "homepage/v2.3.0",
       "service_port": 3003,
       "homepage_url": "https://gethomepage.dev",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/homepage/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/homepage/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:37Z",
+      "updated_at": "2026-09-12T14:48:40Z",
       "download_count": 96,
       "app_type": "docker",
       "category": "system"
@@ -1153,12 +1174,12 @@
       "release_tag": "immich/vrelease-2026.09.12",
       "service_port": 2283,
       "homepage_url": "https://github.com/immich-app/immich",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/immich/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/immich/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:10Z",
+      "updated_at": "2026-09-12T14:48:21Z",
       "download_count": 475,
       "app_type": "docker",
       "category": "media"
@@ -1174,12 +1195,12 @@
       "release_tag": "it-tools/v2024.10.22-7ca5933-r5",
       "service_port": 8280,
       "homepage_url": "https://it-tools.tech",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/it-tools/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/it-tools/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:27Z",
+      "updated_at": "2026-09-12T14:48:42Z",
       "download_count": 63,
       "app_type": "docker",
       "category": "system"
@@ -1195,12 +1216,12 @@
       "release_tag": "jackett/v0.24.2572",
       "service_port": 9117,
       "homepage_url": "https://github.com/Jackett/Jackett",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/jackett/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/jackett/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:23Z",
+      "updated_at": "2026-09-12T14:48:35Z",
       "download_count": 165,
       "app_type": "native",
       "category": "automation"
@@ -1216,12 +1237,12 @@
       "release_tag": "jellyfin/v12.0",
       "service_port": 8097,
       "homepage_url": "https://jellyfin.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/jellyfin/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/jellyfin/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-08T08:03:11Z",
+      "updated_at": "2026-09-12T14:48:45Z",
       "download_count": 1189,
       "app_type": "native",
       "category": "media"
@@ -1237,12 +1258,12 @@
       "release_tag": "jellyseerr/v2.7.3-r4",
       "service_port": 5055,
       "homepage_url": "https://github.com/Fallenbagel/jellyseerr",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/jellyseerr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/jellyseerr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:08Z",
+      "updated_at": "2026-09-12T14:49:07Z",
       "download_count": 52,
       "app_type": "docker",
       "category": "media"
@@ -1258,12 +1279,12 @@
       "release_tag": "jellystat/v1.1.12",
       "service_port": 3004,
       "homepage_url": "https://github.com/CyferShepard/Jellystat",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/jellystat/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/jellystat/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-09T08:02:37Z",
+      "updated_at": "2026-09-12T14:48:09Z",
       "download_count": 60,
       "app_type": "docker",
       "category": "media"
@@ -1279,12 +1300,12 @@
       "release_tag": "kavita/v0.9.1",
       "service_port": 5000,
       "homepage_url": "https://github.com/Kareadita/Kavita",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/kavita/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/kavita/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-29T08:01:59Z",
+      "updated_at": "2026-09-12T14:48:20Z",
       "download_count": 252,
       "app_type": "docker",
       "category": "media"
@@ -1300,12 +1321,12 @@
       "release_tag": "kodbox/v1.68.10-r4",
       "service_port": 8500,
       "homepage_url": "https://kodcloud.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/kodbox/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/kodbox/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:26Z",
+      "updated_at": "2026-09-12T14:49:10Z",
       "download_count": 129,
       "app_type": "docker",
       "category": "content"
@@ -1321,12 +1342,12 @@
       "release_tag": "koel/v9.11.3",
       "service_port": 8060,
       "homepage_url": "https://github.com/koel/koel",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/koel/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/koel/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:31Z",
+      "updated_at": "2026-09-12T14:48:27Z",
       "download_count": 71,
       "app_type": "docker",
       "category": "media"
@@ -1342,12 +1363,12 @@
       "release_tag": "komari/v1.4.3-r4",
       "service_port": 25774,
       "homepage_url": "https://github.com/komari-monitor/komari",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/komari/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/komari/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:13Z",
+      "updated_at": "2026-09-12T14:49:13Z",
       "download_count": 58,
       "app_type": "docker",
       "category": "system"
@@ -1359,16 +1380,16 @@
       "display_name": "Komga",
       "description": "漫画和电子书管理服务器，支持 CBZ/CBR/PDF/EPUB 格式在线阅读。",
       "version": "1.26.3",
-      "fpk_version": "1.26.3-r3",
-      "release_tag": "komga/v1.26.3-r3",
+      "fpk_version": "1.26.3",
+      "release_tag": "komga/v1.26.3",
       "service_port": 25600,
       "homepage_url": "https://github.com/gotson/komga",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/komga/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/komga/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:01Z",
+      "updated_at": "2026-09-12T14:50:05Z",
       "download_count": 148,
       "app_type": "docker",
       "category": "media"
@@ -1384,12 +1405,12 @@
       "release_tag": "koodo-reader/v2.4.4",
       "service_port": 8930,
       "homepage_url": "https://github.com/koodo-reader/koodo-reader",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/koodo-reader/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/koodo-reader/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-03T08:07:39Z",
+      "updated_at": "2026-09-12T14:49:19Z",
       "download_count": 126,
       "app_type": "docker",
       "category": "media"
@@ -1401,16 +1422,16 @@
       "display_name": "LANraragi",
       "description": "自托管的漫画/存档管理服务器，支持自动元数据刮削与标签分类。",
       "version": "0.9.81",
-      "fpk_version": "0.9.81-r4",
-      "release_tag": "lanraragi/v0.9.81-r4",
+      "fpk_version": "0.9.81",
+      "release_tag": "lanraragi/v0.9.81",
       "service_port": 3000,
       "homepage_url": "https://github.com/Difegue/LANraragi",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/lanraragi/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/lanraragi/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:20Z",
+      "updated_at": "2026-09-12T14:49:27Z",
       "download_count": 15,
       "app_type": "docker",
       "category": "content"
@@ -1422,16 +1443,16 @@
       "display_name": "LibreChat",
       "description": "AI 聊天界面，支持 OpenAI、Anthropic 等多种 AI 模型。",
       "version": "0.8.7",
-      "fpk_version": "0.8.7-r3",
-      "release_tag": "librechat/v0.8.7-r3",
+      "fpk_version": "0.8.7",
+      "release_tag": "librechat/v0.8.7",
       "service_port": 3085,
       "homepage_url": "https://librechat.ai",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/librechat/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/librechat/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:10Z",
+      "updated_at": "2026-09-12T14:49:42Z",
       "download_count": 81,
       "app_type": "docker",
       "category": "ai",
@@ -1444,16 +1465,16 @@
       "display_name": "Lidarr",
       "description": "音乐自动化管理工具，自动搜索和下载音乐专辑",
       "version": "3.1.0.4875",
-      "fpk_version": "3.1.0.4875-r6",
-      "release_tag": "lidarr/v3.1.0.4875-r6",
+      "fpk_version": "3.1.0.4875",
+      "release_tag": "lidarr/v3.1.0.4875",
       "service_port": 8686,
       "homepage_url": "https://lidarr.audio",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/lidarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/lidarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:21Z",
+      "updated_at": "2026-09-12T14:50:08Z",
       "download_count": 185,
       "app_type": "native",
       "category": "automation"
@@ -1469,12 +1490,12 @@
       "release_tag": "linkwarden/v2.16.3",
       "service_port": 3050,
       "homepage_url": "https://linkwarden.app",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/linkwarden/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/linkwarden/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:39Z",
+      "updated_at": "2026-09-12T14:49:44Z",
       "download_count": 95,
       "app_type": "docker",
       "category": "content"
@@ -1490,12 +1511,12 @@
       "release_tag": "localai/v4.9.0",
       "service_port": 8185,
       "homepage_url": "https://localai.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/localai/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/localai/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-21T08:11:03Z",
+      "updated_at": "2026-09-12T14:49:46Z",
       "download_count": 91,
       "app_type": "docker",
       "category": "ai"
@@ -1511,12 +1532,12 @@
       "release_tag": "loki/v3.7.7",
       "service_port": 3100,
       "homepage_url": "https://grafana.com/oss/loki/",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/loki/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/loki/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-28T11:43:37Z",
+      "updated_at": "2026-09-12T14:49:30Z",
       "download_count": 36,
       "app_type": "native",
       "category": "system"
@@ -1532,12 +1553,12 @@
       "release_tag": "lucky/v2.27.2-r5",
       "service_port": 16601,
       "homepage_url": "https://lucky666.cn",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/lucky/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/lucky/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:30Z",
+      "updated_at": "2026-09-12T14:49:50Z",
       "download_count": 479,
       "app_type": "native",
       "category": "system"
@@ -1553,12 +1574,12 @@
       "release_tag": "lyranest/v0.2.7",
       "service_port": 8080,
       "homepage_url": "https://github.com/WHWgogogo/LyraNest",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/lyranest/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/lyranest/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:13Z",
+      "updated_at": "2026-09-12T14:49:54Z",
       "download_count": 36,
       "app_type": "docker",
       "category": "media"
@@ -1574,12 +1595,12 @@
       "release_tag": "mail-archiver/v2608.1",
       "service_port": 5008,
       "homepage_url": "https://github.com/s1t5/mail-archiver",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/mail-archiver/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/mail-archiver/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-01T08:02:15Z",
+      "updated_at": "2026-09-12T14:49:10Z",
       "download_count": 19,
       "app_type": "docker",
       "category": "content"
@@ -1595,12 +1616,12 @@
       "release_tag": "mattermost/v11.10.1",
       "service_port": 8065,
       "homepage_url": "https://mattermost.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/mattermost/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/mattermost/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-25T08:12:43Z",
+      "updated_at": "2026-09-12T14:49:24Z",
       "download_count": 17,
       "app_type": "docker",
       "category": "system",
@@ -1617,15 +1638,36 @@
       "release_tag": "maxkb/v2.10.6-lts",
       "service_port": 8083,
       "homepage_url": "https://github.com/1Panel-dev/MaxKB",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/maxkb/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/maxkb/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-03T08:07:50Z",
+      "updated_at": "2026-09-12T14:49:50Z",
       "download_count": 89,
       "app_type": "docker",
       "category": "ai"
+    },
+    {
+      "slug": "mdc",
+      "appname": "mdc",
+      "file_prefix": "mdc",
+      "display_name": "MDC 影音整理",
+      "description": "MDC-NG 影音刮削整理：30+ 刮削源、AI 人脸识别海报、目录监控、演员管理、Emby 联动。基于 mdcng/mdc 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的配置与媒体库路径。",
+      "version": "1.36.0",
+      "fpk_version": "1.36.0-r2",
+      "release_tag": "mdc/v1.36.0-r2",
+      "service_port": 9208,
+      "homepage_url": "https://github.com/Helenvin/mdc-ng",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/mdc/fnos/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-12T14:50:07Z",
+      "download_count": 0,
+      "app_type": "docker",
+      "category": "media"
     },
     {
       "slug": "mealie",
@@ -1638,12 +1680,12 @@
       "release_tag": "mealie/v3.25.1",
       "service_port": 9925,
       "homepage_url": "https://mealie.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/mealie/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/mealie/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-04T08:02:20Z",
+      "updated_at": "2026-09-12T14:49:58Z",
       "download_count": 64,
       "app_type": "docker",
       "category": "content"
@@ -1659,12 +1701,12 @@
       "release_tag": "medusa/v1.0.26",
       "service_port": 8081,
       "homepage_url": "https://github.com/pymedusa/Medusa",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/medusa/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/medusa/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-22T08:05:01Z",
+      "updated_at": "2026-09-12T14:49:29Z",
       "download_count": 131,
       "app_type": "docker",
       "category": "automation"
@@ -1676,16 +1718,16 @@
       "display_name": "MelodyHub",
       "description": "Web 音乐搜索与下载服务，基于 lx-music 核心，支持多平台音源聚合搜索、服务器端下载和歌曲管理。",
       "version": "1.0.0",
-      "fpk_version": "1.0.0-r5",
-      "release_tag": "melody-hub/v1.0.0-r5",
+      "fpk_version": "1.0.0",
+      "release_tag": "melody-hub/v1.0.0",
       "service_port": 3006,
       "homepage_url": "https://github.com/gefl24/melody-hub",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/melody-hub/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/melody-hub/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:56Z",
+      "updated_at": "2026-09-12T14:50:07Z",
       "download_count": 815,
       "app_type": "docker",
       "category": "media"
@@ -1701,12 +1743,12 @@
       "release_tag": "memos/v0.30.0-r3",
       "service_port": 5230,
       "homepage_url": "https://www.usememos.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/memos/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/memos/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:37Z",
+      "updated_at": "2026-09-12T14:50:04Z",
       "download_count": 63,
       "app_type": "native",
       "category": "content"
@@ -1722,12 +1764,12 @@
       "release_tag": "metatube/v1.4.0-r4",
       "service_port": 8091,
       "homepage_url": "https://github.com/metatube-community/metatube-sdk-go",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/metatube/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metatube/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:07Z",
+      "updated_at": "2026-09-12T14:50:09Z",
       "download_count": 499,
       "app_type": "native",
       "category": "media"
@@ -1743,12 +1785,12 @@
       "release_tag": "miair-next/v0.6.0",
       "service_port": 8300,
       "homepage_url": "https://github.com/deerwan/miair-next",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/miair-next/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/miair-next/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-06T08:02:08Z",
+      "updated_at": "2026-09-12T14:50:11Z",
       "download_count": 77,
       "app_type": "docker",
       "category": "media"
@@ -1764,12 +1806,12 @@
       "release_tag": "mihomo/v1.19.30-r4",
       "service_port": 9097,
       "homepage_url": "https://github.com/MetaCubeX/mihomo",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/mihomo/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/mihomo/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-24T20:08:31Z",
+      "updated_at": "2026-09-12T14:50:15Z",
       "download_count": 1354,
       "app_type": "native",
       "category": "network"
@@ -1785,12 +1827,12 @@
       "release_tag": "miniflux/v2.3.3-r5",
       "service_port": 8190,
       "homepage_url": "https://miniflux.app",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/miniflux/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/miniflux/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:45:43Z",
+      "updated_at": "2026-09-12T14:50:22Z",
       "download_count": 51,
       "app_type": "docker",
       "category": "content"
@@ -1806,12 +1848,12 @@
       "release_tag": "mosdns/v5.3.4-r5",
       "service_port": 5354,
       "homepage_url": "https://github.com/IrineSistworking/mosdns",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/mosdns/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/mosdns/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:20Z",
+      "updated_at": "2026-09-12T14:50:24Z",
       "download_count": 139,
       "app_type": "native",
       "category": "network"
@@ -1827,12 +1869,12 @@
       "release_tag": "moviepilot/v3.0.0-r4",
       "service_port": 3000,
       "homepage_url": "https://github.com/jxxghp/MoviePilot",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/moviepilot/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/moviepilot/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-24T02:54:34Z",
+      "updated_at": "2026-09-12T14:50:29Z",
       "download_count": 489,
       "app_type": "docker",
       "category": "content",
@@ -1849,12 +1891,12 @@
       "release_tag": "msf/v0.6.4",
       "service_port": 7777,
       "homepage_url": "https://github.com/scoltzero/msf",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/msf/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/msf/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-08T08:02:32Z",
+      "updated_at": "2026-09-12T14:49:13Z",
       "download_count": 449,
       "app_type": "native",
       "category": "network"
@@ -1870,12 +1912,12 @@
       "release_tag": "n8n/v2.38.7",
       "service_port": 5678,
       "homepage_url": "https://n8n.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/n8n/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/n8n/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:13Z",
+      "updated_at": "2026-09-12T14:49:55Z",
       "download_count": 73,
       "app_type": "docker",
       "category": "system"
@@ -1887,16 +1929,16 @@
       "display_name": "Nanobot",
       "description": "超轻量 AI 智能体框架，99% 更少代码量，支持多模型多通道，Web 管理面板，默认密码 admin/nanobot",
       "version": "0.3.0",
-      "fpk_version": "0.3.0-r4",
-      "release_tag": "nanobot/v0.3.0-r4",
+      "fpk_version": "0.3.0",
+      "release_tag": "nanobot/v0.3.0",
       "service_port": 18780,
       "homepage_url": "https://github.com/HKUDS/nanobot",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nanobot/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/nanobot/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:45:58Z",
+      "updated_at": "2026-09-12T14:50:38Z",
       "download_count": 476,
       "app_type": "docker",
       "category": "ai"
@@ -1908,16 +1950,16 @@
       "display_name": "Navidrome",
       "description": "开源的个人音乐流媒体服务器,兼容 Subsonic/Airsonic API,支持多用户和移动端应用。",
       "version": "0.63.2",
-      "fpk_version": "0.63.2-r5",
-      "release_tag": "navidrome/v0.63.2-r5",
+      "fpk_version": "0.63.2",
+      "release_tag": "navidrome/v0.63.2",
       "service_port": 4533,
       "homepage_url": "https://www.navidrome.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/navidrome/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/navidrome/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:44Z",
+      "updated_at": "2026-09-12T14:50:49Z",
       "download_count": 170,
       "app_type": "native",
       "category": "media"
@@ -1933,12 +1975,12 @@
       "release_tag": "netbird/v0.78.1",
       "service_port": 8820,
       "homepage_url": "https://netbird.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/netbird/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/netbird/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-04T08:02:24Z",
+      "updated_at": "2026-09-12T14:49:00Z",
       "download_count": 53,
       "app_type": "docker",
       "category": "network",
@@ -1955,12 +1997,12 @@
       "release_tag": "netdata/v2.11.0-r3",
       "service_port": 19999,
       "homepage_url": "https://github.com/netdata/netdata",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/netdata/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/netdata/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:19Z",
+      "updated_at": "2026-09-12T14:50:42Z",
       "download_count": 141,
       "app_type": "docker",
       "category": "system"
@@ -1976,12 +2018,12 @@
       "release_tag": "next-ai-draw-io/vlatest-2026.09.12",
       "service_port": 3007,
       "homepage_url": "https://github.com/chadkunsman/next-ai-draw-io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/next-ai-draw-io/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/next-ai-draw-io/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:13Z",
+      "updated_at": "2026-09-12T14:50:45Z",
       "download_count": 21,
       "app_type": "docker",
       "category": "ai"
@@ -1997,12 +2039,12 @@
       "release_tag": "nextcloud/v32.0.15",
       "service_port": 8082,
       "homepage_url": "https://nextcloud.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nextcloud/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/nextcloud/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:27Z",
+      "updated_at": "2026-09-12T14:49:38Z",
       "download_count": 74,
       "app_type": "docker",
       "category": "content"
@@ -2018,12 +2060,12 @@
       "release_tag": "nginx/v1.30.4-r3",
       "service_port": 8888,
       "homepage_url": "https://nginx.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nginx/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/nginx/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:55Z",
+      "updated_at": "2026-09-12T14:50:49Z",
       "download_count": 112,
       "app_type": "native",
       "category": "system"
@@ -2039,12 +2081,12 @@
       "release_tag": "nginx-proxy-manager/v2.15.1-r4",
       "service_port": 81,
       "homepage_url": "https://github.com/NginxProxyManager/nginx-proxy-manager",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nginx-proxy-manager/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/nginx-proxy-manager/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:45:53Z",
+      "updated_at": "2026-09-12T14:51:02Z",
       "download_count": 116,
       "app_type": "docker",
       "category": "system"
@@ -2060,12 +2102,12 @@
       "release_tag": "nginx-ui/v2.5.10",
       "service_port": 8889,
       "homepage_url": "https://github.com/0xJacky/nginx-ui",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nginx-ui/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/nginx-ui/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-21T08:11:12Z",
+      "updated_at": "2026-09-12T14:49:06Z",
       "download_count": 177,
       "app_type": "native",
       "category": "system"
@@ -2081,12 +2123,12 @@
       "release_tag": "node-red/v5.0.7",
       "service_port": 1880,
       "homepage_url": "https://github.com/node-red/node-red",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/node-red/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/node-red/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-09T08:02:42Z",
+      "updated_at": "2026-09-12T14:49:24Z",
       "download_count": 59,
       "app_type": "docker",
       "category": "system"
@@ -2102,12 +2144,12 @@
       "release_tag": "ntfy/v2.28.0",
       "service_port": 2586,
       "homepage_url": "https://ntfy.sh",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ntfy/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ntfy/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-28T11:43:31Z",
+      "updated_at": "2026-09-12T14:50:34Z",
       "download_count": 51,
       "app_type": "native",
       "category": "system"
@@ -2123,12 +2165,12 @@
       "release_tag": "nvidia-driver/v1.17.8",
       "service_port": 0,
       "homepage_url": "https://www.nvidia.com/drivers",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nvidia-driver/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/nvidia-driver/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:10Z",
+      "updated_at": "2026-09-12T14:51:06Z",
       "download_count": 438,
       "app_type": "native",
       "category": "system"
@@ -2144,12 +2186,12 @@
       "release_tag": "obsidian/v1.13.8",
       "service_port": 8080,
       "homepage_url": "https://obsidian.md",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/obsidian/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/obsidian/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-22T08:05:00Z",
+      "updated_at": "2026-09-12T14:48:22Z",
       "download_count": 337,
       "app_type": "docker",
       "category": "content"
@@ -2165,12 +2207,12 @@
       "release_tag": "ollama/v0.34.0",
       "service_port": 11434,
       "homepage_url": "https://github.com/ollama/ollama",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ollama/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ollama/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:34Z",
+      "updated_at": "2026-09-12T14:49:51Z",
       "download_count": 159,
       "app_type": "docker",
       "category": "ai"
@@ -2186,12 +2228,12 @@
       "release_tag": "ombi/v4.53.10-r4",
       "service_port": 3579,
       "homepage_url": "https://github.com/Ombi-app/Ombi",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/ombi/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/ombi/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:21Z",
+      "updated_at": "2026-09-12T14:51:09Z",
       "download_count": 25,
       "app_type": "docker",
       "category": "media"
@@ -2207,12 +2249,12 @@
       "release_tag": "open-webui/v0.11.3",
       "service_port": 8080,
       "homepage_url": "https://github.com/open-webui/open-webui",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/open-webui/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/open-webui/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-01T08:02:08Z",
+      "updated_at": "2026-09-12T14:49:45Z",
       "download_count": 278,
       "app_type": "docker",
       "category": "ai"
@@ -2228,12 +2270,12 @@
       "release_tag": "openlist/v4.2.6",
       "service_port": 5244,
       "homepage_url": "https://github.com/OpenListTeam/OpenList",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/openlist/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/openlist/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-02T08:02:42Z",
+      "updated_at": "2026-09-12T14:49:31Z",
       "download_count": 354,
       "app_type": "native",
       "category": "content"
@@ -2249,12 +2291,12 @@
       "release_tag": "opensurge/v0.1.1",
       "service_port": 61767,
       "homepage_url": "https://github.com/funchs/opensurge-fnos",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/opensurge/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/opensurge/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-31T15:31:33Z",
+      "updated_at": "2026-09-12T14:50:41Z",
       "download_count": 328,
       "app_type": "docker",
       "category": "network"
@@ -2270,12 +2312,12 @@
       "release_tag": "paperless-ngx/v3.1.3",
       "service_port": 8000,
       "homepage_url": "https://docs.paperless-ngx.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/paperless-ngx/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/paperless-ngx/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-04T08:02:34Z",
+      "updated_at": "2026-09-12T14:48:59Z",
       "download_count": 109,
       "app_type": "docker",
       "category": "content"
@@ -2291,12 +2333,12 @@
       "release_tag": "penpot/v2.17.2",
       "service_port": 9001,
       "homepage_url": "https://github.com/penpot/penpot",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/penpot/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/penpot/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-27T11:17:11Z",
+      "updated_at": "2026-09-12T14:49:53Z",
       "download_count": 17,
       "app_type": "docker",
       "category": "system"
@@ -2312,12 +2354,12 @@
       "release_tag": "photoprism/v260728-r3",
       "service_port": 2342,
       "homepage_url": "https://photoprism.app",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/photoprism/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/photoprism/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:47Z",
+      "updated_at": "2026-09-12T14:51:24Z",
       "download_count": 79,
       "app_type": "docker",
       "category": "media"
@@ -2333,12 +2375,12 @@
       "release_tag": "picoclaw/v0.3.1-r5",
       "service_port": 18800,
       "homepage_url": "https://github.com/sipeed/picoclaw",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/picoclaw/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/picoclaw/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-31T15:21:52Z",
+      "updated_at": "2026-09-12T14:51:27Z",
       "download_count": 275,
       "app_type": "native",
       "category": "ai"
@@ -2354,12 +2396,12 @@
       "release_tag": "pihole/v2026.07.2-r3",
       "service_port": 8053,
       "homepage_url": "https://pi-hole.net",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/pihole/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/pihole/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:41Z",
+      "updated_at": "2026-09-12T14:51:33Z",
       "download_count": 135,
       "app_type": "docker",
       "category": "network"
@@ -2375,12 +2417,12 @@
       "release_tag": "plex/v1.43.4.10903",
       "service_port": 32400,
       "homepage_url": "https://www.plex.tv/media-server-downloads/",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/plex/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/plex/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:03:07Z",
+      "updated_at": "2026-09-12T14:50:33Z",
       "download_count": 1271,
       "app_type": "native",
       "category": "media"
@@ -2396,12 +2438,12 @@
       "release_tag": "prometheus/v3.14.0",
       "service_port": 9090,
       "homepage_url": "https://prometheus.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/prometheus/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/prometheus/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-19T08:09:17Z",
+      "updated_at": "2026-09-12T14:49:18Z",
       "download_count": 60,
       "app_type": "native",
       "category": "system"
@@ -2417,12 +2459,12 @@
       "release_tag": "prowlarr/v2.5.2.5491-r4",
       "service_port": 9696,
       "homepage_url": "https://prowlarr.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/prowlarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/prowlarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:47:11Z",
+      "updated_at": "2026-09-12T14:51:37Z",
       "download_count": 823,
       "app_type": "native",
       "category": "automation"
@@ -2438,12 +2480,12 @@
       "release_tag": "puter/v26.09",
       "service_port": 4100,
       "homepage_url": "https://puter.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/puter/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/puter/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:29Z",
+      "updated_at": "2026-09-12T14:49:37Z",
       "download_count": 56,
       "app_type": "docker",
       "category": "content"
@@ -2459,12 +2501,12 @@
       "release_tag": "qbittorrent/v5.2.3-r4",
       "service_port": 8085,
       "homepage_url": "https://github.com/userdocs/qbittorrent-nox-static",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/qbittorrent/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/qbittorrent/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:58Z",
+      "updated_at": "2026-09-12T14:51:55Z",
       "download_count": 1124,
       "app_type": "native",
       "category": "download"
@@ -2480,12 +2522,12 @@
       "release_tag": "qinglong/v2.21.0-r3",
       "service_port": 5700,
       "homepage_url": "https://github.com/whyour/qinglong",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/qinglong/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/qinglong/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:22:55Z",
+      "updated_at": "2026-09-12T14:52:01Z",
       "download_count": 171,
       "app_type": "docker",
       "category": "system"
@@ -2501,12 +2543,12 @@
       "release_tag": "qwenpaw/v2.2.1",
       "service_port": 8088,
       "homepage_url": "https://github.com/agentscope-ai/QwenPaw",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/qwenpaw/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/qwenpaw/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:31Z",
+      "updated_at": "2026-09-12T14:49:01Z",
       "download_count": 49,
       "app_type": "docker",
       "category": "system"
@@ -2522,12 +2564,12 @@
       "release_tag": "radarr/v6.3.0.10514-r4",
       "service_port": 7878,
       "homepage_url": "https://radarr.video",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/radarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/radarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:47:06Z",
+      "updated_at": "2026-09-12T14:52:04Z",
       "download_count": 418,
       "app_type": "native",
       "category": "automation"
@@ -2543,12 +2585,12 @@
       "release_tag": "rclone/v1.75.1",
       "service_port": 5572,
       "homepage_url": "https://rclone.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/rclone/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/rclone/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-05T08:02:44Z",
+      "updated_at": "2026-09-12T14:49:42Z",
       "download_count": 184,
       "app_type": "native",
       "category": "download"
@@ -2564,12 +2606,12 @@
       "release_tag": "reactive-resume/vv5.3.0",
       "service_port": 3200,
       "homepage_url": "https://github.com/amruthpillai/reactive-resume",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/reactive-resume/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/reactive-resume/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-07T08:02:29Z",
+      "updated_at": "2026-09-12T14:49:42Z",
       "download_count": 52,
       "app_type": "docker",
       "category": "content"
@@ -2585,12 +2627,12 @@
       "release_tag": "readarr/v0.4.18.2805-r5",
       "service_port": 8787,
       "homepage_url": "https://readarr.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/readarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/readarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:12Z",
+      "updated_at": "2026-09-12T14:52:23Z",
       "download_count": 179,
       "app_type": "native",
       "category": "automation"
@@ -2606,12 +2648,12 @@
       "release_tag": "rocketchat/v8.8.1",
       "service_port": 3003,
       "homepage_url": "https://rocket.chat",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/rocketchat/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/rocketchat/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-10T08:02:37Z",
+      "updated_at": "2026-09-12T14:50:00Z",
       "download_count": 76,
       "app_type": "docker",
       "category": "system"
@@ -2627,12 +2669,12 @@
       "release_tag": "sabnzbd/v5.1.3",
       "service_port": 8780,
       "homepage_url": "https://github.com/sabnzbd/sabnzbd",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/sabnzbd/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sabnzbd/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-09T08:02:44Z",
+      "updated_at": "2026-09-12T14:49:38Z",
       "download_count": 15,
       "app_type": "docker",
       "category": "download"
@@ -2648,12 +2690,12 @@
       "release_tag": "sakurafrp/v3.1.8-r3",
       "service_port": 7102,
       "homepage_url": "https://www.natfrp.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/sakurafrp/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sakurafrp/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:32Z",
+      "updated_at": "2026-09-12T14:52:39Z",
       "download_count": 154,
       "app_type": "docker",
       "category": "network",
@@ -2670,12 +2712,12 @@
       "release_tag": "seafile/v13.0.25-r3",
       "service_port": 8002,
       "homepage_url": "https://github.com/haiwen/seafile-docker",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/seafile/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/seafile/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:23:43Z",
+      "updated_at": "2026-09-12T14:52:42Z",
       "download_count": 23,
       "app_type": "docker",
       "category": "content"
@@ -2691,12 +2733,12 @@
       "release_tag": "seerr/v3.4.1-r3",
       "service_port": 5055,
       "homepage_url": "https://github.com/seerr-team/seerr",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/seerr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/seerr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:52Z",
+      "updated_at": "2026-09-12T14:52:45Z",
       "download_count": 122,
       "app_type": "docker",
       "category": "media"
@@ -2712,12 +2754,12 @@
       "release_tag": "smartdns/v1.2026.08.05-0921-r2",
       "service_port": 6580,
       "homepage_url": "https://github.com/pymumu/smartdns",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/smartdns/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/smartdns/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:17Z",
+      "updated_at": "2026-09-12T14:52:48Z",
       "download_count": 215,
       "app_type": "native",
       "category": "network"
@@ -2733,12 +2775,12 @@
       "release_tag": "sonarr/v4.0.19.2979-r4",
       "service_port": 8989,
       "homepage_url": "https://sonarr.tv",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/sonarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sonarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:47:14Z",
+      "updated_at": "2026-09-12T14:52:52Z",
       "download_count": 315,
       "app_type": "native",
       "category": "automation"
@@ -2754,12 +2796,12 @@
       "release_tag": "songloft/v2.12.0",
       "service_port": 58091,
       "homepage_url": "https://github.com/songloft-org/songloft",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/songloft/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/songloft/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-31T08:02:46Z",
+      "updated_at": "2026-09-12T14:50:25Z",
       "download_count": 208,
       "app_type": "docker",
       "category": "media"
@@ -2775,12 +2817,12 @@
       "release_tag": "stirling-pdf/v2.14.3-r3",
       "service_port": 18080,
       "homepage_url": "https://stirlingpdf.io",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/stirling-pdf/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/stirling-pdf/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:58Z",
+      "updated_at": "2026-09-12T14:53:09Z",
       "download_count": 175,
       "app_type": "docker",
       "category": "system"
@@ -2796,12 +2838,12 @@
       "release_tag": "sub-store/v2.39.6",
       "service_port": 3001,
       "homepage_url": "https://github.com/sub-store-org/Sub-Store",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/sub-store/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sub-store/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:17Z",
+      "updated_at": "2026-09-12T14:50:23Z",
       "download_count": 88,
       "app_type": "docker",
       "category": "system"
@@ -2817,12 +2859,12 @@
       "release_tag": "suggestarr/v2.14.0",
       "service_port": 5007,
       "homepage_url": "https://github.com/giuseppe99barchetta/SuggestArr",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/suggestarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/suggestarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-09T08:02:46Z",
+      "updated_at": "2026-09-12T14:50:30Z",
       "download_count": 16,
       "app_type": "docker",
       "category": "media"
@@ -2838,12 +2880,12 @@
       "release_tag": "sun-panel/v1.8.1-r5",
       "service_port": 3002,
       "homepage_url": "https://doc.sun-panel.top/zh_cn",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/sun-panel/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sun-panel/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:59Z",
+      "updated_at": "2026-09-12T14:53:13Z",
       "download_count": 54,
       "app_type": "native",
       "category": "system"
@@ -2859,12 +2901,12 @@
       "release_tag": "sunshine/v2026.906.222525",
       "service_port": 47990,
       "homepage_url": "https://docs.lizardbyte.dev/projects/sunshine/",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/sunshine/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sunshine/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-08T08:02:35Z",
+      "updated_at": "2026-09-12T14:50:43Z",
       "download_count": 80,
       "app_type": "docker",
       "category": "media"
@@ -2880,12 +2922,12 @@
       "release_tag": "surface-battery/v1.0.1-r1",
       "service_port": 0,
       "homepage_url": "https://github.com/xiowo/fnos_surface_battery_driver",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/surface-battery/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/surface-battery/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:31:00Z",
+      "updated_at": "2026-09-12T14:53:20Z",
       "download_count": 8,
       "app_type": "native",
       "category": "system"
@@ -2901,12 +2943,12 @@
       "release_tag": "surveyking/v1.13.0",
       "service_port": 1991,
       "homepage_url": "https://github.com/anji-plus/survey",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/surveyking/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/surveyking/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-28T11:43:35Z",
+      "updated_at": "2026-09-12T14:53:22Z",
       "download_count": 61,
       "app_type": "docker",
       "category": "system"
@@ -2922,12 +2964,12 @@
       "release_tag": "suwayomi/v2.3.2243-r4",
       "service_port": 4567,
       "homepage_url": "https://github.com/Suwayomi/Suwayomi-Server",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/suwayomi/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/suwayomi/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:16Z",
+      "updated_at": "2026-09-12T14:53:25Z",
       "download_count": 104,
       "app_type": "docker",
       "category": "media"
@@ -2943,12 +2985,12 @@
       "release_tag": "syncthing/v2.1.5",
       "service_port": 8384,
       "homepage_url": "https://syncthing.net",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/syncthing/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/syncthing/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-08T08:02:45Z",
+      "updated_at": "2026-09-12T14:50:41Z",
       "download_count": 121,
       "app_type": "native",
       "category": "download"
@@ -2964,12 +3006,12 @@
       "release_tag": "tailscale/v1.102.4",
       "service_port": 8088,
       "homepage_url": "https://github.com/tailscale/tailscale",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/tailscale/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/tailscale/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-11T08:02:40Z",
+      "updated_at": "2026-09-12T14:50:40Z",
       "download_count": 272,
       "app_type": "docker",
       "category": "network"
@@ -2985,12 +3027,12 @@
       "release_tag": "tautulli/v2.18.1",
       "service_port": 8181,
       "homepage_url": "https://tautulli.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/tautulli/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/tautulli/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-28T11:43:27Z",
+      "updated_at": "2026-09-12T14:51:00Z",
       "download_count": 26,
       "app_type": "docker",
       "category": "media"
@@ -3006,12 +3048,12 @@
       "release_tag": "tinymediamanager/v5.3.2",
       "service_port": 5800,
       "homepage_url": "https://www.tinymediamanager.org",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/tinymediamanager/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/tinymediamanager/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-23T08:05:19Z",
+      "updated_at": "2026-09-12T14:50:22Z",
       "download_count": 260,
       "app_type": "docker",
       "category": "media"
@@ -3027,12 +3069,12 @@
       "release_tag": "transmission/vlatest-2026.09.12",
       "service_port": 9091,
       "homepage_url": "https://transmissionbt.com",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/transmission/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/transmission/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:13Z",
+      "updated_at": "2026-09-12T14:50:19Z",
       "download_count": 61,
       "app_type": "docker",
       "category": "download"
@@ -3048,12 +3090,12 @@
       "release_tag": "uptime-kuma/v2.5.4",
       "service_port": 3001,
       "homepage_url": "https://github.com/louislam/uptime-kuma",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/uptime-kuma/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/uptime-kuma/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:12Z",
+      "updated_at": "2026-09-12T14:50:22Z",
       "download_count": 47,
       "app_type": "docker",
       "category": "system"
@@ -3069,12 +3111,12 @@
       "release_tag": "vaultwarden/v1.37.2",
       "service_port": 8880,
       "homepage_url": "https://github.com/dani-garcia/vaultwarden",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/vaultwarden/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/vaultwarden/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-23T08:05:15Z",
+      "updated_at": "2026-09-12T14:51:02Z",
       "download_count": 187,
       "app_type": "docker",
       "category": "system"
@@ -3090,12 +3132,12 @@
       "release_tag": "verysync/v2.21.3-r3",
       "service_port": 8666,
       "homepage_url": "https://www.verysync.com/",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/verysync/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/verysync/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:39Z",
+      "updated_at": "2026-09-12T14:53:30Z",
       "download_count": 12,
       "app_type": "native",
       "category": "download"
@@ -3111,12 +3153,12 @@
       "release_tag": "vibenvr/v1.35.6",
       "service_port": 8087,
       "homepage_url": "https://github.com/spupuz/VibeNVR",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/vibenvr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/vibenvr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:14Z",
+      "updated_at": "2026-09-12T14:50:26Z",
       "download_count": 51,
       "app_type": "docker",
       "category": "media"
@@ -3132,12 +3174,12 @@
       "release_tag": "visor/v2.5.7-r6",
       "service_port": 1081,
       "homepage_url": "https://github.com/dromara/orion-visor",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/visor/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/visor/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T09:51:21Z",
+      "updated_at": "2026-09-12T14:53:36Z",
       "download_count": 171,
       "app_type": "docker",
       "category": "system"
@@ -3153,12 +3195,12 @@
       "release_tag": "wg-easy/v15.4.0-r3",
       "service_port": 51821,
       "homepage_url": "https://github.com/wg-easy/wg-easy",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/wg-easy/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/wg-easy/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T10:46:49Z",
+      "updated_at": "2026-09-12T14:53:39Z",
       "download_count": 287,
       "app_type": "docker",
       "category": "network"
@@ -3174,12 +3216,12 @@
       "release_tag": "wikijs/v2.5.277-r4",
       "service_port": 3110,
       "homepage_url": "https://js.wiki",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/wikijs/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/wikijs/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:33Z",
+      "updated_at": "2026-09-12T14:53:42Z",
       "download_count": 60,
       "app_type": "docker",
       "category": "content"
@@ -3195,12 +3237,12 @@
       "release_tag": "wizarr/v2026.9.0",
       "service_port": 5690,
       "homepage_url": "https://github.com/wizarrrr/wizarr",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/wizarr/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/wizarr/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-02T08:02:31Z",
+      "updated_at": "2026-09-12T14:50:36Z",
       "download_count": 61,
       "app_type": "docker",
       "category": "media"
@@ -3216,12 +3258,12 @@
       "release_tag": "wolgoweb/v1.7.71-r6",
       "service_port": 9095,
       "homepage_url": "https://github.com/xiaoxinpro/WolGoWeb",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/wolgoweb/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/wolgoweb/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:42Z",
+      "updated_at": "2026-09-12T14:53:45Z",
       "download_count": 52,
       "app_type": "native",
       "category": "system"
@@ -3237,12 +3279,12 @@
       "release_tag": "zeroclaw/v0.8.5",
       "service_port": 42617,
       "homepage_url": "https://github.com/zeroclaw-labs/zeroclaw",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/zeroclaw/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/zeroclaw/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-05T08:02:41Z",
+      "updated_at": "2026-09-12T14:50:56Z",
       "download_count": 149,
       "app_type": "native",
       "category": "ai"
@@ -3258,12 +3300,12 @@
       "release_tag": "zerotier/v0.8.3-r3",
       "service_port": 3008,
       "homepage_url": "https://github.com/sinamics/ztnet",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/zerotier/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/zerotier/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T08:46:36Z",
+      "updated_at": "2026-09-12T14:53:49Z",
       "download_count": 49,
       "app_type": "docker",
       "category": "network"
@@ -3279,12 +3321,12 @@
       "release_tag": "zonefoundry-bridge/v0.3.51-r3",
       "service_port": 18790,
       "homepage_url": "https://zonefoundry.dev",
-      "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/zonefoundry-bridge/fnos/ICON_256.PNG",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/zonefoundry-bridge/fnos/ICON_256.PNG",
       "platforms": [
         "x86",
         "arm"
       ],
-      "updated_at": "2026-08-17T06:24:48Z",
+      "updated_at": "2026-09-12T14:53:52Z",
       "download_count": 33,
       "app_type": "docker",
       "category": "automation",
