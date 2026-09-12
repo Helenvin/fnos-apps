@@ -1,0 +1,24 @@
+services:
+  avdb:
+    image: ${DOCKER_MIRROR}docker.io/leolitaly/avdb:${VERSION}
+    container_name: avdb
+    restart: unless-stopped
+    ports:
+      - "${TRIM_SERVICE_PORT}:8000"
+    volumes:
+      # drop-in：默认接管手动部署的既有数据库/规则/下载记录，安装向导可修改
+      - ${wizard_data_dir:-/vol1/1000/docker/avdb/data}:/data
+      # 联动 MDC-NG：映射表变更后自动重启 MDC 容器
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DATABASE_URL=sqlite:////data/avdb.db
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+    mem_limit: 4G
+    networks:
+      - avdb_net
+
+networks:
+  avdb_net:
+    driver: bridge

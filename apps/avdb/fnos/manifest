@@ -1,0 +1,15 @@
+appname         = avdb
+version         = 0.0.0
+display_name    = AVdb 影音自动化
+platform        = x86
+maintainer      = Helenvin
+maintainer_url  = https://github.com/Helenvin/AVdb-Only
+distributor     = conversun
+distributor_url = https://github.com/conversun/fnos-apps
+desktop_uidir   = ui
+desktop_applaunchname = avdb.Application
+service_port    = 8000
+checkport       = false
+desc            = AVdb 影音自动化：串接 MDC-NG 刮削信息自动归档、维护映射表，并通过 docker.sock 联动重启 MDC。基于 leolitaly/avdb 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的数据库与规则数据。
+source          = thirdparty
+checksum        = 

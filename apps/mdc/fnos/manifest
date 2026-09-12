@@ -1,0 +1,15 @@
+appname         = mdc
+version         = 0.0.0
+display_name    = MDC 影音整理
+platform        = x86
+maintainer      = Helenvin
+maintainer_url  = https://github.com/Helenvin/mdc-ng
+distributor     = conversun
+distributor_url = https://github.com/conversun/fnos-apps
+desktop_uidir   = ui
+desktop_applaunchname = mdc.Application
+service_port    = 9208
+checkport       = false
+desc            = MDC-NG 影音刮削整理：30+ 刮削源、AI 人脸识别海报、目录监控、演员管理、Emby 联动。基于 mdcng/mdc 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的配置与媒体库路径。
+source          = thirdparty
+checksum        = 

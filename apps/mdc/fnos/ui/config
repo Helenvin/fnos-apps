@@ -1,0 +1,15 @@
+{
+    ".url": {
+        "mdc.Application":
+        {
+            "title": "MDC 影音整理",
+            "desc": "MDC 影音整理",
+            "icon": "images/{0}.png",
+            "type": "url",
+            "port": "9208",
+            "protocol": "http",
+            "url": "/",
+            "allUsers": true
+        }
+    }
+}

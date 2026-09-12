@@ -1,0 +1,27 @@
+[
+    {
+        "stepTitle": "AVdb 配置",
+        "items": [
+            {
+                "type": "tips",
+                "helpText": "原地替换：数据目录默认指向手动部署的既有路径，原有 avdb.db 数据库、采集规则、下载记录自动继承，无需重新设置。"
+            },
+            {
+                "type": "text",
+                "field": "wizard_data_dir",
+                "label": "数据目录（挂载到容器 /data）",
+                "initValue": "/vol1/1000/docker/avdb/data",
+                "rules": [
+                    {
+                        "required": true,
+                        "message": "请输入数据目录，例如 /vol1/1000/docker/avdb/data"
+                    }
+                ]
+            },
+            {
+                "type": "tips",
+                "helpText": "容器会挂载 docker.sock，用于 MDC-NG 映射表变更后自动重启联动容器，等同于授予容器宿主 Docker 控制权，请知悉。WebUI 端口为 8000。"
+            }
+        ]
+    }
+]

@@ -1,0 +1,25 @@
+{
+    "port-config": {
+        "protocol-file": "avdb.sc"
+    },
+    "data-share": {
+        "shares": [
+            {
+                "name": "avdb",
+                "permission": {
+                    "rw": [
+                        "avdb"
+                    ]
+                }
+            }
+        ]
+    },
+    "docker-project": {
+        "projects": [
+            {
+                "name": "avdb",
+                "path": "docker"
+            }
+        ]
+    }
+}

@@ -1,0 +1,18 @@
+services:
+  mdc:
+    image: ${DOCKER_MIRROR}docker.io/mdcng/mdc:${VERSION}
+    container_name: mdc
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Shanghai
+      - MDC_USERNAME=${wizard_username:-admin}
+      - MDC_PASSWORD=${wizard_password:-admin}
+    ports:
+      - "${TRIM_SERVICE_PORT}:9208"
+    volumes:
+      # drop-in：默认接管手动部署的既有配置/数据库，安装向导可修改
+      - ${wizard_config_dir:-/var/apps/mdc/shares/mdc/data}:/config
+      # 媒体库目录：安装向导填写一次，挂载为容器 /media
+      - ${wizard_media_dir:-/vol1/1000}:/media

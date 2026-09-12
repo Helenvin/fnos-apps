@@ -1,0 +1,15 @@
+{
+    ".url": {
+        "avdb.Application":
+        {
+            "title": "AVdb 影音自动化",
+            "desc": "AVdb 影音自动化",
+            "icon": "images/{0}.png",
+            "type": "url",
+            "port": "8000",
+            "protocol": "http",
+            "url": "/",
+            "allUsers": true
+        }
+    }
+}

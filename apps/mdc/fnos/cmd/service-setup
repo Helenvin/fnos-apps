@@ -1,0 +1,14 @@
+#!/bin/bash
+# MDC Docker app — wizard integration (drop-in 接管既有部署)
+
+service_postinst() {
+    # 配置/媒体目录默认指向手动部署既有路径，缺失时兜底创建
+    if [ -n "${wizard_config_dir:-}" ]; then
+        mkdir -p "${wizard_config_dir}" 2>/dev/null || true
+        install_log "MDC 配置目录: ${wizard_config_dir}"
+    fi
+    if [ -n "${wizard_media_dir:-}" ]; then
+        mkdir -p "${wizard_media_dir}" 2>/dev/null || true
+        install_log "MDC 媒体库目录: ${wizard_media_dir}"
+    fi
+}

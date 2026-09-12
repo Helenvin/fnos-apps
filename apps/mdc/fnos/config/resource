@@ -1,0 +1,25 @@
+{
+    "port-config": {
+        "protocol-file": "mdc.sc"
+    },
+    "data-share": {
+        "shares": [
+            {
+                "name": "mdc",
+                "permission": {
+                    "rw": [
+                        "mdc"
+                    ]
+                }
+            }
+        ]
+    },
+    "docker-project": {
+        "projects": [
+            {
+                "name": "mdc",
+                "path": "docker"
+            }
+        ]
+    }
+}
