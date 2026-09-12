@@ -146,7 +146,7 @@ done
 
 
 # --- Helenvin patch: native apps synced from fpk repos (built externally via fnpack) ---
-for slug in LitePan; do
+for slug in LitePan fnclearup; do
   latest_release=$(echo "$ALL_RELEASES" | jq -r \
     --arg prefix "${slug}/" \
     '[.[] | select(.tagName | startswith($prefix))] | sort_by(.publishedAt) | last // empty')
@@ -167,6 +167,12 @@ for slug in LitePan; do
       DESC="LitePan 原生版（Go 单二进制，无需 Docker）：网盘聚合挂载、STRM 刮削、目录整理，默认端口 5211。由 Helenvin/LitePan-fpk 自动同步。"
       PORT=5211; HOMEPAGE="https://github.com/Helenvin/LitePan-fpk"
       ICON="https://raw.githubusercontent.com/Helenvin/LitePan-fpk/main/LitePan-x86/ICON_256.PNG"; CATEGORY="media"
+      ;;
+    fnclearup)
+      FILE_PREFIX="fnclearup"; APPNAME="fnclearup"; DISPLAY="清理精灵（原生）"
+      DESC="智能扫描已卸载应用、网盘挂载与 Docker 残留目录及重复文件，一键安全清理（Node.js 原生版，root 运行，经 fnOS 桌面打开）。安装前需先在应用中心安装 nodejs_v24 运行时；每日自动同步 FnDepot。"
+      PORT=0; HOMEPAGE="https://github.com/Wyf841015/FnDepot"
+      ICON="https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fnclearup/ICON_256.PNG"; CATEGORY="system"
       ;;
   esac
 
