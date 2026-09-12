@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-12T15:03:18Z",
+  "generated_at": "2026-09-12T16:24:01Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -276,7 +276,7 @@
         "arm"
       ],
       "updated_at": "2026-09-12T14:55:12Z",
-      "download_count": 0,
+      "download_count": 4,
       "app_type": "docker",
       "category": "media"
     },
@@ -1686,29 +1686,8 @@
         "arm"
       ],
       "updated_at": "2026-09-12T14:56:04Z",
-      "download_count": 0,
+      "download_count": 3,
       "app_type": "docker",
-      "category": "media"
-    },
-    {
-      "slug": "mdcng",
-      "appname": "mdcng",
-      "file_prefix": "MDC_ng",
-      "display_name": "MDC-NG 媒体刮削（原生）",
-      "description": "MDC-NG 原生版（Rust 单文件二进制，无需 Docker）：媒体刮削整理，端口 9208。由 Helenvin/mdc-ng-fpk 自动同步。",
-      "version": "1.36.0",
-      "fpk_version": "1.36.0",
-      "release_tag": "mdcng/v1.36.0",
-      "service_port": 9208,
-      "homepage_url": "https://github.com/Helenvin/mdc-ng-fpk",
-      "icon_url": "https://raw.githubusercontent.com/Helenvin/mdc-ng-fpk/main/mdc-x86/ICON_256.PNG",
-      "platforms": [
-        "x86",
-        "arm"
-      ],
-      "updated_at": "2026-09-12T14:53:56Z",
-      "download_count": 0,
-      "app_type": "native",
       "category": "media"
     },
     {
