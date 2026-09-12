@@ -99,3 +99,66 @@ jobs:
           LPTAG=$(gh api repos/Helenvin/LitePan-fpk/releases/latest --jq '.tag_name')
           LPVER=$(echo "$LPTAG" | sed 's/^v//; s/-fpk.*//')
           sync_native "Helenvin/LitePan-fpk" "$LPTAG" "LitePan" "LitePan" "$LPVER"
+
+          # --- fnclearup: single all-platform fpk stored inside the FnDepot git repo ---
+          # Upstream has no GitHub Releases; version + sha256 come from its fnpack.json index.
+          # Store convention needs <prefix>_<ver>_<arch>.fpk, so the same all-arch fpk is
+          # uploaded twice (x86/arm).
+          FNDEPOT="Wyf841015/FnDepot"
+          FNPACK=$(curl -sL "https://raw.githubusercontent.com/${FNDEPOT}/main/fnpack.json")
+          # fnpack.json schema v2: releases.<ver> = {changelog, packages.<arch>={download_url,sha256,size}}
+          FNVER=$(printf '%s' "$FNPACK" | jq -r \
+            '.apps.fnclearup.releases | keys | max_by(split(".") | map(tonumber))')
+          FNSHA=$(printf '%s' "$FNPACK" | jq -r --arg v "$FNVER" \
+            '.apps.fnclearup.releases[$v].packages.all.sha256')
+          FNCHANGELOG=$(printf '%s' "$FNPACK" | jq -r --arg v "$FNVER" \
+            '.apps.fnclearup.releases[$v].changelog // ""')
+          FNDL=$(printf '%s' "$FNPACK" | jq -r --arg v "$FNVER" \
+            '.apps.fnclearup.releases[$v].packages.all.download_url // "fnclearup/fnclearup.fpk"')
+          FN_TAG="fnclearup/v${FNVER}"
+          if gh api "repos/${FORK}/releases/tags/${FN_TAG}" >/dev/null 2>&1; then
+            echo "fndepot native exists: ${FN_TAG}"
+          else
+            echo "sync fndepot fnclearup@${FNVER} -> ${FN_TAG}"
+            code=$(curl -sL -o /tmp/fnclearup.fpk -w '%{http_code}' \
+              "https://raw.githubusercontent.com/${FNDEPOT}/main/${FNDL}")
+            actual_sha=$(sha256sum /tmp/fnclearup.fpk 2>/dev/null | cut -d" " -f1 || echo none)
+            if [ "$code" = "200" ] && [ "$actual_sha" = "$FNSHA" ]; then
+              FN_BODY=$(printf '%s\n\n----------------------------------------\n%s\nsha256: %s\nRequires nodejs_v24 runtime (install from App Center first).' \
+                "$FNCHANGELOG" \
+                "Native app fpk synced from FnDepot (${FNDEPOT}), upstream author: 再见一零一二 (gitee.com/wyf1015)." \
+                "$FNSHA")
+              FN_ID=$(gh api -X POST "repos/${FORK}/releases" \
+                -f tag_name="${FN_TAG}" -f name="${FN_TAG}" \
+                -f body="$FN_BODY" \
+                --jq ".id") || FN_ID=""
+              if [ -n "$FN_ID" ]; then
+                for ARCH in x86 arm; do
+                  up=$(curl -s -o /dev/null -w '%{http_code}' -X POST \
+                    --header "Authorization: Bearer $GH_TOKEN" \
+                    --header "Content-Type: application/octet-stream" \
+                    --data-binary "@/tmp/fnclearup.fpk" \
+                    "https://uploads.github.com/repos/${FORK}/releases/${FN_ID}/assets?name=fnclearup_${FNVER}_${ARCH}.fpk")
+                  echo "  fnclearup_${FNVER}_${ARCH}.fpk upload=${up}"
+                done
+              fi
+            else
+              echo "  download or sha256 check FAILED (http=${code})"
+            fi
+            rm -f /tmp/fnclearup.fpk
+          fi
+
+          # Mirror fnclearup icon into this repo (store icon_url must not depend on upstream)
+          FN_ICON_PATH="native-assets/fnclearup/ICON_256.PNG"
+          if ! gh api "repos/${FORK}/contents/${FN_ICON_PATH}" >/dev/null 2>&1; then
+            curl -sL -o /tmp/fn_icon.png "https://raw.githubusercontent.com/${FNDEPOT}/main/fnclearup/ICON_256.PNG"
+            FN_ICON_B64=$(base64 -w0 /tmp/fn_icon.png)
+            if gh api -X PUT "repos/${FORK}/contents/${FN_ICON_PATH}" \
+              -f message="chore: add fnclearup store icon (synced from FnDepot)" \
+              -f content="$FN_ICON_B64" >/dev/null 2>&1; then
+              echo "fnclearup icon mirrored to ${FN_ICON_PATH}"
+            else
+              echo "[WARN] fnclearup icon upload FAILED"
+            fi
+            rm -f /tmp/fn_icon.png
+          fi
