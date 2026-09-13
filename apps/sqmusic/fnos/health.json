@@ -1,9 +1,0 @@
-{
-    "type": "http",
-    "path": "/",
-    "expect_status": [200, 301, 302],
-    "startup_timeout_seconds": 120,
-    "post_install_warmup_seconds": 0,
-    "skip_arch": [],
-    "note": "首次启动需拉取镜像并初始化 MySQL，启动超时放宽到 120 秒"
-}
