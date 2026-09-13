@@ -1,9 +1,0 @@
-#!/bin/bash
-# YesPlayMusic Docker app — wizard integration
-
-service_postinst() {
-    # 无本地数据目录；SQMUSIC_API 由 compose 内置默认值兜底（http://172.17.0.1:8097）
-    if [ -n "${wizard_sqmusic_api:-}" ]; then
-        install_log "YesPlayMusic SQMusic 联动地址: ${wizard_sqmusic_api}"
-    fi
-}
