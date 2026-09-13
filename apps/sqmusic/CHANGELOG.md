@@ -1,3 +1,11 @@
+## 2026-09-13 发现页整页替换为洛雪 Web 播放器（lxserver 融合版）
+
+- 「发现」页现有聚合门户逻辑**全部删除**，整页嵌入 [lxserver](https://github.com/XCQ0607/lxserver)（LX Music 同步服务端 + Web 播放器，v2.0.2）
+- 播放器能力：酷狗/网易云/QQ/酷我/咪咕五源搜索、在线播放（128k/320k/FLAC/Hi-Res 自动降级）、批量下载、**洛雪 .js 自定义音源**（设置内上传/URL 导入）、收藏歌单同步、评论、歌词翻译/卡拉OK、PWA
+- **端口统一**：lxserver 不暴露独立端口，与 sqmusic 共用 8097 一个入口 —— nginx 按与 sqmusic 后端逐一比对无重叠的路径白名单分派（/lx/ 播放器页、/js/ 注入脚本、/rest/ Subsonic、/api/music/{cache,custom,...} 与 /api/{user,custom-source,admin}），其余 /api/* 仍走 sqmusic 后端，原搜索/下载/监听功能不受影响
+- 播放器持久音乐库直接落在音乐下载目录（与 sqmusic 下载同目录，Emby/Jellyfin 可扫描）；lxserver 数据（音源脚本/用户/缓存）在应用数据目录 lx_data
+- 前端 V3Discover.vue 缩为嵌入壳（2KB），web fork 同步
+
 ## 2026-09-13 发现页重做为 QQ 音乐网页版（内嵌真实榜单 + 行尾下载）
 
 - 发现页按用户要求重做：呈现 **QQ 音乐网页版真实内容**（等同内嵌效果）——

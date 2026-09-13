@@ -13,12 +13,12 @@
 
 | 文件 | 说明 |
 |---|---|
-| `src/components/V3Discover.vue` | 新增：发现页 v4 多源聚合门户（酷狗源：40+ 官方榜单/13 类歌手库/专辑详情；QQ 源：15 类歌单广场+歌单详情；播放=后端 getDownloadUrl 直链+跨源换票兜底，底部常驻播放条；逐首/整列表下载；七源搜索），全匿名可用 |
+| `src/components/V3Discover.vue` | 发现页 v5：整页嵌入 lxserver 洛雪播放器（iframe /lx/），旧聚合门户逻辑已全部删除 |
 | `src/components/V3TopWitge.vue` | 修改：PC + 移动端导航首位置插入"发现"入口（/v3discover） |
 | `src/router/index.js` | 修改：注册 `/v3discover` 路由，`/home` 默认重定向改为发现页 |
 | `src/components/Monitor.vue` | 修改：监听页输入提示改为「支持网易云/酷我/酷狗/QQ音乐 歌单分享链接」 |
 | `src/components/V3Set.vue` | 修改：QQ/微信登录二维码获取失败时弹出错误提示（原为静默空白） |
-| `nginx.conf` | 修改：新增 `location /qq/` 反代 `c.y.qq.com`（注入 Referer https://y.qq.com/ ，否则 fcg 接口返回 code=-2）+ `location /kg/` 反代 `mobiles.kugou.com`（注入 Referer https://m.kugou.com/ + 移动 UA + proxy_ssl_server_name，发现页酷狗榜单/歌手/专辑接口） |
+| `nginx.conf` | /qq/ + /kg/ 外站代理；lxserver 分派（/lx/ 播放器页、/js/、/rest/、/api 白名单 → lxserver:9527，其余 /api/* → sqmusic_main） |
 
 ## 重建步骤（上游出新版或改补丁后）
 
