@@ -237,12 +237,12 @@ const openTop = async (t, targetView) => {
 };
 const gotoTop = (t) => { loadTops(); openTop(t, "top"); };
 
-// ================= 首页分区榜单（QQ 音乐网页版四大榜） =================
+// ================= 首页分区榜单（QQ 音乐网页版四大榜，id 已按 fcg_myqq_toplist 实测校准） =================
 const homeSections = [
-    { id: 4, title: "飙升榜" },
+    { id: 62, title: "飙升榜" },
     { id: 26, title: "热歌榜" },
     { id: 27, title: "新歌榜" },
-    { id: 3, title: "流行指数榜" }
+    { id: 4, title: "流行指数榜" }
 ];
 const homeData = ref({}); // topid -> {songs, loading}
 const HOME_COUNT = 10;
@@ -276,7 +276,7 @@ loadHome();
                 </div>
                 <nav class="nav-tabs">
                     <div class="nav-tab" :class="{ active: view === 'home' }" @click="setView('home')">首页</div>
-                    <div class="nav-tab" :class="{ active: view === 'top' }" @click="gotoTop(tops[0] || { id: 4, title: '飙升榜' })">排行榜</div>
+                    <div class="nav-tab" :class="{ active: view === 'top' }" @click="gotoTop(tops[0] || { id: 62, title: '飙升榜' })">排行榜</div>
                 </nav>
                 <div class="search-box">
                     <svg class="search-ico" viewBox="0 0 24 24" width="16" height="16">
