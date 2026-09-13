@@ -13,12 +13,12 @@
 
 | 文件 | 说明 |
 |---|---|
-| `src/components/V3Discover.vue` | 新增：发现页（YesPlayMusic 风格：侧栏导航+首页hero+推荐歌单卡片+排行榜+大封面歌单详情；歌单详情=parserUrlInfo 元数据 + parserUrl 完整歌曲列表，全匿名），支持逐首/批量下载 |
+| `src/components/V3Discover.vue` | 新增：发现页 v4 多源聚合门户（酷狗源：40+ 官方榜单/13 类歌手库/专辑详情；QQ 源：15 类歌单广场+歌单详情；播放=后端 getDownloadUrl 直链+跨源换票兜底，底部常驻播放条；逐首/整列表下载；七源搜索），全匿名可用 |
 | `src/components/V3TopWitge.vue` | 修改：PC + 移动端导航首位置插入"发现"入口（/v3discover） |
 | `src/router/index.js` | 修改：注册 `/v3discover` 路由，`/home` 默认重定向改为发现页 |
 | `src/components/Monitor.vue` | 修改：监听页输入提示改为「支持网易云/酷我/酷狗/QQ音乐 歌单分享链接」 |
 | `src/components/V3Set.vue` | 修改：QQ/微信登录二维码获取失败时弹出错误提示（原为静默空白） |
-| `nginx.conf` | 修改：新增 `location /qq/` 反代 `c.y.qq.com`（注入 Referer https://y.qq.com/ ，否则 fcg 接口返回 code=-2） |
+| `nginx.conf` | 修改：新增 `location /qq/` 反代 `c.y.qq.com`（注入 Referer https://y.qq.com/ ，否则 fcg 接口返回 code=-2）+ `location /kg/` 反代 `mobiles.kugou.com`（注入 Referer https://m.kugou.com/ + 移动 UA + proxy_ssl_server_name，发现页酷狗榜单/歌手/专辑接口） |
 
 ## 重建步骤（上游出新版或改补丁后）
 
@@ -41,8 +41,9 @@ tar -czf ../apps/sqmusic/webdist/dist.tgz dist nginx.conf
 
 ## 注意
 
-- 发现页的 QQ fcg 接口依赖 nginx `/qq/` 代理注入 Referer，直接访问 `c.y.qq.com` 会被拒（code=-2），
-  因此 nginx.conf 必须随 dist 一起打包，且 `sqmusic_web` 容器务必挂载本目录的 nginx.conf。
-- 歌单广场的**歌单详情/整单下载**走后端 `/api/parser/parserUrlInfo`（需在设置里 QQ 扫码登录）；
-  榜单功能完全匿名可用。
+- 发现页的 QQ fcg 接口依赖 nginx `/qq/` 代理注入 Referer，直接访问 `c.y.qq.com` 会被拒（code=-2）；
+  酷狗榜单/歌手/专辑接口依赖 `/kg/` 代理（mobiles.kugou.com，须带 m.kugou.com Referer + 移动 UA）。
+  因此 nginx.conf 必须随 dist 一起打包（`tar -czf dist.tgz dist nginx.conf`），且 `sqmusic_web` 容器务必挂载本目录的 nginx.conf。
+- 播放/下载走后端 `/api/music/getDownloadUrl`（v3.2.4 起匿名可用）+ 七源搜索换票；QQ 歌单广场详情走
+  后端 `/api/parser/parserUrlInfo` + `parserUrl`（匿名可用）。
 - 上游若升级到 v4 等不兼容版本，需按新版组件结构重做补丁。
