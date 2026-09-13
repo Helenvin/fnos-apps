@@ -1,16 +1,13 @@
 <script setup>
-// ============ SQMusic 发现页（YesPlayMusic 风格 UI） ============
-// 布局致敬 YesPlayMusic：左侧图标导航 + 首页 hero/推荐歌单/排行榜 + 大封面歌单详情
-// 全链路匿名：榜单/歌单广场走 /qq/ 代理（nginx 注入 Referer），
-// 歌单详情 = parserUrlInfo(头部元数据) + parserUrl(完整歌曲列表，可直接下载)，无需扫码登录
+// ============ SQMusic 发现页（QQ音乐网页版风格 UI） ============
+// 布局致敬 y.qq.com：顶部导航（首页/排行榜/搜索）+ 榜单歌曲表格直接展示
+// 每首歌曲行尾对应下载按钮；全链路匿名：榜单走 /qq/ 代理（nginx 注入 Referer）
+// 下载：榜单行走"搜索换票"（后端搜索拿原生数据）→ POST /api/download/downloadSong
 import { ref, computed } from "vue";
 import axios from "axios";
 import {
     musicSearch,
-    musicDownload,
-    parserUrlInfo,
-    parserUrlSongs,
-    parserUrlAndDownload
+    musicDownload
 } from "../utils/api.js";
 
 // ---------- QQ fcg 代理（nginx /qq/ → c.y.qq.com，自动带 Referer） ----------
@@ -21,8 +18,7 @@ const qqGet = async (path, params) => {
 };
 
 // ---------- 视图切换 ----------
-const view = ref("home"); // home | top | plaza | detail
-const prevView = ref("home");
+const view = ref("home"); // home | top | search
 const setView = (v) => { view.value = v; };
 
 // ---------- 通用状态 ----------
@@ -42,7 +38,7 @@ const fmtDur = (s) => {
     return Math.floor(t / 60) + ":" + String(t % 60).padStart(2, "0");
 };
 
-// 音质标签（YPM 风格小徽标）
+// 音质标签（歌曲名后小徽标）
 const brTag = (b) => {
     const s = String(b || "").toUpperCase();
     if (s.includes("HIRE") || s.includes("HI_RES")) return "Hi-Res";
@@ -111,13 +107,23 @@ const downloadOne = async (song) => {
     if (!dres.data || dres.data.code !== 200) throw new Error(dres.data?.msg || "下载失败");
 };
 
-const downloadBtn = async (song) => {
+// 单曲下载状态（行尾按钮转圈）
+const dlBusy = ref({}); // key: view+idx -> true
+const busyKey = (viewName, idx) => viewName + "#" + idx;
+
+const downloadBtn = async (song, viewName = "home") => {
+    const key = busyKey(viewName, song.idx);
+    if (dlBusy.value[key]) return;
+    dlBusy.value = { ...dlBusy.value, [key]: true };
     try {
         await downloadOne(song);
         window.$message.success("已加入下载：" + song.name);
     } catch (e) {
         window.$message.error("下载失败：" + (e.message || e));
     }
+    const next = { ...dlBusy.value };
+    delete next[key];
+    dlBusy.value = next;
 };
 
 const downloadAll = async (songs, listName) => {
@@ -165,7 +171,7 @@ const doSearch = async () => {
     searchLoading.value = true;
     searchError.value = "";
     searchSongs.value = [];
-    if (view.value !== "detail") view.value = "search";
+    view.value = "search";
     try {
         const res = await musicSearch("qq", "music", kw, 30, 1);
         if (res.data && res.data.code === 200 && res.data.data) {
@@ -207,17 +213,17 @@ const loadTops = async () => {
             listen: t.listenCount
         }));
         if (!tops.value.length) topsError.value = "榜单列表为空";
-        else if (!curTop.value) openTop(tops.value[0]);
     } catch (e) {
         topsError.value = "榜单加载失败：" + (e.message || e);
     }
     topsLoading.value = false;
 };
 
-const openTop = async (t) => {
+const openTop = async (t, targetView) => {
     curTop.value = t;
     topSongs.value = [];
     topSongsLoading.value = true;
+    if (targetView) view.value = targetView;
     try {
         const j = await qqGet("/v8/fcg-bin/fcg_v8_toplist_cp.fcg", {
             topid: t.id, type: "top", song_num: 100,
@@ -229,912 +235,608 @@ const openTop = async (t) => {
     }
     topSongsLoading.value = false;
 };
-const gotoTop = (t) => { view.value = "top"; loadTops(); openTop(t); };
+const gotoTop = (t) => { loadTops(); openTop(t, "top"); };
 
-// ================= 歌单广场 =================
-const plazaCats = [
-    { label: "热门", id: "10000000" },
-    { label: "华语", id: "168" },
-    { label: "流行", id: "118" },
-    { label: "摇滚", id: "149" },
-    { label: "民谣", id: "133" },
-    { label: "电子", id: "109" },
-    { label: "说唱", id: "188" },
-    { label: "粤语", id: "197" },
-    { label: "日韩", id: "148" },
-    { label: "欧美", id: "141" },
-    { label: "轻音乐", id: "131" },
-    { label: "影视原声", id: "104" },
-    { label: "ACG", id: "21" },
-    { label: "爵士", id: "92" },
-    { label: "古典", id: "136" }
+// ================= 首页分区榜单（QQ 音乐网页版四大榜） =================
+const homeSections = [
+    { id: 4, title: "飙升榜" },
+    { id: 26, title: "热歌榜" },
+    { id: 27, title: "新歌榜" },
+    { id: 3, title: "流行指数榜" }
 ];
-const plazaCat = ref("10000000");
-const plazaPage = ref(1);
-const plazaList = ref([]);
-const plazaLoading = ref(false);
-const plazaError = ref("");
-const PAGE_SIZE = 20;
+const homeData = ref({}); // topid -> {songs, loading}
+const HOME_COUNT = 10;
 
-const loadPlaza = async (page) => {
-    plazaPage.value = page;
-    plazaLoading.value = true;
-    plazaError.value = "";
+const loadHomeSection = async (sec) => {
+    if (homeData.value[sec.id] && homeData.value[sec.id].songs.length) return;
+    homeData.value = { ...homeData.value, [sec.id]: { songs: [], loading: true } };
     try {
-        const sin = (page - 1) * PAGE_SIZE;
-        const j = await qqGet("/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg", {
-            picmid: 1, rnd: Math.random(), g_tk: 732560959, loginUin: 0, hostUin: 0,
-            format: "json", inCharset: "utf8", outCharset: "utf-8", notice: 0,
-            platform: "yqq.json", needNewCode: 0,
-            categoryId: plazaCat.value, sortId: 5, sin: sin, ein: sin + PAGE_SIZE - 1
+        const j = await qqGet("/v8/fcg-bin/fcg_v8_toplist_cp.fcg", {
+            topid: sec.id, type: "top", song_num: HOME_COUNT,
+            format: "json", inCharset: "utf8", outCharset: "utf-8", notice: 0, platform: "yqq.json", needNewCode: 0
         });
-        plazaList.value = ((j.data || {}).list || []).map(d => ({
-            id: String(d.dissid || ""),
-            name: d.dissname || "未命名歌单",
-            pic: d.imgurl || d.imgv30 || d.picurl || "",
-            listen: d.listennum || 0
-        }));
-        if (!plazaList.value.length) plazaError.value = "该分类暂无数据，换一个分类试试";
+        const songs = toRows((j.songlist || []).map(s => ({ data: s.data || {} })));
+        homeData.value = { ...homeData.value, [sec.id]: { songs, loading: false } };
     } catch (e) {
-        plazaError.value = "歌单广场加载失败：" + (e.message || e);
-    }
-    plazaLoading.value = false;
-};
-const switchCat = (id) => { plazaCat.value = id; loadPlaza(1); };
-
-// 首页推荐歌单 = 广场热门前 10
-const hotList = computed(() => plazaList.value.slice(0, 10));
-// 首页排行榜预览 = 前 8
-const hotTops = computed(() => tops.value.slice(0, 8));
-
-// ================= 歌单详情（YPM 大封面页） =================
-// 元数据走 parserUrlInfo（名称/封面/数量/描述），歌曲走 parserUrl（完整列表，可直接下载）
-const dissUrl = (id) => "https://y.qq.com/n/ryqq/playlist/" + id;
-
-const curDiss = ref(null);        // {id, name, pic, listen, cover, desc, count}
-const dissSongs = ref([]);
-const dissLoading = ref(false);
-const dissError = ref("");
-
-const openDiss = async (d) => {
-    prevView.value = view.value === "detail" ? prevView.value : view.value;
-    view.value = "detail";
-    curDiss.value = { id: d.id, name: d.name || "", pic: d.pic || "", listen: d.listen || 0 };
-    dissSongs.value = [];
-    dissError.value = "";
-    dissLoading.value = true;
-    const url = dissUrl(d.id);
-    const [metaRes, songsRes] = await Promise.allSettled([parserUrlInfo(url), parserUrlSongs(url)]);
-    // 头部元数据（失败不阻塞歌曲列表）
-    if (metaRes.status === "fulfilled" && metaRes.value.data && metaRes.value.data.code === 200) {
-        const info = metaRes.value.data.data || {};
-        if (info.name) curDiss.value.name = info.name;
-        if (info.cover) curDiss.value.pic = info.cover;
-        if (info.desc) curDiss.value.desc = info.desc;
-        curDiss.value.count = info.count || 0;
-    }
-    // 歌曲列表
-    if (songsRes.status === "fulfilled" && songsRes.value.data && songsRes.value.data.code === 200) {
-        const data = songsRes.value.data.data;
-        const musics = Array.isArray(data) ? data : (data.musics || data.songs || []);
-        if (musics.length) {
-            dissSongs.value = toRows(musics);
-            if (!curDiss.value.count) curDiss.value.count = musics.length;
-        } else {
-            dissError.value = "解析到 0 首歌曲，请重试";
-        }
-    } else {
-        const msg = (songsRes.status === "fulfilled" && songsRes.value.data && songsRes.value.data.msg) || "";
-        dissError.value = msg ? ("解析失败：" + msg) : "歌单解析失败，请重试";
-    }
-    dissLoading.value = false;
-};
-const backDiss = () => {
-    view.value = prevView.value === "detail" ? "plaza" : prevView.value;
-    curDiss.value = null;
-    dissSongs.value = [];
-    dissError.value = "";
-};
-
-// 后台解析整单（不阻塞页面）
-const dissBlindDownload = async () => {
-    try {
-        const res = await parserUrlAndDownload(dissUrl(curDiss.value.id), false, curDiss.value.name, "");
-        if (res.data && res.data.code === 200) {
-            window.$message.success("解析任务已提交，请到下载页查看进度");
-        } else {
-            window.$message.error("解析失败：" + ((res.data && res.data.msg) || "请稍后重试"));
-        }
-    } catch (e) {
-        window.$message.error("解析失败，请稍后重试");
+        homeData.value = { ...homeData.value, [sec.id]: { songs: [], loading: false, error: true } };
     }
 };
-
-// ---------- 初始化 ----------
-loadTops();
-loadPlaza(1);
+const loadHome = () => { homeSections.forEach(loadHomeSection); };
+loadHome();
 </script>
 
 <template>
-  <div class="ypm-root">
-    <!-- ============ 左侧导航（YesPlayMusic 风格） ============ -->
-    <aside class="ypm-side">
-      <div class="ypm-logo">
-        <div class="ypm-logo-badge">SQ</div>
-        <div class="ypm-logo-text">音乐发现</div>
-      </div>
-      <nav class="ypm-nav">
-        <div class="ypm-nav-item" :class="{ active: view === 'home' }" @click="setView('home')">
-          <svg class="ypm-ico" viewBox="0 0 24 24"><path d="M4 11.5 12 4l8 7.5V20a1 1 0 0 1-1 1h-5v-6h-4v6H5a1 1 0 0 1-1-1v-8.5Z"/></svg>
-          <span>发现音乐</span>
-        </div>
-        <div class="ypm-nav-item" :class="{ active: view === 'top' }" @click="setView('top'); loadTops()">
-          <svg class="ypm-ico" viewBox="0 0 24 24"><path d="M5 20V10m7 10V4m7 16v-7" fill="none" stroke-width="2.4" stroke-linecap="round" class="stroke"/></svg>
-          <span>排行榜</span>
-        </div>
-        <div class="ypm-nav-item" :class="{ active: view === 'plaza' || view === 'detail' }" @click="setView('plaza')">
-          <svg class="ypm-ico" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 1-9 9h2a7 7 0 1 0 7-7V3Z"/><circle cx="12" cy="12" r="2.4"/></svg>
-          <span>歌单广场</span>
-        </div>
-      </nav>
-      <div class="ypm-side-foot">
-        <div class="ypm-foot-line">全链路匿名</div>
-        <div class="ypm-foot-line sub">无需扫码登录</div>
-      </div>
-    </aside>
-
-    <!-- ============ 主区 ============ -->
-    <main class="ypm-main">
-      <!-- 顶栏：搜索 + 批量下载状态 -->
-      <div class="ypm-topbar">
-        <div class="ypm-search">
-          <svg class="ypm-search-ico" viewBox="0 0 24 24"><path d="M10.5 4a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13Zm5.9 11.8 4 4-1.6 1.6-4-4a8 8 0 0 1-4.3 1.6A8 8 0 1 1 10.5 2a8 8 0 0 1 8 8 8 8 0 0 1-1.6 4.3Z" transform="scale(0.92) translate(1,1)"/></svg>
-          <input
-            v-model="searchKw"
-            class="ypm-search-input"
-            type="text"
-            placeholder="搜索歌曲 / 歌手（QQ 音乐源）"
-            @keyup.enter="doSearch"
-          />
-          <n-button size="small" type="primary" :loading="searchLoading" @click="doSearch">搜索</n-button>
-        </div>
-        <n-progress
-          v-if="dlRunning || dlDone > 0"
-          type="line"
-          :percentage="dlTotal ? Math.round(dlDone / dlTotal * 100) : 0"
-          indicator-placement="inside"
-          processing
-          class="ypm-progress"
-        >
-          {{ dlDone }} / {{ dlTotal }}
-        </n-progress>
-        <n-button v-if="dlRunning" quaternary type="error" size="small" @click="stopDl">停止</n-button>
-      </div>
-
-      <!-- ================= 首页（发现音乐） ================= -->
-      <section v-if="view === 'home'" class="ypm-view">
-        <div class="ypm-hero">
-          <div class="ypm-hero-title">发现音乐</div>
-          <div class="ypm-hero-sub">榜单 · 歌单 · 搜索 · 高音质下载，全部匿名直达</div>
-          <div class="ypm-hero-actions">
-            <n-button round type="primary" @click="setView('plaza')">逛逛歌单广场</n-button>
-            <n-button round secondary @click="setView('top')">看看排行榜</n-button>
-          </div>
-        </div>
-
-        <div class="ypm-section-head">
-          <span class="ypm-section-bar"></span>
-          <span class="ypm-section-title">推荐歌单</span>
-          <span class="ypm-section-more" @click="setView('plaza')">更多 ›</span>
-        </div>
-        <n-spin :show="plazaLoading">
-          <div class="ypm-grid">
-            <div v-for="d in hotList" :key="'h'+d.id" class="ypm-card" @click="openDiss(d)">
-              <div class="ypm-card-cover-wrap">
-                <img class="ypm-card-pic" :src="d.pic" loading="lazy" alt=""/>
-                <span class="ypm-card-listen">▶ {{ fmtListen(d.listen) }}</span>
-              </div>
-              <div class="ypm-card-name">{{ d.name }}</div>
-            </div>
-          </div>
-        </n-spin>
-
-        <div class="ypm-section-head">
-          <span class="ypm-section-bar"></span>
-          <span class="ypm-section-title">排行榜</span>
-          <span class="ypm-section-more" @click="setView('top'); loadTops()">更多 ›</span>
-        </div>
-        <n-spin :show="topsLoading">
-          <div class="ypm-top-row">
-            <div v-for="t in hotTops" :key="'t'+t.id" class="ypm-top-card" @click="gotoTop(t)">
-              <img class="ypm-top-pic" :src="t.pic" loading="lazy" alt=""/>
-              <div class="ypm-top-text">
-                <div class="ypm-top-name">{{ t.title }}</div>
-                <div class="ypm-top-sub">{{ fmtListen(t.listen) }} 次收听</div>
-              </div>
-            </div>
-          </div>
-        </n-spin>
-      </section>
-
-      <!-- ================= 榜单视图 ================= -->
-      <section v-if="view === 'top'" class="ypm-view ypm-split">
-        <div class="ypm-split-left">
-          <n-spin :show="topsLoading">
-            <n-alert v-if="topsError" type="warning" style="margin-bottom:8px">{{ topsError }}</n-alert>
-            <div class="ypm-toplist">
-              <div v-for="t in tops" :key="t.id" class="ypm-toplist-item"
-                   :class="{ active: curTop && curTop.id === t.id }" @click="openTop(t)">
-                <img class="ypm-toplist-pic" :src="t.pic" loading="lazy" alt=""/>
-                <div class="ypm-toplist-text">
-                  <div class="ypm-top-name">{{ t.title }}</div>
-                  <div class="ypm-top-sub">{{ fmtListen(t.listen) }} 次收听</div>
+    <div class="yqq">
+        <!-- 顶部导航（QQ音乐网页版风格） -->
+        <header class="yqq-header">
+            <div class="header-inner">
+                <div class="logo" @click="setView('home')">
+                    <span class="logo-icon">♫</span>
+                    <span class="logo-text">发现音乐</span>
                 </div>
-              </div>
+                <nav class="nav-tabs">
+                    <div class="nav-tab" :class="{ active: view === 'home' }" @click="setView('home')">首页</div>
+                    <div class="nav-tab" :class="{ active: view === 'top' }" @click="gotoTop(tops[0] || { id: 4, title: '飙升榜' })">排行榜</div>
+                </nav>
+                <div class="search-box">
+                    <svg class="search-ico" viewBox="0 0 24 24" width="16" height="16">
+                        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <line x1="16.5" y1="16.5" x2="21" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input
+                        v-model="searchKw"
+                        placeholder="搜索歌曲、歌手"
+                        @keyup.enter="doSearch"
+                    />
+                </div>
             </div>
-          </n-spin>
-        </div>
-        <div class="ypm-split-right">
-          <div class="ypm-toolbar">
-            <span class="ypm-detail-title" style="font-size:18px">{{ curTop ? curTop.title : "选择榜单" }}</span>
-            <n-button v-if="topSongs.length" size="small" type="primary" round :loading="dlRunning"
-                      @click="downloadAll(topSongs, curTop.title)">
-              下载全榜（{{ topSongs.length }} 首）
-            </n-button>
-          </div>
-          <n-spin :show="topSongsLoading">
-            <div v-if="topSongs.length" class="ypm-table-wrap">
-              <table class="ypm-table">
-                <thead>
-                  <tr><th class="col-idx">#</th><th>歌曲</th><th class="col-album">专辑</th>
-                      <th class="col-dur">时长</th><th class="col-br">音质</th><th class="col-op"></th></tr>
-                </thead>
-                <tbody>
-                  <tr v-for="s in topSongs" :key="s.id + s.idx" class="ypm-row">
-                    <td class="col-idx">{{ s.idx }}</td>
-                    <td>
-                      <div class="ypm-song">
-                        <img v-if="s.pic" class="ypm-pic" :src="s.pic" loading="lazy" alt=""/>
-                        <div class="ypm-song-text">
-                          <div class="ypm-song-name">{{ s.name }}</div>
-                          <div class="ypm-song-artist">{{ s.singer }}</div>
+        </header>
+
+        <!-- 首页：分区榜单歌曲表格 -->
+        <main v-if="view === 'home'" class="yqq-main">
+            <section v-for="sec in homeSections" :key="sec.id" class="home-section">
+                <div class="section-head">
+                    <h2 class="section-title">{{ sec.title }}</h2>
+                    <a class="section-more" @click.prevent="gotoTop({ id: sec.id, title: sec.title })">
+                        更多
+                        <svg viewBox="0 0 24 24" width="12" height="12"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                </div>
+                <div class="song-table" v-if="homeData[sec.id] && homeData[sec.id].songs.length">
+                    <div v-for="row in homeData[sec.id].songs" :key="sec.id + '-' + row.idx" class="song-row">
+                        <div class="col-idx" :class="{ top3: row.idx <= 3 }">{{ row.idx }}</div>
+                        <div class="col-title">
+                            <img class="song-cover" :src="row.pic" loading="lazy" @error="$event.target.style.visibility='hidden'"/>
+                            <div class="song-name-wrap">
+                                <span class="song-name" :title="row.name">{{ row.name }}</span>
+                                <span v-for="t in brTags(row.brTypes)" :key="t" class="br-tag">{{ t }}</span>
+                            </div>
                         </div>
-                      </div>
-                    </td>
-                    <td class="col-album ypm-ellipsis">{{ s.album }}</td>
-                    <td class="col-dur">{{ fmtDur(s.duration) }}</td>
-                    <td class="col-br">
-                      <span v-for="t in brTags(s.brTypes)" :key="t" class="ypm-br" :class="{ hl: t !== '128K' }">{{ t }}</span>
-                    </td>
-                    <td class="col-op">
-                      <n-button size="tiny" quaternary type="primary" :disabled="dlRunning" @click="downloadBtn(s)">下载</n-button>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <n-empty v-else-if="!topSongsLoading" description="左侧选择榜单" style="margin-top:60px" />
-          </n-spin>
-        </div>
-      </section>
-
-      <!-- ================= 歌单广场视图 ================= -->
-      <section v-if="view === 'plaza'" class="ypm-view">
-        <div class="ypm-cats">
-          <span v-for="c in plazaCats" :key="c.id" class="ypm-chip"
-                :class="{ active: plazaCat === c.id }"
-                @click="switchCat(c.id)">{{ c.label }}</span>
-        </div>
-        <n-alert v-if="plazaError" type="warning" style="margin-bottom:12px">{{ plazaError }}</n-alert>
-        <n-spin :show="plazaLoading">
-          <div class="ypm-grid">
-            <div v-for="d in plazaList" :key="d.id" class="ypm-card" @click="openDiss(d)">
-              <div class="ypm-card-cover-wrap">
-                <img class="ypm-card-pic" :src="d.pic" loading="lazy" alt=""/>
-                <span class="ypm-card-listen">▶ {{ fmtListen(d.listen) }}</span>
-              </div>
-              <div class="ypm-card-name">{{ d.name }}</div>
-            </div>
-          </div>
-          <div class="ypm-pager" v-if="plazaList.length">
-            <n-button quaternary size="small" :disabled="plazaPage <= 1" @click="loadPlaza(plazaPage - 1)">上一页</n-button>
-            <span class="ypm-pager-text">第 {{ plazaPage }} 页</span>
-            <n-button quaternary size="small" :disabled="plazaList.length < PAGE_SIZE" @click="loadPlaza(plazaPage + 1)">下一页</n-button>
-          </div>
-        </n-spin>
-      </section>
-
-      <!-- ================= 歌单详情（YPM 大封面页） ================= -->
-      <section v-if="view === 'detail' && curDiss" class="ypm-view">
-        <div class="ypm-back">
-          <n-button quaternary size="small" @click="backDiss">‹ 返回</n-button>
-        </div>
-        <div class="ypm-detail-head">
-          <img v-if="curDiss.pic" class="ypm-detail-cover" :src="curDiss.pic" alt=""/>
-          <div class="ypm-detail-info">
-            <div class="ypm-detail-tag">歌单</div>
-            <div class="ypm-detail-title">{{ curDiss.name || "加载中…" }}</div>
-            <div class="ypm-detail-meta">
-              <span v-if="curDiss.count">共 {{ curDiss.count }} 首</span>
-              <span v-if="curDiss.listen">· {{ fmtListen(curDiss.listen) }} 次播放</span>
-              <span class="ypm-detail-anon">· 匿名解析无需登录</span>
-            </div>
-            <div v-if="curDiss.desc" class="ypm-detail-desc">{{ curDiss.desc }}</div>
-            <div class="ypm-detail-actions">
-              <n-button v-if="dissSongs.length" type="primary" round :loading="dlRunning"
-                        @click="downloadAll(dissSongs, curDiss.name)">
-                下载全部（{{ dissSongs.length }} 首）
-              </n-button>
-              <n-button round @click="dissBlindDownload">后台解析整单</n-button>
-            </div>
-          </div>
-        </div>
-        <n-spin :show="dissLoading">
-          <n-alert v-if="dissError" type="warning" style="margin-bottom:12px">
-            {{ dissError }}
-            <n-button size="tiny" style="margin-left:8px" @click="openDiss(curDiss)">重试</n-button>
-          </n-alert>
-          <div v-if="dissSongs.length" class="ypm-table-wrap">
-            <table class="ypm-table">
-              <thead>
-                <tr><th class="col-idx">#</th><th>歌曲</th><th class="col-album">专辑</th>
-                    <th class="col-dur">时长</th><th class="col-br">音质</th><th class="col-op"></th></tr>
-              </thead>
-              <tbody>
-                <tr v-for="s in dissSongs" :key="s.id + s.idx" class="ypm-row">
-                  <td class="col-idx">{{ s.idx }}</td>
-                  <td>
-                    <div class="ypm-song">
-                      <img v-if="s.pic" class="ypm-pic" :src="s.pic" loading="lazy" alt=""/>
-                      <div class="ypm-song-text">
-                        <div class="ypm-song-name">{{ s.name }}</div>
-                        <div class="ypm-song-artist">{{ s.singer }}</div>
-                      </div>
+                        <div class="col-singer" :title="row.singer">{{ row.singer }}</div>
+                        <div class="col-album" :title="row.album">{{ row.album }}</div>
+                        <div class="col-dur">{{ fmtDur(row.duration) }}</div>
+                        <div class="col-op">
+                            <button
+                                class="dl-btn"
+                                :title="'下载 ' + row.name"
+                                :class="{ busy: dlBusy[busyKey('home', row.idx)] }"
+                                @click="downloadBtn(row, 'home')"
+                            >
+                                <svg viewBox="0 0 24 24" width="15" height="15">
+                                    <path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                  </td>
-                  <td class="col-album ypm-ellipsis">{{ s.album }}</td>
-                  <td class="col-dur">{{ fmtDur(s.duration) }}</td>
-                  <td class="col-br">
-                    <span v-for="t in brTags(s.brTypes)" :key="t" class="ypm-br" :class="{ hl: t !== '128K' }">{{ t }}</span>
-                  </td>
-                  <td class="col-op">
-                    <n-button size="tiny" quaternary type="primary" :disabled="dlRunning" @click="downloadBtn(s)">下载</n-button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </n-spin>
-      </section>
+                </div>
+                <div v-else class="section-loading">加载中…</div>
+            </section>
+        </main>
 
-      <!-- ================= 搜索结果视图 ================= -->
-      <section v-if="view === 'search'" class="ypm-view">
-        <div class="ypm-toolbar">
-          <span class="ypm-detail-title" style="font-size:18px">搜索结果{{ searchKw ? "：" + searchKw : "" }}</span>
-          <n-button v-if="searchSongs.length" size="small" type="primary" round :loading="dlRunning"
-                    @click="downloadAll(searchSongs, searchKw)">
-            下载全部（{{ searchSongs.length }} 首）
-          </n-button>
-        </div>
-        <n-spin :show="searchLoading">
-          <n-empty v-if="!searchSongs.length && !searchLoading && !searchError" description="输入关键词搜索歌曲"
-                   style="margin-top:60px" />
-          <n-alert v-if="searchError" type="warning" style="margin-bottom:12px">{{ searchError }}</n-alert>
-          <div v-if="searchSongs.length" class="ypm-table-wrap">
-            <table class="ypm-table">
-              <thead>
-                <tr><th class="col-idx">#</th><th>歌曲</th><th class="col-album">专辑</th>
-                    <th class="col-dur">时长</th><th class="col-br">音质</th><th class="col-op"></th></tr>
-              </thead>
-              <tbody>
-                <tr v-for="s in searchSongs" :key="s.id + s.idx" class="ypm-row">
-                  <td class="col-idx">{{ s.idx }}</td>
-                  <td>
-                    <div class="ypm-song">
-                      <img v-if="s.pic" class="ypm-pic" :src="s.pic" loading="lazy" alt=""/>
-                      <div class="ypm-song-text">
-                        <div class="ypm-song-name">{{ s.name }}</div>
-                        <div class="ypm-song-artist">{{ s.singer }}</div>
-                      </div>
+        <!-- 排行榜：左列表右歌曲表格 -->
+        <main v-else-if="view === 'top'" class="yqq-main top-layout">
+            <aside class="top-side">
+                <div class="side-title">榜单</div>
+                <div v-if="topsLoading" class="side-loading">加载中…</div>
+                <div v-else-if="topsError" class="side-loading">{{ topsError }}</div>
+                <div
+                    v-for="t in tops"
+                    :key="t.id"
+                    class="side-item"
+                    :class="{ active: curTop && curTop.id === t.id }"
+                    @click="openTop(t)"
+                >
+                    <img class="side-cover" :src="t.pic" loading="lazy" @error="$event.target.style.visibility='hidden'"/>
+                    <div class="side-info">
+                        <div class="side-name">{{ t.title }}</div>
+                        <div class="side-listen">{{ fmtListen(t.listen) }} 收听</div>
                     </div>
-                  </td>
-                  <td class="col-album ypm-ellipsis">{{ s.album }}</td>
-                  <td class="col-dur">{{ fmtDur(s.duration) }}</td>
-                  <td class="col-br">
-                    <span v-for="t in brTags(s.brTypes)" :key="t" class="ypm-br" :class="{ hl: t !== '128K' }">{{ t }}</span>
-                  </td>
-                  <td class="col-op">
-                    <n-button size="tiny" quaternary type="primary" :disabled="dlRunning" @click="downloadBtn(s)">下载</n-button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </n-spin>
-      </section>
-    </main>
-  </div>
+                </div>
+            </aside>
+            <div class="top-content">
+                <div class="top-head" v-if="curTop">
+                    <h2 class="top-title">{{ curTop.title }}</h2>
+                    <button v-if="topSongs.length" class="dl-all-btn" @click="downloadAll(topSongs, curTop.title)">
+                        <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        下载全部
+                    </button>
+                    <button v-if="dlRunning" class="dl-stop-btn" @click="stopDl">停止</button>
+                    <span v-if="dlRunning" class="dl-progress">{{ dlDone }}/{{ dlTotal }}</span>
+                </div>
+                <div v-if="topSongsLoading" class="section-loading">加载中…</div>
+                <div class="song-table" v-else-if="topSongs.length">
+                    <div v-for="row in topSongs" :key="'top-' + row.idx" class="song-row">
+                        <div class="col-idx" :class="{ top3: row.idx <= 3 }">{{ row.idx }}</div>
+                        <div class="col-title">
+                            <img class="song-cover" :src="row.pic" loading="lazy" @error="$event.target.style.visibility='hidden'"/>
+                            <div class="song-name-wrap">
+                                <span class="song-name" :title="row.name">{{ row.name }}</span>
+                                <span v-for="t in brTags(row.brTypes)" :key="t" class="br-tag">{{ t }}</span>
+                            </div>
+                        </div>
+                        <div class="col-singer" :title="row.singer">{{ row.singer }}</div>
+                        <div class="col-album" :title="row.album">{{ row.album }}</div>
+                        <div class="col-dur">{{ fmtDur(row.duration) }}</div>
+                        <div class="col-op">
+                            <button
+                                class="dl-btn"
+                                :title="'下载 ' + row.name"
+                                :class="{ busy: dlBusy[busyKey('top', row.idx)] }"
+                                @click="downloadBtn(row, 'top')"
+                            >
+                                <svg viewBox="0 0 24 24" width="15" height="15">
+                                    <path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 搜索结果 -->
+        <main v-else-if="view === 'search'" class="yqq-main">
+            <div class="top-head">
+                <h2 class="top-title">“{{ searchKw }}” 的搜索结果</h2>
+            </div>
+            <div v-if="searchLoading" class="section-loading">搜索中…</div>
+            <div v-else-if="searchError" class="section-loading">{{ searchError }}</div>
+            <div class="song-table" v-else-if="searchSongs.length">
+                <div v-for="row in searchSongs" :key="'s-' + row.idx" class="song-row">
+                    <div class="col-idx">{{ row.idx }}</div>
+                    <div class="col-title">
+                        <img class="song-cover" :src="row.pic" loading="lazy" @error="$event.target.style.visibility='hidden'"/>
+                        <div class="song-name-wrap">
+                            <span class="song-name" :title="row.name">{{ row.name }}</span>
+                            <span v-for="t in brTags(row.brTypes)" :key="t" class="br-tag">{{ t }}</span>
+                        </div>
+                    </div>
+                    <div class="col-singer" :title="row.singer">{{ row.singer }}</div>
+                    <div class="col-album" :title="row.album">{{ row.album }}</div>
+                    <div class="col-dur">{{ fmtDur(row.duration) }}</div>
+                    <div class="col-op">
+                        <button
+                            class="dl-btn"
+                            :title="'下载 ' + row.name"
+                            :class="{ busy: dlBusy[busyKey('search', row.idx)] }"
+                            @click="downloadBtn(row, 'search')"
+                        >
+                            <svg viewBox="0 0 24 24" width="15" height="15">
+                                <path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 20h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="yqq-footer">SQMusic 发现页 · 数据来源 QQ 音乐榜单 · 歌曲可一键下载入库 NAS</footer>
+    </div>
 </template>
 
 <style scoped>
-.ypm-root {
-  --ypm-accent: #335eea;
-  --ypm-accent-soft: rgba(51, 94, 234, 0.12);
-  --ypm-surface: rgba(128, 128, 128, 0.07);
-  --ypm-border: rgba(128, 128, 128, 0.14);
-  display: flex;
-  height: calc(100vh - 120px);
-  min-height: 520px;
-  border-radius: 12px;
-  overflow: hidden;
-  background: var(--ypm-surface);
+.yqq {
+    min-height: 100vh;
+    background: #fff;
+    color: #333;
+}
+/* ---------- 顶部导航 ---------- */
+.yqq-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+.logo-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #31c27c;
+    color: #fff;
+    font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logo-text {
+    font-size: 19px;
+    font-weight: 700;
+    color: #31c27c;
+    letter-spacing: 1px;
+}
+.nav-tabs {
+    display: flex;
+    gap: 8px;
+    height: 100%;
+}
+.nav-tab {
+    padding: 0 18px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 15px;
+    color: #444;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    transition: color 0.2s;
+}
+.nav-tab:hover { color: #31c27c; }
+.nav-tab.active {
+    color: #31c27c;
+    font-weight: 600;
+}
+.nav-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 18px;
+    right: 18px;
+    bottom: 0;
+    height: 3px;
+    border-radius: 2px 2px 0 0;
+    background: #31c27c;
+}
+.search-box {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f3f3f3;
+    border-radius: 18px;
+    padding: 0 16px;
+    height: 36px;
+    width: 240px;
+    color: #999;
+    transition: box-shadow 0.2s;
+}
+.search-box:focus-within {
+    box-shadow: 0 0 0 1.5px #31c27c inset;
+}
+.search-box input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 13px;
+    color: #333;
+}
+/* ---------- 主体 ---------- */
+.yqq-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 24px 40px;
+}
+.home-section { margin-bottom: 34px; }
+.section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+.section-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #222;
+    position: relative;
+    padding-left: 12px;
+}
+.section-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 5px;
+    width: 4px;
+    border-radius: 2px;
+    background: #31c27c;
+}
+.section-more {
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    transition: color 0.2s;
+}
+.section-more:hover { color: #31c27c; }
+.section-loading {
+    padding: 28px 0;
+    text-align: center;
+    color: #aaa;
+    font-size: 13px;
+}
+/* ---------- 歌曲表格（y.qq.com 风格） ---------- */
+.song-table {
+    border-top: 1px solid #f0f0f0;
+}
+.song-row {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 0 8px;
+    transition: background 0.15s;
+}
+.song-row:hover { background: #f7faf9; }
+.col-idx {
+    width: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #99a;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+.col-idx.top3 { color: #fa5c5c; font-weight: 700; font-style: italic; }
+.col-title {
+    flex: 0 0 34%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 12px;
+}
+.song-cover {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: #f2f2f2;
+    flex-shrink: 0;
+}
+.song-name-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+.song-name {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 220px;
+}
+.song-row:hover .song-name { color: #31c27c; }
+.br-tag {
+    flex-shrink: 0;
+    font-size: 10px;
+    line-height: 1;
+    padding: 3px 4px;
+    border: 1px solid #31c27c;
+    border-radius: 3px;
+    color: #31c27c;
+    transform: scale(0.92);
+}
+.col-singer, .col-album {
+    flex: 1;
+    min-width: 0;
+    font-size: 13px;
+    color: #777;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 12px;
+}
+.song-row:hover .col-singer,
+.song-row:hover .col-album { color: #31c27c; }
+.col-dur {
+    width: 52px;
+    text-align: right;
+    font-size: 13px;
+    color: #999;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+.col-op {
+    width: 56px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+}
+.dl-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #888;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.dl-btn:hover {
+    border-color: #31c27c;
+    background: #31c27c;
+    color: #fff;
+}
+.dl-btn.busy {
+    border-color: #31c27c;
+    color: #31c27c;
+    animation: pulse 1s infinite;
+    pointer-events: none;
+}
+@keyframes pulse {
+    50% { opacity: 0.45; }
+}
+/* ---------- 排行榜布局 ---------- */
+.top-layout {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+}
+.top-side {
+    flex: 0 0 280px;
+    background: #fafbfb;
+    border: 1px solid #f0f0f0;
+    border-radius: 8px;
+    padding: 14px;
+    position: sticky;
+    top: 76px;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+}
+.side-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333;
+    padding: 4px 8px 10px;
+}
+.side-loading {
+    padding: 16px 8px;
+    color: #aaa;
+    font-size: 13px;
+}
+.side-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+.side-item:hover { background: #eef8f3; }
+.side-item.active { background: #e2f5ec; }
+.side-cover {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    object-fit: cover;
+    background: #eee;
+    flex-shrink: 0;
+}
+.side-info { min-width: 0; }
+.side-name {
+    font-size: 13px;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.side-item.active .side-name { color: #31c27c; font-weight: 600; }
+.side-listen {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 2px;
+}
+.top-content { flex: 1; min-width: 0; }
+.top-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+.top-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
+    padding-left: 12px;
+    position: relative;
+}
+.top-title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    border-radius: 2px;
+    background: #31c27c;
+}
+.dl-all-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 16px;
+    border: none;
+    border-radius: 16px;
+    background: #31c27c;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.dl-all-btn:hover { background: #2bb56f; }
+.dl-stop-btn {
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    background: #fff;
+    color: #666;
+    font-size: 13px;
+    cursor: pointer;
+}
+.dl-stop-btn:hover { border-color: #fa5c5c; color: #fa5c5c; }
+.dl-progress {
+    font-size: 12px;
+    color: #999;
+    font-variant-numeric: tabular-nums;
+}
+/* ---------- 页脚 ---------- */
+.yqq-footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 18px 24px 30px;
+    text-align: center;
+    color: #bbb;
+    font-size: 12px;
 }
 
-/* ---------- 左侧导航 ---------- */
-.ypm-side {
-  width: 168px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 18px 12px 14px;
-  border-right: 1px solid var(--ypm-border);
+/* ---------- 移动端适配 ---------- */
+@media (max-width: 760px) {
+    .header-inner { gap: 12px; padding: 0 12px; }
+    .nav-tab { padding: 0 10px; }
+    .search-box { width: 130px; }
+    .yqq-main { padding: 16px 12px 30px; }
+    .top-layout { flex-direction: column; }
+    .top-side { position: static; max-height: 220px; flex: none; width: 100%; box-sizing: border-box; }
+    .col-album, .col-dur { display: none; }
+    .col-title { flex: 1; }
+    .song-cover { width: 34px; height: 34px; }
+    .song-name { max-width: 110px; }
 }
-.ypm-logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 6px 18px;
-}
-.ypm-logo-badge {
-  width: 34px;
-  height: 34px;
-  border-radius: 9px;
-  background: linear-gradient(135deg, #335eea, #6a5af9);
-  color: #fff;
-  font-weight: 800;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 10px rgba(51, 94, 234, 0.35);
-}
-.ypm-logo-text {
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-.ypm-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.ypm-nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 10px;
-  border-radius: 10px;
-  font-size: 13px;
-  cursor: pointer;
-  user-select: none;
-  opacity: 0.72;
-  transition: background 0.15s, opacity 0.15s;
-}
-.ypm-nav-item:hover { background: var(--ypm-accent-soft); opacity: 1; }
-.ypm-nav-item.active {
-  background: var(--ypm-accent-soft);
-  color: var(--ypm-accent);
-  font-weight: 600;
-  opacity: 1;
-}
-.ypm-nav-item.active .ypm-ico, .ypm-nav-item.active .ypm-ico .stroke { fill: var(--ypm-accent); stroke: var(--ypm-accent); }
-.ypm-ico { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
-.ypm-ico .stroke { stroke: currentColor; fill: none; }
-.ypm-side-foot {
-  margin-top: auto;
-  padding: 0 6px;
-}
-.ypm-foot-line {
-  font-size: 11px;
-  color: var(--ypm-accent);
-  font-weight: 600;
-}
-.ypm-foot-line.sub {
-  color: inherit;
-  opacity: 0.5;
-  font-weight: 400;
-  margin-top: 2px;
-}
-
-/* ---------- 主区 ---------- */
-.ypm-main {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-.ypm-topbar {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--ypm-border);
-}
-.ypm-search {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  max-width: 460px;
-  position: relative;
-}
-.ypm-search-ico {
-  position: absolute;
-  left: 12px;
-  width: 15px;
-  height: 15px;
-  fill: currentColor;
-  opacity: 0.45;
-  pointer-events: none;
-}
-.ypm-search-input {
-  flex: 1;
-  height: 34px;
-  padding: 0 12px 0 34px;
-  border-radius: 17px;
-  border: 1px solid var(--ypm-border);
-  background: transparent;
-  color: inherit;
-  font-size: 13px;
-  outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
-}
-.ypm-search-input:focus {
-  border-color: var(--ypm-accent);
-  box-shadow: 0 0 0 3px var(--ypm-accent-soft);
-}
-.ypm-progress { flex: 1; min-width: 140px; }
-
-.ypm-view {
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
-  padding: 16px 18px 28px;
-}
-.ypm-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-/* ---------- 首页 hero ---------- */
-.ypm-hero {
-  border-radius: 16px;
-  padding: 30px 32px;
-  background: linear-gradient(135deg, #335eea 0%, #6a5af9 60%, #8f6bff 100%);
-  color: #fff;
-  margin-bottom: 22px;
-  box-shadow: 0 10px 30px rgba(51, 94, 234, 0.28);
-}
-.ypm-hero-title {
-  font-size: 26px;
-  font-weight: 800;
-  letter-spacing: 1px;
-}
-.ypm-hero-sub {
-  margin-top: 6px;
-  font-size: 13px;
-  opacity: 0.88;
-}
-.ypm-hero-actions {
-  margin-top: 16px;
-  display: flex;
-  gap: 10px;
-}
-.ypm-hero-actions :deep(.n-button--primary-type) { --n-color: #fff; --n-color-hover: #f0f3ff; --n-text-color: #335eea; }
-
-/* ---------- 区块标题 ---------- */
-.ypm-section-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 18px 0 12px;
-}
-.ypm-section-bar {
-  width: 4px;
-  height: 16px;
-  border-radius: 2px;
-  background: var(--ypm-accent);
-}
-.ypm-section-title {
-  font-size: 17px;
-  font-weight: 700;
-}
-.ypm-section-more {
-  margin-left: auto;
-  font-size: 12px;
-  opacity: 0.55;
-  cursor: pointer;
-  user-select: none;
-}
-.ypm-section-more:hover { color: var(--ypm-accent); opacity: 1; }
-
-/* ---------- 卡片网格 ---------- */
-.ypm-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 14px;
-}
-.ypm-card { cursor: pointer; }
-.ypm-card-cover-wrap {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  background: rgba(128, 128, 128, 0.15);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-.ypm-card:hover .ypm-card-cover-wrap {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
-}
-.ypm-card-pic {
-  display: block;
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-.ypm-card-listen {
-  position: absolute;
-  right: 7px;
-  bottom: 7px;
-  font-size: 10px;
-  color: #fff;
-  background: rgba(0, 0, 0, 0.45);
-  border-radius: 9px;
-  padding: 2px 7px;
-  backdrop-filter: blur(3px);
-}
-.ypm-card-name {
-  margin-top: 7px;
-  font-size: 12.5px;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ---------- 排行榜横向卡片 ---------- */
-.ypm-top-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-  gap: 12px;
-}
-.ypm-top-card {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-  padding: 9px;
-  border-radius: 12px;
-  border: 1px solid var(--ypm-border);
-  cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-}
-.ypm-top-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(51, 94, 234, 0.45);
-  box-shadow: 0 8px 18px rgba(51, 94, 234, 0.14);
-}
-.ypm-top-pic {
-  width: 52px;
-  height: 52px;
-  border-radius: 9px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: rgba(128, 128, 128, 0.15);
-}
-.ypm-top-name {
-  font-size: 13px;
-  font-weight: 600;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.ypm-top-sub {
-  font-size: 11px;
-  opacity: 0.55;
-  margin-top: 2px;
-}
-
-/* ---------- 歌曲表（YPM 风格） ---------- */
-.ypm-table-wrap { overflow: auto; }
-.ypm-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 13px;
-}
-.ypm-table th {
-  text-align: left;
-  font-weight: 500;
-  opacity: 0.5;
-  padding: 6px 8px;
-  border-bottom: 1px solid var(--ypm-border);
-  white-space: nowrap;
-}
-.ypm-table td { padding: 7px 8px; vertical-align: middle; }
-.ypm-row td { border-bottom: 1px solid rgba(128, 128, 128, 0.06); }
-.ypm-row:hover { background: var(--ypm-accent-soft); }
-.col-idx { width: 42px; opacity: 0.55; }
-.col-album { width: 200px; }
-.col-dur { width: 64px; opacity: 0.7; }
-.col-br { width: 150px; }
-.col-op { width: 70px; }
-.ypm-ellipsis {
-  max-width: 200px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  opacity: 0.75;
-}
-.ypm-song { display: flex; align-items: center; gap: 10px; min-width: 0; }
-.ypm-pic {
-  width: 38px;
-  height: 38px;
-  border-radius: 7px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: rgba(128, 128, 128, 0.15);
-}
-.ypm-song-text { min-width: 0; }
-.ypm-song-name {
-  font-weight: 500;
-  font-size: 13px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.ypm-song-artist {
-  font-size: 11px;
-  opacity: 0.55;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.ypm-br {
-  display: inline-block;
-  font-size: 10px;
-  line-height: 1;
-  padding: 3px 6px;
-  border-radius: 8px;
-  margin-right: 4px;
-  border: 1px solid rgba(128, 128, 128, 0.3);
-  opacity: 0.65;
-}
-.ypm-br.hl {
-  color: var(--ypm-accent);
-  border-color: rgba(51, 94, 234, 0.5);
-  opacity: 1;
-  font-weight: 600;
-}
-
-/* ---------- 榜单分栏 ---------- */
-.ypm-split { display: flex; gap: 16px; overflow: hidden; }
-.ypm-split-left { width: 250px; flex-shrink: 0; overflow: auto; }
-.ypm-split-right { flex: 1; min-width: 0; overflow: auto; }
-.ypm-toplist { display: flex; flex-direction: column; gap: 3px; }
-.ypm-toplist-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 7px 8px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.ypm-toplist-item:hover { background: var(--ypm-accent-soft); }
-.ypm-toplist-item.active {
-  background: var(--ypm-accent-soft);
-  box-shadow: inset 3px 0 0 var(--ypm-accent);
-}
-.ypm-toplist-pic {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: rgba(128, 128, 128, 0.15);
-}
-
-/* ---------- 歌单广场 chips ---------- */
-.ypm-cats {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-.ypm-chip {
-  padding: 5px 14px;
-  border-radius: 14px;
-  font-size: 12.5px;
-  border: 1px solid var(--ypm-border);
-  cursor: pointer;
-  user-select: none;
-  opacity: 0.75;
-  transition: all 0.15s;
-}
-.ypm-chip:hover { color: var(--ypm-accent); border-color: rgba(51, 94, 234, 0.5); opacity: 1; }
-.ypm-chip.active {
-  background: var(--ypm-accent);
-  border-color: var(--ypm-accent);
-  color: #fff;
-  font-weight: 600;
-  opacity: 1;
-  box-shadow: 0 4px 10px rgba(51, 94, 234, 0.3);
-}
-
-/* ---------- 歌单详情（YPM 大封面头部） ---------- */
-.ypm-back { margin-bottom: 6px; }
-.ypm-detail-head {
-  display: flex;
-  gap: 22px;
-  padding: 6px 0 20px;
-}
-.ypm-detail-cover {
-  width: 180px;
-  height: 180px;
-  border-radius: 14px;
-  object-fit: cover;
-  flex-shrink: 0;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
-  background: rgba(128, 128, 128, 0.15);
-}
-.ypm-detail-info { min-width: 0; display: flex; flex-direction: column; justify-content: center; }
-.ypm-detail-tag {
-  display: inline-block;
-  width: fit-content;
-  font-size: 11px;
-  color: var(--ypm-accent);
-  border: 1px solid rgba(51, 94, 234, 0.5);
-  border-radius: 6px;
-  padding: 2px 8px;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.ypm-detail-title {
-  font-size: 24px;
-  font-weight: 800;
-  line-height: 1.3;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-.ypm-detail-meta {
-  margin-top: 8px;
-  font-size: 12.5px;
-  opacity: 0.65;
-}
-.ypm-detail-anon { color: var(--ypm-accent); opacity: 1; font-weight: 600; }
-.ypm-detail-desc {
-  margin-top: 8px;
-  font-size: 12px;
-  opacity: 0.55;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  max-width: 560px;
-}
-.ypm-detail-actions { margin-top: 14px; display: flex; gap: 10px; flex-wrap: wrap; }
-
-.ypm-pager {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 18px;
-}
-.ypm-pager-text { margin: 0 12px; font-size: 13px; opacity: 0.7; }
 </style>
