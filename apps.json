@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-13T08:32:22Z",
+  "generated_at": "2026-09-13T09:36:40Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -2855,8 +2855,8 @@
       "display_name": "SQMusic 音乐下载站",
       "description": "多源音乐下载站（simple_sq_music_plus Docker 打包 + 自研「发现」页）：QQ 25 个榜单匿名浏览、逐首/整榜下载，歌单广场解析下载（需 QQ 扫码登录），kw/qq/qqvip/mg/netease/kg/tidal 七源搜索，监听下载，标签歌词，文件按歌手/专辑落盘适配 Emby/Jellyfin。",
       "version": "3.2.4",
-      "fpk_version": "3.2.4",
-      "release_tag": "sqmusic/v3.2.4",
+      "fpk_version": "3.2.4-r1",
+      "release_tag": "sqmusic/v3.2.4-r1",
       "service_port": 8097,
       "homepage_url": "https://github.com/59799517/simple_sq_music_plus",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sqmusic/fnos/ICON_256.PNG",
@@ -2864,7 +2864,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-13T08:32:08Z",
+      "updated_at": "2026-09-13T09:36:20Z",
       "download_count": 9,
       "app_type": "docker",
       "category": "media"
