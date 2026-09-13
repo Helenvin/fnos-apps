@@ -13,9 +13,11 @@
 
 | 文件 | 说明 |
 |---|---|
-| `src/components/V3Discover.vue` | 新增：发现页（QQ 榜单 25 个匿名可看可下 + 歌单广场浏览），每首歌带下载按钮，支持整单批量下载 |
+| `src/components/V3Discover.vue` | 新增：发现页（YesPlayMusic 风格：侧栏导航+首页hero+推荐歌单卡片+排行榜+大封面歌单详情；歌单详情=parserUrlInfo 元数据 + parserUrl 完整歌曲列表，全匿名），支持逐首/批量下载 |
 | `src/components/V3TopWitge.vue` | 修改：PC + 移动端导航首位置插入"发现"入口（/v3discover） |
 | `src/router/index.js` | 修改：注册 `/v3discover` 路由，`/home` 默认重定向改为发现页 |
+| `src/components/Monitor.vue` | 修改：监听页输入提示改为「支持网易云/酷我/酷狗/QQ音乐 歌单分享链接」 |
+| `src/components/V3Set.vue` | 修改：QQ/微信登录二维码获取失败时弹出错误提示（原为静默空白） |
 | `nginx.conf` | 修改：新增 `location /qq/` 反代 `c.y.qq.com`（注入 Referer https://y.qq.com/ ，否则 fcg 接口返回 code=-2） |
 
 ## 重建步骤（上游出新版或改补丁后）

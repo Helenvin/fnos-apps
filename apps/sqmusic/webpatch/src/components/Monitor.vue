@@ -7,7 +7,8 @@ import {ref,onMounted} from "vue";
 let addMonitorRequest = ()=>{
   // 构建符合 SqMonitor 实体类的数据对象
   const monitorData = {
-    plugName: parserUrlInfoData.value.plugName || "netease", // 默认网易云
+    // 后端 ParserInfo 历史拼写 plugNmae，已加注解序列化为 plugName；两者都读做兼容
+    plugName: parserUrlInfoData.value.plugName || parserUrlInfoData.value.plugNmae || "netease", // 默认网易云
     type: parserUrlInfoData.value.type,
     enabled: "1",
     targetId: parserUrlInfoData.value.id,

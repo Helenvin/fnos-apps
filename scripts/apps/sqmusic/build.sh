@@ -9,7 +9,7 @@ VERSION="${1:-${VERSION:-}}"
 
 [ -z "${VERSION}" ] && { echo "VERSION is required" >&2; exit 1; }
 
-# GHCR image tag: v3.2.0 (workflow tags images v[version]; VERSION itself has no v prefix)
+# GHCR image tag: v3.2.2 (workflow tags images v[version]; VERSION itself has no v prefix)
 IMAGE_TAG="v${UPSTREAM_TAG:-${VERSION}}"
 
 echo "==> Building sqmusic ${VERSION} (Docker-based), image tag: ${IMAGE_TAG}"
