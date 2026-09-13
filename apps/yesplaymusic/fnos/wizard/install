@@ -1,0 +1,20 @@
+[
+    {
+        "stepTitle": "YesPlayMusic 配置",
+        "items": [
+            {
+                "type": "tips",
+                "helpText": "SQMusic 联动地址：在歌曲上右键「下载到 NAS（sqmusic）」将经此地址推送到 SQMusic 后端统一落盘（默认 /vol1/1000/audio/music）。留空默认 http://172.17.0.1:8097（fnOS 商店 SQMusic 默认端口）。未安装 SQMusic 时可忽略本项，不影响播放。"
+            },
+            {
+                "type": "text",
+                "field": "wizard_sqmusic_api",
+                "label": "SQMusic 联动地址（留空使用默认）"
+            },
+            {
+                "type": "tips",
+                "helpText": "播放功能开箱即用；网易云灰色歌曲解锁为桌面客户端专属能力，网页版不支持。配合 SQMusic 应用的七源搜索与监听下载可补齐下载能力。"
+            }
+        ]
+    }
+]

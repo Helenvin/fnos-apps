@@ -1,0 +1,15 @@
+appname         = yesplaymusic
+version         = 0.0.0
+display_name    = YesPlayMusic 音乐播放器
+platform        = x86
+maintainer      = Helenvin
+maintainer_url  = https://github.com/qier222/YesPlayMusic
+distributor     = conversun
+distributor_url = https://github.com/conversun/fnos-apps
+desktop_uidir   = ui
+desktop_applaunchname = yesplaymusic.Application
+service_port    = 8100
+checkport       = false
+desc            = YesPlayMusic 网页客户端（第三方网易云音乐播放器，Docker 打包）：高颜值界面，每日推荐/私人FM/歌单广场/搜索/歌词/云盘，扫码登录网易云账号。已打通 SQMusic：歌曲右键「下载到 NAS」直推 SQMusic 后端统一落盘 /vol1/1000/audio/music，与 SQMusic 共存共用音乐库。
+source          = thirdparty
+checksum        =

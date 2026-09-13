@@ -1,0 +1,19 @@
+services:
+  yesplaymusic:
+    # YesPlayMusic 网页客户端（第三方网易云）：官方 Dockerfile 单容器（nginx 前端 + @neteaseapireborn/api）
+    # CI 从 Helenvin/YesPlayMusic master 自动构建；GHCR 国内直连
+    image: ghcr.io/helenvin/yesplaymusic:${VERSION}
+    container_name: yesplaymusic
+    restart: unless-stopped
+    environment:
+      # SQMusic 联动地址：歌曲右键「下载到 NAS」经此推送到 SQMusic 后端统一落盘
+      # 留空默认 http://172.17.0.1:8097（fnOS 商店 SQMusic 的 WebUI 端口）
+      - SQMUSIC_API=${wizard_sqmusic_api:-http://172.17.0.1:8097}
+    ports:
+      - "${TRIM_SERVICE_PORT}:80"
+    networks:
+      - ypm-network
+
+networks:
+  ypm-network:
+    driver: bridge
