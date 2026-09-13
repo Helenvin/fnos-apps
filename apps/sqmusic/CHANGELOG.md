@@ -45,4 +45,12 @@
   `plugNmae` 的 JSON 序列化键统一为 `plugName`，前端兼容读取
 - 榜单歌曲行增强：带封面/歌曲 id（songmid/albummid 推导）；无插件信息行下载改为搜索换票（修复下载按钮报"无可下载码率"）
 - 后端 `ghcr.io/helenvin/simple_sq_music_plus:v3.2.2`
+
+## 2026-09-13 v3.2.3 酷狗歌单识别根治
+
+- **修复酷狗分享短链歌单无法识别**：`t1.kugou.com` 现已直接返回 200 分享页（不再 302），
+  原非贪婪正则提取 `var dataFromSmarty = [...]` 会截取失败导致 JSON 解析报错（Extra data）。
+  重写为**括号配平扫描**（正确处理字符串内的引号转义与嵌套中括号），实测 10 首歌全部解析成功
+- 监听扫描（ScanKwKgQqPlayList）酷狗分享链路同步修复，并补齐 `UrlMusicPlayListParser` 导入
+- 后端 `ghcr.io/helenvin/simple_sq_music_plus:v3.2.3`
 - ⚠️ 升级后请删除升级前添加的错误监听记录（如"插件名称：netease"的 QQ 歌单），重新添加即可正确识别
