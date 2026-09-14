@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-14T07:32:43Z",
+  "generated_at": "2026-09-14T09:24:17Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -602,8 +602,8 @@
       "display_name": "Daidai Panel",
       "description": "轻量现代的定时任务与脚本管理面板",
       "version": "3.2.7",
-      "fpk_version": "3.2.7-r1",
-      "release_tag": "daidai-panel/v3.2.7-r1",
+      "fpk_version": "3.2.7",
+      "release_tag": "daidai-panel/v3.2.7",
       "service_port": 5701,
       "homepage_url": "https://github.com/linzixuanzz/daidai-panel",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/daidai-panel/fnos/ICON_256.PNG",
@@ -611,7 +611,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T14:55:25Z",
+      "updated_at": "2026-09-14T07:58:06Z",
       "download_count": 58,
       "app_type": "docker",
       "category": "system"
@@ -749,8 +749,8 @@
       "display_name": "Emby",
       "description": "EmbyServer是一款软件媒体系统，可让您控制媒体的管理和流式传输。可以通过多个应用程序将专用服务器中的媒体提供给最终用户设备。",
       "version": "4.10.0.40",
-      "fpk_version": "4.10.0.40",
-      "release_tag": "emby/v4.10.0.40",
+      "fpk_version": "4.10.0.40-r2",
+      "release_tag": "emby/v4.10.0.40-r2",
       "service_port": 8096,
       "homepage_url": "https://emby.media",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/emby/fnos/ICON_256.PNG",
@@ -758,7 +758,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:29:04Z",
+      "updated_at": "2026-09-14T09:23:56Z",
       "download_count": 794,
       "app_type": "native",
       "category": "media"
@@ -981,8 +981,8 @@
       "display_name": "Frigate",
       "description": "AI 视频监控系统，支持实时物体检测和录像管理。",
       "version": "0.18.0",
-      "fpk_version": "0.18.0-r1",
-      "release_tag": "frigate/v0.18.0-r1",
+      "fpk_version": "0.18.0",
+      "release_tag": "frigate/v0.18.0",
       "service_port": 8971,
       "homepage_url": "https://frigate.video",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/frigate/fnos/ICON_256.PNG",
@@ -990,7 +990,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T14:55:16Z",
+      "updated_at": "2026-09-14T07:58:09Z",
       "download_count": 104,
       "app_type": "docker",
       "category": "media"
@@ -1211,9 +1211,9 @@
       "file_prefix": "immich",
       "display_name": "Immich",
       "description": "自托管照片和视频备份方案,支持人脸识别和智能搜索。",
-      "version": "release-2026.09.12",
-      "fpk_version": "release-2026.09.12",
-      "release_tag": "immich/vrelease-2026.09.12",
+      "version": "release-2026.09.13",
+      "fpk_version": "release-2026.09.13",
+      "release_tag": "immich/vrelease-2026.09.13",
       "service_port": 2283,
       "homepage_url": "https://github.com/immich-app/immich",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/immich/fnos/ICON_256.PNG",
@@ -1221,7 +1221,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:31:52Z",
+      "updated_at": "2026-09-14T07:58:12Z",
       "download_count": 475,
       "app_type": "docker",
       "category": "media"
@@ -2865,7 +2865,7 @@
         "arm"
       ],
       "updated_at": "2026-09-14T07:32:26Z",
-      "download_count": 0,
+      "download_count": 2,
       "app_type": "docker",
       "category": "media"
     },
