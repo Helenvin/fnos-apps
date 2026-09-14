@@ -32,32 +32,6 @@
 | 多服务依赖 (应用 + 数据库 + 缓存等) | Docker 容器 | docker-compose 统一编排多容器，参考 Immich |
 | 需要特定版本系统库 (glibc 等) | Docker 容器 | 容器隔离避免与宿主系统冲突 |
 | 上游自托管处于 alpha/beta 阶段 | Docker 容器 | 容器隔离降低不稳定应用对系统的风险 |
-| 手工上传、永不跟随上游更新 | 外部上传（模式 C） | CI 完全不参与，版本由维护者自己决定 |
-
-### 模式 C：外部上传（免构建）
-
-适用：应用由维护者自行打包并上传，**不跟随任何上游更新**（当前使用：`EM2B`）。
-
-做法：
-
-1. **不要**创建 `scripts/apps/<slug>/meta.env`。`build-apps.yml` 里的 `buildable_only()`
-   会过滤掉所有没有该文件的应用，它因此不会进入任何构建矩阵 —— 每日定时构建和
-   `push` 构建都不会碰它。这是「永不更新」的关键。
-2. 在 `scripts/ci/generate-apps-json.sh` 的「Helenvin patch」原生块
-   （`for slug in LitePan fnclearup EM2B`）里追加 slug，并补一个 `case` 分支填写
-   `FILE_PREFIX / APPNAME / DISPLAY / DESC / PORT / HOMEPAGE / ICON / CATEGORY`。
-3. 若该 slug 可能同名出现在上游 `conversun/fnos-apps` 中，把 slug 加进
-   `mirror-upstream-releases.yml` 的 `EXCLUDED_SLUGS`，防止上游 release 被镜像进来。
-4. 在 `Helenvin/fnos-apps` 发布 release：tag 用 `<slug>/v<版本>`，资产命名必须是
-   `<file_prefix>_<fpk_version>_<x86|arm>.fpk` —— 商店前端按这个格式硬拼下载地址，
-   命名不符会 404。
-5. release 发布后 `update-apps-json.yml`（`release: published` 触发）会自动重跑
-   `generate-apps-json.sh`，应用随即出现在商店里。
-
-> ⚠️ 改动 `scripts/ci/**` 会命中 `build-apps.yml` 的 push 触发条件，而该目录的变更会
-> 重建**全部**应用。提交时在 commit message 里带上 `[skip ci]` 即可跳过（仓库里
-> apps.json 的自动提交一直这么做）。注意这**不影响** `release: published` 触发的
-> `update-apps-json.yml`。
 
 ---
 
