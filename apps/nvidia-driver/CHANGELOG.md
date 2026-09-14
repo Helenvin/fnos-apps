@@ -17,7 +17,7 @@
   mmap `/dev/nvidia*`，即使实际跑在 OpenVINO/CPU 上也会被判定为"GPU 被占用"，导致
   安装、升级、卸载全部失败。现在这些步骤前自动停止 `ai_manager.service`，结束（含出错）
   后自动恢复
-- 文档：说明包名由来与 `ai_manager` 的判定逻辑
+- 文档：说明包名由来与 `ai_manager` 的判定逻辑，并新增与飞牛官方 `Nvidia-Driver-580` 的对比
 
 ## 2026-08-23
 

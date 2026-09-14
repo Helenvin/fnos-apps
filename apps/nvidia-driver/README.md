@@ -22,6 +22,26 @@ NVIDIA GPU 驱动用户态组件与 nvidia-container-toolkit 安装包。包名 
 onnxruntime-gpu + cuDNN 跑 `check_support.onnx` 做真正的硬件验证——这一步在 Tesla P4 上
 已实测通过。
 
+## 相比飞牛官方 `Nvidia-Driver-580` 的优势
+
+官方包的实体是一个 dpkg（`nvidia-driver-lib-trim`），把**某一个**驱动版本的用户态库、
+GSP 固件和内核模块目录一次性写死（实测机器上残留的是 `560.28.03` + `/usr/lib/modules/6.6.38-trim`）。
+本包的思路不同：
+
+| | 飞牛官方 `Nvidia-Driver-580` | 本包 |
+|---|---|---|
+| 驱动版本 | 打包时固定（如 560.28.03） | **运行时**从飞牛当前内核自带的 `nvidia.ko` 读取，下载完全匹配的用户态 |
+| 飞牛系统更新后 | 内核换了、模块版本变了，用户态仍是旧版 → `Driver/library version mismatch`，需等官方重新发包 | 下次开机 `reconcile_driver` 自动重新对齐，GPU 不掉 |
+| 内核模块 | 随包携带，与系统镜像可能不一致 | **从不携带、从不编译**，只用飞牛自己的模块与固件 |
+| Docker GPU | 不包含 nvidia-container-toolkit（`dpkg -L` 中无任何 container/CDI 文件） | 自带 nvidia-container-toolkit，自动配置 `nvidia` runtime 与 CDI，`docker run --gpus all` 开箱即用 |
+| 持久化模式 | — | 自动开启 Persistence Mode |
+| 相册 / AI 识别 | 可用 | 同名同标识，同样可用（见上文） |
+| 无 GPU 机器 | — | 安装成功并进入 `pending-no-gpu`，插卡重启后自动生效 |
+| 安装包体积 | 数百 MB | 约 10MB（用户态按需下载并缓存） |
+| 升级节奏 | 跟随飞牛发版 | 跟随 nvidia-container-toolkit 发版；驱动侧无需发包即可适配新系统 |
+
+一句话：官方包解决"能装上"，本包解决"系统更新之后还能用"，并把 Docker GPU 直通一起配好。
+
 ## 工作方式
 
 飞牛系统镜像自带了匹配其内核的预编译 NVIDIA 内核模块：
