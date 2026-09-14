@@ -1,13 +1,13 @@
 # fnOS Apps（Helenvin 定制版）
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Apps](https://img.shields.io/badge/apps-160-2ea44f)
+![Apps](https://img.shields.io/badge/apps-161-2ea44f)
 ![Platform](https://img.shields.io/badge/fnOS-third--party-orange)
 
 飞牛 fnOS 第三方应用仓库（个人定制版）。fork 自 [conversun/fnos-apps](https://github.com/conversun/fnos-apps)：
 
 - 保留其 156 款应用的自动跟踪构建体系，并**全量镜像上游 Release 到本仓库**——即使上游删库，所有应用仍可正常安装与更新
-- 新增自有应用：MDC / AVdb（Docker 版）+ LitePan、清理精灵（原生版）
+- 新增自有应用：MDC / AVdb（Docker 版）+ LitePan、清理精灵（原生版）+ SQMusic（Docker 版）
 - 配套**定制版应用中心**：在飞牛窗口内嵌打开，应用目录与安装包全部来自本仓库
 
 > ⭐️ 如果觉得本项目对你有帮助，请右上角点个 Star！
@@ -208,7 +208,7 @@
 |---|---|---|
 | `mirror-upstream-releases` | 每日 02:20 UTC + 手动 | 镜像 conversun/fnos-apps 每个应用的最新 Release 到本仓库（跳过官方商店）；同步 LitePan 原生 fpk 并按商店规范改名；跟踪 FnDepot 同步清理精灵（单 all 包双架构改名 + sha256 校验） |
 | `build-apps.yml`（继承上游） | 每日 08:00 UTC / push / 手动 | 跟踪上游版本自动重建，动态矩阵构建，`-rN` 修订自动递增 |
-| `update-apps-json.yml`（继承上游） | Release 发布 / 手动 | 重新生成 `apps.json` 应用目录（当前 160 个应用） |
+| `update-apps-json.yml`（继承上游） | Release 发布 / 手动 | 重新生成 `apps.json` 应用目录（当前 161 个应用） |
 
 ### 与上游的差异
 

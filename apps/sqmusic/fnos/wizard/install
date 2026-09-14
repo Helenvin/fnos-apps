@@ -1,0 +1,29 @@
+[
+    {
+        "stepTitle": "SQMusic 配置",
+        "items": [
+            {
+                "type": "tips",
+                "helpText": "音乐下载目录：留空默认 /vol1/1000/audio/music（与常见手动部署一致，原地接管）。歌曲按歌手/专辑落盘，可供 Emby/Jellyfin/navidrome 直接扫描。"
+            },
+            {
+                "type": "text",
+                "field": "wizard_music_dir",
+                "label": "音乐下载目录（挂载到容器 /music，留空使用默认）"
+            },
+            {
+                "type": "tips",
+                "helpText": "MySQL 数据目录：留空使用应用专属空间（fnOS 自动管理）。如需继承既有手动部署的下载记录与账号，请填写原 mysql_data 目录的绝对路径（原样填入即可原地接管）。"
+            },
+            {
+                "type": "text",
+                "field": "wizard_mysql_dir",
+                "label": "MySQL 数据目录（留空使用应用默认）"
+            },
+            {
+                "type": "tips",
+                "helpText": "安装完成后打开应用即进入 WebUI：在「监听」页添加网易云/QQ 音乐歌单分享链接可自动增量下载（QQ 公开歌单匿名添加，歌曲实际下载需在「设置→插件管理」完成 QQ 扫码登录）。"
+            }
+        ]
+    }
+]
