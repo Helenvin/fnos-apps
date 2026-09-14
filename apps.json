@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-14T08:03:17Z",
+  "generated_at": "2026-09-14T17:36:35Z",
   "source": {
     "name": "conversun/fnos-apps",
     "url": "https://github.com/conversun/fnos-apps"
@@ -339,7 +339,7 @@
         "arm"
       ],
       "updated_at": "2026-08-17T06:22:13Z",
-      "download_count": 39,
+      "download_count": 40,
       "app_type": "docker",
       "category": ""
     },
@@ -486,7 +486,7 @@
         "arm"
       ],
       "updated_at": "2026-08-17T07:35:37Z",
-      "download_count": 163,
+      "download_count": 164,
       "app_type": "native",
       "category": "download"
     },
@@ -738,7 +738,7 @@
         "arm"
       ],
       "updated_at": "2026-09-09T08:03:54Z",
-      "download_count": 827,
+      "download_count": 832,
       "app_type": "native",
       "category": "media"
     },
@@ -907,7 +907,7 @@
         "arm"
       ],
       "updated_at": "2026-09-11T08:02:42Z",
-      "download_count": 65,
+      "download_count": 77,
       "app_type": "native",
       "category": "system"
     },
@@ -991,7 +991,7 @@
         "arm"
       ],
       "updated_at": "2026-08-30T08:02:25Z",
-      "download_count": 196,
+      "download_count": 198,
       "app_type": "native",
       "category": "system"
     },
@@ -1432,7 +1432,7 @@
         "arm"
       ],
       "updated_at": "2026-08-17T09:51:13Z",
-      "download_count": 60,
+      "download_count": 61,
       "app_type": "docker",
       "category": "system"
     },
@@ -1833,7 +1833,7 @@
         "arm"
       ],
       "updated_at": "2026-09-14T08:02:29Z",
-      "download_count": 35,
+      "download_count": 45,
       "app_type": "docker",
       "category": "download"
     },
@@ -1875,7 +1875,7 @@
         "arm"
       ],
       "updated_at": "2026-08-24T20:08:31Z",
-      "download_count": 1422,
+      "download_count": 1437,
       "app_type": "native",
       "category": "network"
     },
@@ -2219,13 +2219,13 @@
     },
     {
       "slug": "nvidia-driver",
-      "appname": "nvidia-driver",
-      "file_prefix": "nvidia-driver",
+      "appname": "Nvidia-Driver-580",
+      "file_prefix": "Nvidia-Driver-580",
       "display_name": "NVIDIA Driver",
-      "description": "NVIDIA GPU 驱动与容器工具包，支持 Docker GPU 直通和硬件转码。直接使用飞牛系统自带的 NVIDIA 内核模块，不编译内核模块，并自动安装版本匹配的用户态组件，因此飞牛系统更新后 GPU 不会掉。",
-      "version": "1.17.8",
-      "fpk_version": "1.17.8",
-      "release_tag": "nvidia-driver/v1.17.8",
+      "description": "NVIDIA GPU 驱动与容器工具包，支持 Docker GPU 直通、硬件转码与飞牛相册 AI 加速。直接使用飞牛系统自带的 NVIDIA 内核模块，不编译内核模块，并自动安装版本匹配的用户态组件，因此飞牛系统更新后 GPU 不会掉。",
+      "version": "1.20.0",
+      "fpk_version": "1.20.0-r1",
+      "release_tag": "nvidia-driver/v1.20.0-r1",
       "service_port": 0,
       "homepage_url": "https://www.nvidia.com/drivers",
       "icon_url": "https://raw.githubusercontent.com/conversun/fnos-apps/main/apps/nvidia-driver/fnos/ICON_256.PNG",
@@ -2233,7 +2233,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T08:02:10Z",
+      "updated_at": "2026-09-14T17:36:16Z",
       "download_count": 438,
       "app_type": "native",
       "category": "system"
@@ -2360,7 +2360,7 @@
         "arm"
       ],
       "updated_at": "2026-08-31T15:31:33Z",
-      "download_count": 349,
+      "download_count": 354,
       "app_type": "docker",
       "category": "network"
     },
@@ -2591,7 +2591,7 @@
         "arm"
       ],
       "updated_at": "2026-08-17T08:46:58Z",
-      "download_count": 1178,
+      "download_count": 1183,
       "app_type": "native",
       "category": "download"
     },
@@ -2633,7 +2633,7 @@
         "arm"
       ],
       "updated_at": "2026-09-11T08:02:31Z",
-      "download_count": 62,
+      "download_count": 63,
       "app_type": "docker",
       "category": "system"
     },
@@ -3348,7 +3348,7 @@
         "arm"
       ],
       "updated_at": "2026-08-17T10:46:49Z",
-      "download_count": 294,
+      "download_count": 299,
       "app_type": "docker",
       "category": "network"
     },
