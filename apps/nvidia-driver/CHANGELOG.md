@@ -1,3 +1,24 @@
+## 2026-09-15
+
+**包名改为 `Nvidia-Driver-580`（`source = official`），让飞牛相册能选中 NVIDIA GPU。**
+
+**从旧包名 `nvidia-driver` 升级的用户需手动卸载重装一次**：应用中心把不同 `appname`
+视为不同应用，不会提示更新。先卸载旧的 `NVIDIA Driver`，再安装本版本。
+
+- 修复：相册硬件设置里选择 NVIDIA GPU 报 `hardware is unavailable`。根因是飞牛
+  `ai_manager` 只认应用中心里名为 `Nvidia-Driver-580` 的官方应用，不检查驱动是否正常
+  （追踪 `/v1/setting/set-gpu`：查 resmon → 查已安装应用列表 → 直接返回 20818）。
+  本包改用相同标识后，相册可正常选中 GPU；`ai_manager` 随后用自带的
+  onnxruntime-gpu + cuDNN 做真实推理验证，Tesla P4 实测通过
+- 修复：从旧版 DKMS 安装迁移时，`nvidia-uninstall` 先于"GPU 占用"检查执行；检查一旦
+  失败，系统被留在"内核模块已加载但用户态与 `nvidia-smi` 都不存在"的半残状态。
+  现在所有破坏性步骤之前先做占用检查
+- 修复：飞牛 AI 服务（`trim.img2vec` / `trim.face_det` / `trim.gpu_verify`）常驻并
+  mmap `/dev/nvidia*`，即使实际跑在 OpenVINO/CPU 上也会被判定为"GPU 被占用"，导致
+  安装、升级、卸载全部失败。现在这些步骤前自动停止 `ai_manager.service`，结束（含出错）
+  后自动恢复
+- 文档：说明包名由来与 `ai_manager` 的判定逻辑
+
 ## 2026-08-23
 
 **重大变更：不再编译内核模块。修复飞牛系统更新后 GPU 掉卡。**

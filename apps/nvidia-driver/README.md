@@ -1,12 +1,26 @@
 # NVIDIA Driver for fnOS
 
-NVIDIA GPU 驱动用户态组件与 nvidia-container-toolkit 安装包。
+NVIDIA GPU 驱动用户态组件与 nvidia-container-toolkit 安装包。包名 `Nvidia-Driver-580`。
 
-> **⚠️ 从 580.x 旧版升级：需要手动卸载重装一次。**
+> **⚠️ 从旧版（包名 `nvidia-driver`）升级：需要手动卸载重装一次。**
 >
-> 旧版本号是驱动版本（如 `580.178.04`），新版本号跟随 nvidia-container-toolkit
-> （如 `1.20.0`）。数字变小会被应用中心当作降级，因此不会提示更新。
-> 请先卸载旧的 `NVIDIA Driver`，再安装新的 `.fpk`。之后的升级恢复正常。
+> - 旧包名 `nvidia-driver` / 版本号是驱动版本（如 `580.178.04`）；
+> - 新包名 `Nvidia-Driver-580` / 版本号跟随 nvidia-container-toolkit（如 `1.17.8`）。
+>
+> 应用中心把它们当成两个不同的应用，不会提示更新。请先卸载旧的 `NVIDIA Driver`，
+> 再安装新的 `.fpk`。之后的升级恢复正常。
+
+## 为什么包名是 `Nvidia-Driver-580`
+
+飞牛相册的人脸/场景识别由系统服务 `ai_manager` 调度。它判断 NVIDIA GPU 是否可选时，
+**不检查驱动本身**，而是向应用中心查询已安装应用列表，寻找名为 `Nvidia-Driver-580`
+且 `source = official` 的应用；找不到就直接返回 `20818 hardware is unavailable`。
+（实测追踪 `/v1/setting/set-gpu`：先问 resmon 确认 GPU 存在，再 `GET /rpc/v1/app/installed`，
+之后立即报错，全程没有执行 `nvidia-smi`、没有读取任何驱动文件。）
+
+因此本包沿用官方包的标识，让相册能够选中 GPU。驱动就绪后，`ai_manager` 会用自带的
+onnxruntime-gpu + cuDNN 跑 `check_support.onnx` 做真正的硬件验证——这一步在 Tesla P4 上
+已实测通过。
 
 ## 工作方式
 
@@ -70,8 +84,9 @@ cd apps/nvidia-driver
 ## 注意事项
 
 - 仅支持 x86_64 架构
-- 不应与飞牛商店的 `Nvidia-Driver` 包共存。若检测到官方包已接管驱动，本包不会覆盖，
-  而是在版本不一致时直接报错提示。
+- 与飞牛商店的官方 `Nvidia-Driver-580` 同名，二者只能装一个。若官方包已接管用户态驱动，
+  本包不会覆盖，而是在版本不一致时直接报错提示。
+- 安装/升级/卸载期间会短暂停止飞牛 AI 服务（`ai_manager.service`）以释放 GPU，结束后自动恢复。
 - 若当前飞牛内核未提供 `nvidia-gpu-*` 模块，安装会直接失败并提示升级系统
 - 无 GPU 的机器上安装会成功并进入 `pending-no-gpu` 状态，插卡重启后自动生效
 - 如遇 GPU 掉卡（Xid 79），建议添加内核参数 `pcie_aspm=off`
