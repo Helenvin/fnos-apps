@@ -146,7 +146,12 @@ done
 
 
 # --- Helenvin patch: native apps synced from fpk repos (built externally via fnpack) ---
-for slug in LitePan fnclearup; do
+# Apps listed here deliberately have NO scripts/apps/<slug>/ contract: build-apps.yml's
+# buildable_only() filter drops every app without meta.env from all matrices, so these
+# are never built, never version-bumped and never touched by CI. Their releases are
+# created by hand (EM2B) or synced from an external repo (LitePan, fnclearup).
+# To add one: append the slug here and add a matching case arm below.
+for slug in LitePan fnclearup EM2B; do
   latest_release=$(echo "$ALL_RELEASES" | jq -r \
     --arg prefix "${slug}/" \
     '[.[] | select(.tagName | startswith($prefix))] | sort_by(.publishedAt) | last // empty')
@@ -173,6 +178,18 @@ for slug in LitePan fnclearup; do
       DESC="智能扫描已卸载应用、网盘挂载与 Docker 残留目录及重复文件，一键安全清理（Node.js 原生版，root 运行，经 fnOS 桌面打开）。安装前需先在应用中心安装 nodejs_v24 运行时；每日自动同步 FnDepot。"
       PORT=0; HOMEPAGE="https://github.com/Wyf841015/FnDepot"
       ICON="https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fnclearup/ICON_256.PNG"; CATEGORY="system"
+      ;;
+    EM2B)
+      # Frozen by hand: the maintainer uploads the fpk personally and NO upstream is
+      # ever followed. Publish it as release EM2B/v<version> with assets named
+      # EM2B_<fpk_version>_x86.fpk and EM2B_<fpk_version>_arm.fpk (the store builds
+      # its download URL as <file_prefix>_<fpk_version>_<arch>.fpk).
+      FILE_PREFIX="EM2B"; APPNAME="EM2B"; DISPLAY="EM2B"
+      DESC="EM2B（第三方应用，由维护者自行上传维护，固定版本，不跟随上游更新）。"
+      PORT=0  # TODO(EM2B): 填 EM2B 的 Web 管理端口
+      HOMEPAGE="https://github.com/Helenvin/fnos-apps"
+      ICON="https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/EM2B/ICON_256.PNG"  # TODO(EM2B): 换成 release 里的图标直链
+      CATEGORY="media"
       ;;
   esac
 

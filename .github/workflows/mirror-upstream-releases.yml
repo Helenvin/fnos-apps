@@ -24,13 +24,18 @@ jobs:
           gh api "repos/${FORK}/tags?per_page=100" --paginate > /tmp/existing.json
           EXISTING=$(jq -r '.[].name' /tmp/existing.json)
 
-          # latest release per slug (same rule as generate-apps-json.sh),
-          # skip the store app itself - we publish our own patched build
-          mapfile -t RELS < <(jq -r '
+          # latest release per slug (same rule as generate-apps-json.sh).
+          # EXCLUDED_SLUGS covers two kinds of never-upstream apps:
+          #   fnos-apps-store - we publish our own patched build of it
+          #   EM2B            - hand-uploaded and frozen on purpose; an upstream
+          #                     release for it must never be mirrored in
+          EXCLUDED_SLUGS='["fnos-apps-store","EM2B"]'
+          mapfile -t RELS < <(jq -r --argjson excl "$EXCLUDED_SLUGS" '
             [.[] | select(.draft == false)]
             | group_by(.tag_name | split("/")[0])
             | map(sort_by(.published_at) | last)
-            | .[] | select(.tag_name | startswith("fnos-apps-store/") | not)
+            | .[] | (.tag_name | split("/")[0]) as $slug
+            | select(($excl | index($slug)) == null)
             | [.tag_name] | @tsv' /tmp/upstream.json)
           echo "releases to consider: ${#RELS[@]}"
 
