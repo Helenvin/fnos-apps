@@ -41,6 +41,19 @@
 #   * we record what we created and remove it on uninstall only if unchanged;
 #   * we never touch /usr/lib/modules_trim/*/nvidia-gpu-* or /usr/lib/firmware.
 #
+# Package identity (manifest appname = Nvidia-Driver-580, source = official)
+# ==========================================================================
+# fnOS's AI Manager (/usr/trim/bin/ai_manager, used by 相册 for face/scene
+# recognition) decides whether an NVIDIA GPU is selectable by asking the app
+# center for its installed-app list and looking for the OFFICIAL app named
+# `Nvidia-Driver-580` — nothing else. Traced on fnOS 1.2 / ai_manager: the
+# /v1/setting/set-gpu handler queries resmon (GPU present), then
+# GET /rpc/v1/app/installed, then answers `20818 hardware is unavailable`
+# without ever running nvidia-smi or touching a driver file. A perfectly
+# working driver installed under any other appname is invisible to it, so the
+# only way to make 相册 accept the GPU is to carry the same identity. The app
+# center reads both fields straight from the manifest and does not sign-check
+# `source`, so this is enough.
 
 # ============================================================
 # Constants
@@ -147,6 +160,35 @@ nv_gpu_busy() {
         done
     done
     return 1
+}
+
+# fnOS's AI Manager (相册/智能识别) keeps trim.img2vec / trim.face_det /
+# trim.gpu_verify alive with /dev/nvidia* mmapped — even while they actually
+# run on OpenVINO/CPU. Swapping the userspace libraries underneath them, or
+# running the busy check against them, both fail. Quiesce the service for the
+# duration of a destructive step and bring it back on ANY exit path (error_exit
+# calls `exit 1`, so this must be an EXIT trap, not a tail call).
+NV_AI_MANAGER_UNIT="ai_manager.service"
+NV_AI_MANAGER_PAUSED=0
+
+nv_quiesce_ai_manager() {
+    [ "$NV_AI_MANAGER_PAUSED" = "1" ] && return 0
+    command -v systemctl >/dev/null 2>&1 || return 0
+    systemctl is-active --quiet "$NV_AI_MANAGER_UNIT" 2>/dev/null || return 0
+    install_log "暂停飞牛 AI 服务（${NV_AI_MANAGER_UNIT}）以释放 GPU..."
+    systemctl stop "$NV_AI_MANAGER_UNIT" 2>&1 | install_log || true
+    if ! systemctl is-active --quiet "$NV_AI_MANAGER_UNIT" 2>/dev/null; then
+        NV_AI_MANAGER_PAUSED=1
+        trap nv_resume_ai_manager EXIT
+        sleep 2
+    fi
+}
+
+nv_resume_ai_manager() {
+    [ "$NV_AI_MANAGER_PAUSED" = "1" ] || return 0
+    NV_AI_MANAGER_PAUSED=0
+    install_log "恢复飞牛 AI 服务（${NV_AI_MANAGER_UNIT}）"
+    systemctl start "$NV_AI_MANAGER_UNIT" 2>&1 | install_log || true
 }
 
 # ============================================================
@@ -486,6 +528,14 @@ nv_migrate_from_dkms() {
     [ -x /usr/bin/nvidia-uninstall ] && ls -d /usr/src/nvidia-* >/dev/null 2>&1 && had=1
     [ "$had" = "1" ] || return 0
 
+    # nvidia-uninstall below removes the userspace (and nvidia-smi with it).
+    # Refuse BEFORE that point: a busy check that only runs afterwards leaves
+    # the box with modules loaded and no libraries when it trips.
+    nv_quiesce_ai_manager
+    if nv_gpu_busy; then
+        error_exit "NVIDIA GPU 正在被容器或应用占用，无法安全清理旧版驱动。请停止所有 GPU 工作负载后重试。"
+    fi
+
     install_log "检测到旧版本 DKMS 安装，正在清理（不再编译内核模块）..."
 
     if [ -x /usr/bin/nvidia-uninstall ]; then
@@ -559,6 +609,7 @@ reconcile_driver() {
             error_exit "检测到其他应用管理的 NVIDIA 用户态组件（${have_version}），与飞牛内核模块（${want_version}）版本不一致。为避免覆盖飞牛官方驱动，本应用不会自动修改。请卸载官方 Nvidia-Driver 后重试。"
         fi
 
+        nv_quiesce_ai_manager
         if nv_gpu_busy; then
             error_exit "NVIDIA GPU 正在被容器或应用占用，无法安全更新用户态驱动。请停止所有 GPU 工作负载后重试。"
         fi
@@ -638,6 +689,7 @@ service_postupgrade() {
 service_preuninst() {
     install_log "开始卸载 NVIDIA 驱动..."
 
+    nv_quiesce_ai_manager
     if nv_gpu_busy; then
         error_exit "NVIDIA GPU 正在被容器或应用占用，无法安全卸载。请停止所有 GPU 工作负载后重试。"
     fi
