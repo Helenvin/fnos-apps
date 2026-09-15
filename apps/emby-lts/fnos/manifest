@@ -1,0 +1,14 @@
+appname         = embyserverlts
+version         = 4.10.0.40
+display_name    = Emby-LTS
+platform        = arm
+maintainer      = Emby LLC
+maintainer_url  = https://emby.media
+distributor     = conversun
+distributor_url = https://github.com/conversun/fnos-apps
+desktop_uidir   = ui
+desktop_applaunchname = embyserverlts.Application
+service_port    = 8096
+desc            = EmbyServer是一款软件媒体系统，可让您控制媒体的管理和流式传输。可以通过多个应用程序将专用服务器中的媒体提供给最终用户设备。【LTS 锁定版】版本固定为 4.10.0.40，不随上游每日更新。
+source          = thirdparty
+checksum        = 

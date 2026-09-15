@@ -1,0 +1,15 @@
+{
+    ".url": {
+        "embyserverlts.Application": 
+        {
+            "title": "Emby-LTS",
+            "desc": "Emby-LTS",
+            "icon": "images/{0}.png",
+            "type": "url",
+            "port": "8096",
+            "protocol": "http",
+            "url": "/web/index.html",
+            "allUsers": true
+        }
+    }
+}
