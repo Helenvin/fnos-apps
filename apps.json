@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-15T05:13:27Z",
+  "generated_at": "2026-09-15T06:29:57Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -770,8 +770,8 @@
       "display_name": "Emby",
       "description": "EmbyServer是一款软件媒体系统，可让您控制媒体的管理和流式传输。可以通过多个应用程序将专用服务器中的媒体提供给最终用户设备。",
       "version": "4.10.0.40",
-      "fpk_version": "4.10.0.40-r2",
-      "release_tag": "emby/v4.10.0.40-r2",
+      "fpk_version": "4.10.0.40-r3",
+      "release_tag": "emby/v4.10.0.40-r3",
       "service_port": 8096,
       "homepage_url": "https://emby.media",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/emby/fnos/ICON_256.PNG",
@@ -779,7 +779,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-14T09:23:56Z",
+      "updated_at": "2026-09-15T06:29:39Z",
       "download_count": 832,
       "app_type": "native",
       "category": "media"
