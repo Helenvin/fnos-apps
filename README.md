@@ -1,7 +1,7 @@
 # fnOS Apps
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Apps](https://img.shields.io/badge/apps-165-2ea44f)
+![Apps](https://img.shields.io/badge/apps-171-2ea44f)
 ![Platform](https://img.shields.io/badge/fnOS-third--party-orange)
 
 面向飞牛 fnOS 的第三方应用打包仓库。自动跟踪上游版本，构建可直接安装的 `.fpk` 包。
@@ -40,6 +40,7 @@
 |:---:|---|---:|---|:---:|:---:|
 | <img src="apps/plex/fnos/ICON.PNG" width="28"> | **Plex** | `32400` | 媒体服务器，支持硬件转码 | [官网](https://www.plex.tv) | [Release][r-plex] |
 | <img src="apps/emby/fnos/ICON.PNG" width="28"> | **Emby** | `8096` | 媒体管理与流式传输 | [官网](https://emby.media) | [Release][r-emby] |
+| <img src="apps/emby-lts/fnos/ICON.PNG" width="28"> | **Emby-LTS** | `8096` | Emby 版本锁定版：固定 4.10.0.40，不随上游更新；与原版 Emby 数据隔离可并存安装，但端口相同不可同时运行 | [官网](https://emby.media) | [Release][r-emby-lts] |
 | <img src="apps/jellyfin/fnos/ICON.PNG" width="28"> | **Jellyfin** | `8097` | 开源媒体系统，内置 FFmpeg | [官网](https://jellyfin.org) | [Release][r-jellyfin] |
 | <img src="apps/navidrome/fnos/ICON.PNG" width="28"> | **Navidrome** | `4533` | 音乐流媒体服务器 | [官网](https://www.navidrome.org) | [Release][r-navidrome] |
 | <img src="apps/koel/fnos/ICON.PNG" width="28"> | **Koel** | `8060` | 个人音乐流媒体，默认账号 `admin@koel.dev/KoelIsCool` | [GitHub](https://github.com/koel/koel) | [Release][r-koel] |
@@ -272,6 +273,7 @@ fnos-apps/
 [r-store]: https://github.com/conversun/fnos-apps/releases?q=fnos-apps-store
 [r-plex]: https://github.com/conversun/fnos-apps/releases?q=plex
 [r-emby]: https://github.com/conversun/fnos-apps/releases?q=emby
+[r-emby-lts]: https://github.com/Helenvin/fnos-apps/releases?q=emby-lts
 [r-jellyfin]: https://github.com/conversun/fnos-apps/releases?q=jellyfin
 [r-navidrome]: https://github.com/conversun/fnos-apps/releases?q=navidrome
 [r-metatube]: https://github.com/conversun/fnos-apps/releases?q=metatube
