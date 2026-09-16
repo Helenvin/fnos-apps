@@ -1,0 +1,9 @@
+{
+    "type": "http",
+    "path": "/",
+    "expect_status": [200, 302],
+    "startup_timeout_seconds": 600,
+    "post_install_warmup_seconds": 0,
+    "skip_arch": [],
+    "note": "首次启动要展开运行期载荷（解压后约 1GB、4 万多个文件，见 service-setup 的 unpack_payload），再建库、装载站点资源、等前端代理就绪，冷启动明显慢于常规应用。展开有 marker 挡住，只做一次。"
+}

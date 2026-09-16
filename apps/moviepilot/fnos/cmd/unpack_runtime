@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# 展开运行期载荷：${TRIM_APPDEST}/payload.tar.gz -> ${TRIM_APPDEST}/runtime
+#
+# 为什么单独一个入口：解开这个载荷要建 4 万多个文件、耗时几分钟，塞不进 fnOS 的
+# 安装回调（回调等太久会被判安装失败），也不能塞进 service_prestart（启动步骤阻塞
+# 同样会被判启动没走完，桌面入口会登记不上），所以 service_postinst 只把它丢到
+# 后台跑，启动时的等待交给 cmd/run_service，两边共用 service-setup 里的
+# unpack_payload（同一把文件锁，谁先到谁做）。
+#
+# 手动排查时可以直接跑（-w 只是打印等待锁的过程，不需要锁就立刻返回）：
+#   "${TRIM_APPDEST}/cmd/unpack_runtime"
+# 展开日志默认在 ${TRIM_PKGVAR}/unpack.log。
+
+. "$(dirname "$0")/common"
+. "$(dirname "$0")/service-setup"
+
+if unpack_payload; then
+    # 展开完就把构建前缀改写好，应用启动时 venv 已经是能用的
+    rewrite_build_prefix
+fi

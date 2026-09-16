@@ -1,7 +1,10 @@
 {
     "defaults": {
-        "run-as": "package"
+        "run-as": "root"
     },
-    "username": "moviepilot",
-    "groupname": "moviepilot"
+    "folder-permission": {
+        "rw": [
+            "/vol1/1000"
+        ]
+    }
 }

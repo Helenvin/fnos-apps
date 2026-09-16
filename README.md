@@ -133,7 +133,6 @@
 | <img src="apps/danmu-api/fnos/ICON.PNG" width="28"> | **Danmu API** | `9321` | 弹幕 API 服务器，兼容弹弹play 接口规范 | [GitHub](https://github.com/huangxd-/danmu_api) | [Release][r-danmu-api] |
 | <img src="apps/auto-bangumi/fnos/ICON.PNG" width="28"> | **AutoBangumi** | `7892` | RSS 自动追番下载整理，默认账号 `admin/adminadmin` | [GitHub](https://github.com/EstrellaXD/Auto_Bangumi) | [Release][r-ab] |
 | <img src="apps/audiobookshelf/fnos/ICON.PNG" width="28"> | **Audiobookshelf** | `13378` | 有声书和播客服务器 | [官网](https://www.audiobookshelf.org) | [Release][r-abs] |
-| <img src="apps/moviepilot/fnos/ICON.PNG" width="28"> | **MoviePilot** | `3000` | 影视自动化管理 | [GitHub](https://github.com/jxxghp/MoviePilot) | [Release][r-mp] |
 | <img src="apps/openlist/fnos/ICON.PNG" width="28"> | **OpenList** | `5244` | 文件列表/WebDAV | [GitHub](https://github.com/OpenListTeam/OpenList) | [Release][r-openlist] |
 | <img src="apps/kodbox/fnos/ICON.PNG" width="28"> | **KodBox** | `8500` | 私有云存储/在线文档协作 | [官网](https://kodcloud.com) | [Release][r-kodbox] |
 | <img src="apps/chinesesubfinder/fnos/ICON.PNG" width="28"> | **ChineseSubFinder** | `19035` | 中文字幕自动下载 | [GitHub](https://github.com/ChineseSubFinder/ChineseSubFinder) | [Release][r-csf] |
@@ -160,6 +159,7 @@
 
 | | App | 端口 | 说明 | 来源 | 下载 |
 |:---:|---|---:|---|:---:|:---:|
+| <img src="apps/moviepilot/fnos/ICON.PNG" width="28"> | **MoviePilot** | `3300` | 影视自动化管理：订阅、下载、整理入库，原生运行无需 Docker（装完首次启动要展开载荷，需几分钟） | [GitHub](https://github.com/jxxghp/MoviePilot) | [Release][r-mp] |
 | <img src="apps/sonarr/fnos/ICON.PNG" width="28"> | **Sonarr** | `8989` | 电视剧自动下载管理 | [官网](https://sonarr.tv) | [Release][r-sonarr] |
 | <img src="apps/radarr/fnos/ICON.PNG" width="28"> | **Radarr** | `7878` | 电影自动下载管理 | [官网](https://radarr.video) | [Release][r-radarr] |
 | <img src="apps/lidarr/fnos/ICON.PNG" width="28"> | **Lidarr** | `8686` | 音乐自动下载管理 | [官网](https://lidarr.audio) | [Release][r-lidarr] |
@@ -348,7 +348,7 @@ fnos-apps/
 [r-syncthing]: https://github.com/conversun/fnos-apps/releases?q=syncthing
 [r-ani]: https://github.com/conversun/fnos-apps/releases?q=ani-rss
 [r-abs]: https://github.com/conversun/fnos-apps/releases?q=audiobookshelf
-[r-mp]: https://github.com/conversun/fnos-apps/releases?q=moviepilot
+[r-mp]: https://github.com/Helenvin/fnos-apps/releases?q=moviepilot
 [r-openlist]: https://github.com/conversun/fnos-apps/releases?q=openlist
 [r-kodbox]: https://github.com/conversun/fnos-apps/releases?q=kodbox
 [r-sunpanel]: https://github.com/conversun/fnos-apps/releases?q=sun-panel

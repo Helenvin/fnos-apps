@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# 应用进程的启动包装：等运行期载荷展开完 → 改写构建前缀 → exec 真正要跑的进程。
+#
+# 为什么"等解压"不放在 service_prestart 里（r1–r3 的写法）：
+# fnOS 把「启动应用」当成安装流程的一环，service_prestart 阻塞几分钟（载荷解压后
+# 约 1GB / 4 万多个文件）会被判成启动没走完，后果是真机上桌面入口登记不上——
+# 应用中心里只有「停用 / 卸载」，桌面既没有图标也没有「打开」按钮。服务本身是好的
+# （3300 能访问、详情页显示「停用」即飞牛认为它在跑），缺的只是 app_service 那条
+# 桌面入口记录。
+#
+# 所以等待挪到这里：本脚本由 common 的 start_daemon 以后台方式拉起（& + PID_FILE），
+# 等多久都不占 fnOS 的启动回调；结尾用 exec，PID 不变，daemon_status / stop_daemon
+# 照旧可用。
+#
+# 用法（SERVICE_COMMAND 里两行各调一次）：
+#   run_service backend    后端 uvicorn
+#   run_service frontend   前端 express（等后端 /health/ready 通了才监听 UI 端口）
+
+. "$(dirname "$0")/common"
+. "$(dirname "$0")/service-setup"
+
+ROLE="${1:-}"
+
+case "${ROLE}" in
+    backend|frontend) ;;
+    *)
+        install_log "错误：run_service 需要参数 backend 或 frontend（收到 '${ROLE}'）"
+        exit 1
+        ;;
+esac
+
+# 载荷没展开 / 只展开了一半 / 换过载荷时，在这里等（或自己动手）把它做完。
+# 两个包装脚本、service_postinst 的后台展开、service_prestart 都可能并发走到
+# unpack_payload，它内部靠一把文件锁串行化：谁先到谁解，其余人排队等结果
+# （拿不到锁就继续排，绝不"超时后自己抢着解"——那是 r4 炸掉的原因，见
+#  service-setup 里那段说明）。
+#
+# ⚠️ 这里绝对不能 exit：run_service 的 pid 就是飞牛认的"应用服务进程"，pid 一没，
+# 应用中心立刻记 APP_START_FAILED_LOCAL_APP_RUN_EXCEPTION 并显示「本地应用启动失败」
+# （r4 的事实：解压失败 → exit 1 → 两个 pid 一起消失 → 直接无法启用）。
+# 展开真失败就一直重试，让 pid 活着：只要后面某次成功，服务自己就起来了；
+# 每次失败的原因都落在 moviepilot.log 里，不用登 NAS 也能查。
+attempt=0
+until unpack_payload; do
+    attempt=$((attempt + 1))
+    install_log "错误：运行期载荷未就绪（${ROLE} 第 ${attempt} 次尝试），20s 后重试；展开进度见 ${APP_DATA_DIR}/unpack.log"
+    sleep 20
+done
+
+# 载荷换过时 venv 里的构建前缀要重新改写（带 marker，幂等）
+rewrite_build_prefix
+
+if [ "${ROLE}" = "backend" ]; then
+    exec env PYTHONUNBUFFERED=1 PORT="${BACKEND_PORT}" HOST=127.0.0.1 \
+        "${VENV_PY}" -m app.main
+fi
+
+exec env PORT="${BACKEND_PORT}" NGINX_PORT="${UI_PORT}" \
+    MOVIEPILOT_BACKEND_HOST=127.0.0.1 \
+    MOVIEPILOT_FRONTEND_MAX_FAILURES=30 \
+    MOVIEPILOT_FRONTEND_HEALTH_INTERVAL_MS=2000 \
+    MOVIEPILOT_FRONTEND_HEALTH_TIMEOUT_MS=3000 \
+    "${NODE_BIN}" "${MP_ROOT}/public/service.js"

@@ -1,117 +1,436 @@
 #!/bin/bash
-# MoviePilot Docker app — wizard integration
 #
-# fnOS reads docker-compose.yaml through Docker API directly; it does NOT
-# invoke \`docker compose\` CLI, so \`env_file:\` and Compose-time interpolation
-# of \`${VAR:-default}\` do not work for wizard-supplied values. We sed-patch
-# the docker-compose.yaml in place for all wizard-driven values.
+# MoviePilot 原生运行时的服务定义。
+#
+# 运行时载荷（CPython 3.14 + venv + Node + 前端 + 站点资源）由
+# Helenvin/moviepilot-fpk 在 debian:12 上离线构建。载荷里所有绝对路径都指向
+# 构建前缀 /opt/moviepilot，装到 NAS 上后必须改写。
+#
+# 载荷进包的方式很关键：app.tgz 里只有一个 payload.tar.gz（理由见
+# scripts/lib/pack-runtime-payload.sh 里的长注释），真正的 44,890 个文件由本脚本在
+# 安装/启动时自己展开到 ${TRIM_APPDEST}/runtime。fnOS 自带的解压器处理不了那个
+# 量级的目录树，会直接报「解压app.tgz失败」，所以这一步只能由我们来做。
+#
+# 进程模型：MoviePilot 原生模式本身是两个进程（uvicorn 后端 + express 前端），
+# common 的 start_daemon 支持多行 SERVICE_COMMAND，每行独立后台启动并把 PID
+# 追加到 PID_FILE，所以不需要自己写 supervisor。
+
+APP_DIR="${TRIM_APPDEST}"
+APP_DATA_DIR="${TRIM_PKGVAR}"
+RUNTIME_DIR="${APP_DIR}/runtime"
+BUILD_PREFIX="/opt/moviepilot"
+
+LOG_FILE="${APP_DATA_DIR}/${TRIM_APPNAME}.log"
+PID_FILE="${APP_DATA_DIR}/${TRIM_APPNAME}.pid"
+
+MP_ROOT="${RUNTIME_DIR}/app"
+VENV_PY="${RUNTIME_DIR}/venv/bin/python"
+NODE_BIN="${MP_ROOT}/.runtime/node/bin/node"
+
+# UI 端口固定 3300：fnos-apps 里的 Docker 版 MoviePilot 占用 3000，两个商店
+# 的应用可能同时存在，端口必须错开。
+UI_PORT=3300
+# 后端只监听回环，由前端 express 反代 /api，不单独对外开放。
+BACKEND_PORT=3301
+
+# MoviePilot 的数据目录：数据库、日志、缓存、cookies 都在这里。
+export CONFIG_DIR="${APP_DATA_DIR}/config"
+# 隐身 Chromium 不再随包（解压后 729MB，占载荷的一半）。上游会在第一次需要浏览器
+# 仿真时自己下载到 CLOAKBROWSER_CACHE_DIR。放在 runtime 下是有意的：载荷里已经
+# 不含 browser/，覆盖式展开碰不到它，升级换载荷时缓存能留下来。
+export CLOAKBROWSER_CACHE_DIR="${RUNTIME_DIR}/browser"
+
+# fnOS 下发的环境是被裁剪过的，PATH 为空。MoviePilot 会 fork 外部命令，
+# 必须显式把随包的解释器、Node 和系统路径补回来。
+export PATH="${RUNTIME_DIR}/venv/bin:${MP_ROOT}/.runtime/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+# 后端先起，前端 express 会轮询 /health/ready，通了才开始监听 UI 端口。
+# 上游原生模式的取值是 MAX_FAILURES=4 / INTERVAL=15000。首次启动要建库、装载站点
+# 资源，NAS（尤其 arm64）上把启动等待放宽到 30 次（每次间隔 1s，约 30-60s）；
+# watchdog 间隔同步压到 2s，后端真挂掉时 60s 内收工，与上游量级一致。
+#
+# 两条都走 cmd/run_service 包装：真正的命令与三个环境变量都在那个脚本里，这里
+# 只负责各起一个后台进程（common 的 start_daemon 支持多行 SERVICE_COMMAND，每行
+# 独立后台启动并把 PID 追加到 PID_FILE）。
+SERVICE_COMMAND="${APP_DIR}/cmd/run_service backend
+${APP_DIR}/cmd/run_service frontend"
+
+# 守护进程的工作目录用数据目录，保证相对路径写入落在可写位置。
+SVC_CWD="${APP_DATA_DIR}"
+SVC_BACKGROUND=y
+SVC_WRITE_PID=y
+# 两个 pid 都在 = 启动步骤立刻返回（daemon_status 命中），所以这个值只在
+# "有一个 pid 已经死了"时才起作用。r4 用了 240：真机上一个 pid 死掉后，start_daemon
+# 会抱着剩下那个活着的 pid 空转满 240 秒，应用中心就一直在「启用中」，最后超时报
+# 「无法启用 / 本地应用启动失败」。压到 30：真出问题 30 秒内就把错误交给飞牛，
+# 错误也能尽早落到 moviepilot.log 里。
+SVC_WAIT_TIMEOUT=30
+
+# common 默认 SVC_QUIET=y，会一直追加旧日志；清空后每次启动重写，日志不会无限膨胀。
+SVC_QUIET=
+
+prepare_data_dirs() {
+    mkdir -p "${APP_DATA_DIR}" "${CONFIG_DIR}" \
+        "${CONFIG_DIR}/logs" "${CONFIG_DIR}/cache" \
+        "${CONFIG_DIR}/temp" "${CONFIG_DIR}/cookies" 2>/dev/null || true
+}
+
+# 把载荷里的构建前缀改写成实际安装路径。
+#   - 文本命中：pyvenv.cfg 的 home、bin/ 下脚本的 shebang、moviepilot.pth
+#   - 符号链接：uv 写下的绝对链接，重建为指向随包解释器
+# 成功后在数据目录留下标记，避免每次启动都全量扫一遍 venv。
+rewrite_build_prefix() {
+    local force="${1:-}"
+    local marker="${APP_DATA_DIR}/.runtime-prefix"
+    local lock="${APP_DATA_DIR}/.runtime-prefix.lock"
+
+    [ -d "${RUNTIME_DIR}/venv" ] || return 0
+
+    # 整段放在子 shell 里、并且先拿一把自己的锁：
+    #   - 锁的 fd 只在这个子 shell 存活，不会被子 shell 退出后启动的守护进程继承走
+    #   - service_prestart、cmd/run_service 的两个包装、cmd/unpack_runtime 可能同时
+    #     走到这里，两份 sed 并行改同一批 venv 文件会改出半对半错的运行时
+    # 锁内再判一次 marker，所以重复调用是幂等的。
+    # 拿不到锁就一直排队（见文件顶部 r4 的教训），绝不抢着往前跑。
+    (
+        rounds=0
+        while ! unpack_lock_try prefix; do
+            rounds=$((rounds + 1))
+            if [ "${rounds}" -ge "${UNPACK_LOCK_MAX_ROUNDS}" ]; then
+                install_log "警告：等构建前缀改写锁超过 $((UNPACK_LOCK_ROUND * UNPACK_LOCK_MAX_ROUNDS))s，放弃改写（下次启动会重试）"
+                exit 0
+            fi
+        done
+
+        if [ "${force}" != "force" ] \
+            && [ -f "${marker}" ] \
+            && [ "$(cat "${marker}" 2>/dev/null)" = "${RUNTIME_DIR}" ]; then
+            unpack_lock_drop prefix
+            exit 0
+        fi
+
+        # 载荷还没展开完就绝对不要碰 venv：
+        #   - 改的是半棵树，结果半对半错
+        #   - 还会把 marker 写成"已完成"，害得真正展开完之后的改写被跳过
+        #     （venv 里的 shebang 就永远指着构建前缀 /opt/moviepilot，python 起不来）
+        # 没有外层载荷 = 老式包（文件是直接铺开的），不走这层保护。
+        if [ -f "${UNPACK_ARCHIVE}" ] \
+            && ! payload_is_unpacked "$(payload_stamp "${UNPACK_ARCHIVE}")"; then
+            unpack_lock_drop prefix
+            exit 0
+        fi
+
+        local hits count
+        hits="$(grep -rlIF -- "${BUILD_PREFIX}" "${RUNTIME_DIR}/venv" 2>/dev/null || true)"
+        if [ -n "${hits}" ]; then
+            count="$(printf '%s\n' "${hits}" | wc -l)"
+            printf '%s\n' "${hits}" | while IFS= read -r file; do
+                [ -n "${file}" ] || continue
+                sed -i "s#${BUILD_PREFIX}#${RUNTIME_DIR}#g" "${file}"
+            done
+            install_log "已改写 ${count} 个文件里的构建前缀"
+        fi
+
+        find "${RUNTIME_DIR}/python" "${RUNTIME_DIR}/venv" "${RUNTIME_DIR}/app/.runtime" \
+            -type l 2>/dev/null | while IFS= read -r link; do
+            local target
+            target="$(readlink "${link}" 2>/dev/null || true)"
+            case "${target}" in
+                "${BUILD_PREFIX}"/*)
+                    ln -sfn "${RUNTIME_DIR}/${target#"${BUILD_PREFIX}"/}" "${link}"
+                    ;;
+            esac
+        done
+
+        printf '%s' "${RUNTIME_DIR}" > "${marker}" 2>/dev/null || true
+        unpack_lock_drop prefix
+        exit 0
+    ) 9>>"${lock}"
+}
+
+# Chromium 的系统库。fnOS 是 Debian 12，仓库里有这些包，但机器状态不可假定；
+# 装不上只影响浏览器仿真类站点，MoviePilot 主体功能照常，所以不致命。
+browser_deps_present() {
+    command -v ldconfig >/dev/null 2>&1 || return 1
+    local lib
+    for lib in libnss3.so libgbm.so.1 libatk-1.0.so.0 libcups.so.2 libxkbcommon.so.0; do
+        ldconfig -p 2>/dev/null | grep -q "${lib}" || return 1
+    done
+    return 0
+}
+
+# 安装在后台跑：apt 慢或没网时不能把安装流程一起拖住，装完自己落标记。
+install_browser_system_deps() {
+    local marker="${APP_DATA_DIR}/.browser-deps-ok"
+    [ -f "${marker}" ] && return 0
+    command -v apt-get >/dev/null 2>&1 || return 0
+
+    if browser_deps_present; then
+        touch "${marker}" 2>/dev/null || true
+        return 0
+    fi
+
+    local log="${APP_DATA_DIR}/browser-deps.log" runner="nohup"
+    command -v setsid >/dev/null 2>&1 && runner="setsid"
+
+    install_log "后台安装 Chromium 系统依赖，日志：${log}"
+    ${runner} env DEBIAN_FRONTEND=noninteractive sh -c '
+        apt-get update -qq &&
+        apt-get install -y --no-install-recommends \
+            libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
+            libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 \
+            libgbm1 libpango-1.0-0 libcairo2 libasound2 libatspi2.0-0 \
+            libx11-6 libxcb1 libxext6 libglib2.0-0 libx11-xcb1 libxi6 libxtst6 \
+            libxshmfence1 libwayland-client0 libvulkan1 fonts-liberation \
+            xdg-utils xvfb
+        rc=$?
+        [ "${rc}" -eq 0 ] && touch "$1"
+        exit "${rc}"
+    ' sh "${marker}" >>"${log}" 2>&1 </dev/null &
+    return 0
+}
+
+# ---------------------------------------------------------------------------
+# 运行期载荷的展开
+#
+# app.tgz 里只有一个 payload.tar.gz（约 1GB 解压后 4 万多个文件），fnOS 的安装器
+# 只负责把它当作一个普通文件落到 ${APP_DIR}，真正的目录树在这里展开。
+#
+# 展开要几分钟，装不进 fnOS 的安装回调里（回调等太久，安装会被判失败，这正是
+# 上一版"解压app.tgz失败"之后要躲开的第二种失败）。所以：
+#   - service_postinst / service_postupgrade 把展开丢到后台（cmd/unpack_runtime）
+#   - cmd/run_service（SERVICE_COMMAND 的两个包装）在拉起进程前等它完成，谁先到谁解
+# 这些都在后台进程里，等多久都不占 fnOS 的启动回调。
+#
+# ⚠️ r4 的教训（真机把应用搞成「无法启用 / 本地应用启动失败」）：
+# **等待只能是无上限地排队，绝不能"等 N 秒拿不到锁就自己上手解压"。**
+# r4 写的是 flock -w 600，而首解 4 万多个条目在真机上超过了 600s，于是三个等待者
+# （两个 run_service + 一个后台 unpack_runtime）在同一时刻集体超时、同时开解，
+# GNU tar 并发解压同一棵树必然报 "Cannot open: File exists" → unpack_payload 返回 1
+# → run_service 退出 1 → 两个 pid 一起消失 → 飞牛记录 APP_START_FAILED_LOCAL_APP_RUN_EXCEPTION，
+# 应用中心显示「无法启用 moviepilot / 本地应用启动失败」，而且每次重试都重复踩同一脚。
+# 现在：同一时刻只有一个展开者；等不到锁就一轮一轮接着排；展开完还要校验关键文件
+# 在位才写 marker；写不出 marker 就当没展开（下次重解）。
+# # ---------------------------------------------------------------------------
+UNPACK_ARCHIVE="${APP_DIR}/payload.tar.gz"
+UNPACK_MARKER="${APP_DATA_DIR}/.runtime-unpacked"
+UNPACK_LOCK="${APP_DATA_DIR}/.runtime-unpack.lock"
+# 等锁一轮的长度。拿不到就记一笔、再排一轮——**绝不是"等超时就自己上手解压"**。
+# 这个区别就是 r4 那次「无法启用」的全部原因，说明见文件顶部那段。
+UNPACK_LOCK_ROUND=300
+# 排这么多轮还不来（约 2 小时）就当异常退出，别让 run_service 的 pid 永远吊在那儿。
+UNPACK_LOCK_MAX_ROUNDS=24
+
+# 载荷指纹：体积 + mtime。升级换了载荷它就变，从而触发重解。
+payload_stamp() {
+    stat -c '%s-%Y' "$1" 2>/dev/null || echo unknown
+}
+
+# 载荷的实体文件在位了没。
+# 只挑「载荷里确实存在、且不随 CPython 小版本变化」的路径，不用 find 去数 4 万个
+# 文件（太贵、也毫无必要）：
+#   - venv/bin/python 是指向 ../../python/bin/python3.14 的**相对**符号链接，
+#     链路终点是载荷里的真实二进制，解压完就是可执行的
+#   - app/public/service.js 与 app/.runtime/node/bin/node 是前端和 Node 运行时的落点
+payload_files_present() {
+    [ -d "${RUNTIME_DIR}/python" ] || return 1
+    [ -d "${RUNTIME_DIR}/app" ] || return 1
+    [ -x "${RUNTIME_DIR}/venv/bin/python" ] || return 1
+    [ -f "${RUNTIME_DIR}/app/public/service.js" ] || return 1
+    [ -f "${RUNTIME_DIR}/app/.runtime/node/bin/node" ] || return 1
+    return 0
+}
+
+# marker 命中 + 实体文件在位 = 真的解开了。
+# marker 只在**解压成功且校验通过之后**才写，所以「解压到一半」不可能被误判成已完成。
+payload_is_unpacked() {
+    [ -f "${UNPACK_MARKER}" ] || return 1
+    [ "$(cat "${UNPACK_MARKER}" 2>/dev/null)" = "$1" ] || return 1
+    payload_files_present
+}
+
+# 取锁。fd 9 由调用方的子 shell 持有（调用方写 `( ... ) 9>>"${UNPACK_LOCK}"`），
+# 子 shell 一退出锁就放掉，不会被之后拉起的守护进程继承走。
+# 拿不到返回 1，由调用方决定「再排一轮」——**没锁就绝不动手解压**。
+# 参数：退化成目录锁时用的名字（flock 存在时用不上，只为把两把锁分开）。
+unpack_lock_try() {
+    local name="${1:-unpack}"
+    local fallback="${APP_DATA_DIR}/.${name}-lock.d"
+
+    if command -v flock >/dev/null 2>&1; then
+        flock -w "${UNPACK_LOCK_ROUND}" 9 && return 0
+        return 1
+    fi
+    # 没有 flock 的环境（精简容器 / busybox）退化成目录锁：mkdir 是原子的。
+    # 持有者 pid 写进锁目录，pid 不在了就接管，避免死锁。
+    # ⚠️ 必须写 $BASHPID（真正持有锁的这个子 shell 的 pid），不能写 $$——
+    # $$ 在子 shell 里仍是顶层 wrapper 的 pid，wrapper 被 stop 杀掉后子 shell
+    # 还活着，其他人却会看到"持有者已死"而接管，结果并发解压（回归测试 S4 实测）。
+    local waited=0 owner
+    while [ "${waited}" -lt "${UNPACK_LOCK_ROUND}" ]; do
+        if mkdir "${fallback}" 2>/dev/null; then
+            printf '%s' "${BASHPID:-$$}" > "${fallback}/pid" 2>/dev/null || true
+            return 0
+        fi
+        owner="$(cat "${fallback}/pid" 2>/dev/null || true)"
+        if [ -n "${owner}" ] && ! kill -0 "${owner}" 2>/dev/null; then
+            # 原子接管：把整个锁目录 mv 走，谁 mv 成功谁接管。**不能 rm -rf 后重试**——
+            # 两个进程同时看到旧持有者已死时，B 的删除会把 A 刚建好的新锁也删掉，
+            # 于是两个都拿到锁、同时去解压（S4 回归测试实测踩过这个坑）。
+            if mv "${fallback}" "${fallback}.stale.$$" 2>/dev/null; then
+                install_log "展开锁的持有者 ${owner} 已不在，接管"
+                rm -f "${fallback}.stale.$$/pid" 2>/dev/null || true
+                rmdir "${fallback}.stale.$$" 2>/dev/null || true
+            fi
+            continue
+        fi
+        sleep 2
+        waited=$((waited + 2))
+    done
+    return 1
+}
+
+unpack_lock_drop() {
+    command -v flock >/dev/null 2>&1 && return 0   # fd 9 随子 shell 退出自动释放
+    local fallback="${APP_DATA_DIR}/.${1:-unpack}-lock.d"
+    rm -f "${fallback}/pid" 2>/dev/null || true
+    rmdir "${fallback}" 2>/dev/null || true
+}
+
+# 有没有人正在解（非阻塞探一下，拿到锁立刻放掉）。
+# 用来保证同一时刻只有一个展开进程：r4 里 service_postinst 和 service_prestart 各起
+# 一个，两个后台进程抢同一把锁，白等一遍，也更容易踩到并发解压。
+unpack_in_progress() {
+    local name="${1:-unpack}"
+    [ -f "${UNPACK_LOCK}" ] || return 1
+    if command -v flock >/dev/null 2>&1; then
+        ( flock -n 9 ) 9>>"${UNPACK_LOCK}" 2>/dev/null && return 1   # 拿到了 = 没人解
+        return 0
+    fi
+    [ -d "${APP_DATA_DIR}/.${name}-lock.d" ]
+}
+
+unpack_payload() {
+    # 没有外层载荷 = 老版把文件直接铺开的包，什么都不用做
+    [ -f "${UNPACK_ARCHIVE}" ] || return 0
+
+    local stamp
+    stamp="$(payload_stamp "${UNPACK_ARCHIVE}")"
+    payload_is_unpacked "${stamp}" && return 0
+
+    mkdir -p "${APP_DATA_DIR}" 2>/dev/null || true
+
+    # 关键段放在子 shell 里：锁的 fd 只在这个子 shell 存活，不会被子 shell 退出后
+    # 启动的守护进程继承走——否则 MoviePilot 会攥着锁活到下一次启动，把自己后面
+    # 的启动流程挡在 flock 上。
+    (
+        local rounds=0
+        while : ; do
+            unpack_lock_try && break
+            rounds=$((rounds + 1))
+            install_log "等其它进程展开运行期载荷中（第 ${rounds} 轮，每轮最多 ${UNPACK_LOCK_ROUND}s）……它做完这里立刻继续"
+            if [ "${rounds}" -ge "${UNPACK_LOCK_MAX_ROUNDS}" ]; then
+                install_log "错误：等展开锁超过 $((UNPACK_LOCK_ROUND * UNPACK_LOCK_MAX_ROUNDS))s，放弃；另一个进程的进度见 ${APP_DATA_DIR}/unpack.log"
+                exit 1
+            fi
+        done
+
+        # 排队期间可能已经被别人做完了
+        if payload_is_unpacked "${stamp}"; then
+            unpack_lock_drop
+            exit 0
+        fi
+
+        install_log "展开运行期载荷 payload.tar.gz（$(du -h "${UNPACK_ARCHIVE}" 2>/dev/null | cut -f1)，44,215 个条目 / 解压后约 1GB，首次要几分钟，期间不会有新日志，属正常）到 ${APP_DIR}"
+        local started="${SECONDS}" rc=0
+        tar -xzf "${UNPACK_ARCHIVE}" -C "${APP_DIR}" || rc=$?
+        if [ "${rc}" -ne 0 ]; then
+            # 并发解压同一棵树时 GNU tar 必然报 "Cannot open: File exists"。正常情况
+            # 下拿不到锁就不会走到这里；真出现了说明锁没起作用，日志里要留证据。
+            install_log "错误：运行期载荷展开失败（tar 退出码 ${rc}），MoviePilot 无法启动；重启服务或重装应用会重试"
+            unpack_lock_drop
+            exit 1
+        fi
+        if ! payload_files_present; then
+            install_log "错误：载荷展开后关键文件缺失（${RUNTIME_DIR}），按未完成处理，下次启动会重解"
+            unpack_lock_drop
+            exit 1
+        fi
+        printf '%s' "${stamp}" > "${UNPACK_MARKER}" 2>/dev/null || true
+        # 载荷换过：venv 里的构建前缀要重新改写，把标记清掉让 rewrite_build_prefix 干活
+        rm -f "${APP_DATA_DIR}/.runtime-prefix" 2>/dev/null || true
+        install_log "载荷展开完成，用时 $((SECONDS - started))s，${RUNTIME_DIR} 共 $(du -sh "${RUNTIME_DIR}" 2>/dev/null | cut -f1)"
+        unpack_lock_drop
+        exit 0
+    ) 9>>"${UNPACK_LOCK}"
+}
+
+# 把展开丢到后台。入口脚本 cmd/unpack_runtime 会自己 source common + service-setup，
+# 不依赖这里的 shell 状态，所以照抄 install_browser_system_deps 的 setsid/nohup 写法。
+unpack_payload_background() {
+    [ -f "${UNPACK_ARCHIVE}" ] || return 0
+
+    local stamp log runner
+    stamp="$(payload_stamp "${UNPACK_ARCHIVE}")"
+    payload_is_unpacked "${stamp}" && return 0
+
+    # 已经有人在解就别再起一个：同一时刻只允许一个展开者，多一个只是白等锁，
+    # 还更容易踩到并发解压（r4 的「无法启用」就是这么来的）。
+    if unpack_in_progress; then
+        install_log "运行期载荷正在后台展开，不再起第二个展开进程"
+        return 0
+    fi
+
+    log="${APP_DATA_DIR}/unpack.log"
+    runner="nohup"
+    command -v setsid >/dev/null 2>&1 && runner="setsid"
+
+    install_log "后台展开运行期载荷（解压后约 1GB / 4 万多个条目），进度见 ${log}"
+    ${runner} bash "${APP_DIR}/cmd/unpack_runtime" >>"${log}" 2>&1 </dev/null &
+    return 0
+}
+
+service_prestart() {
+    prepare_data_dirs
+    # ⚠️ 这里绝不能等载荷展开（r1–r3 就是在这里等，真机踩了坑）。
+    # fnOS 把「启动应用」当成安装流程的一环，service_prestart 阻塞几分钟（载荷
+    # 解压后约 1GB / 4 万多个文件）会被判成启动没走完，后果是桌面入口（app_service）
+    # 登记不上——应用中心里只有「停用 / 卸载」，桌面既没有图标也没有「打开」按钮，
+    # 而服务本身是好的（3300 能访问、详情页显示「停用」= 飞牛认为它在跑）。
+    # 展开只丢后台（cmd/unpack_runtime），等待交给 cmd/run_service：那两个进程由
+    # start_daemon 后台拉起，等多久都不占 fnOS 的启动回调。
+    unpack_payload_background
+    # 载荷已经就绪时顺手补一次前缀改写（升级换过载荷时标记会失效）。
+    # 没 venv 立刻返回、marker 命中秒退，放在启动路径上不会拖慢启动。
+    rewrite_build_prefix
+}
 
 service_postinst() {
-    mkdir -p "${TRIM_PKGVAR}/config" "${TRIM_PKGVAR}/core" "${TRIM_PKGVAR}/media" "${TRIM_PKGVAR}/downloads" 2>/dev/null || true
-    chown -R "${TRIM_UID}:${TRIM_GID}" "${TRIM_PKGVAR}/config" "${TRIM_PKGVAR}/core" "${TRIM_PKGVAR}/media" "${TRIM_PKGVAR}/downloads" 2>/dev/null || true
-
-    if [ -n "${wizard_media_dir}" ]; then
-        apply_media_dir "${wizard_media_dir}"
-        mkdir -p "${wizard_media_dir}" 2>/dev/null || true
-    fi
-    if [ -n "${wizard_download_dir}" ]; then
-        apply_download_dir "${wizard_download_dir}"
-        mkdir -p "${wizard_download_dir}" 2>/dev/null || true
-    fi
-    if [ -n "${wizard_password}" ]; then
-        apply_superuser_password "${wizard_password}"
-    fi
-}
-
-COMPOSE_FILE="${TRIM_APPDEST}/docker/docker-compose.yaml"
-PORT_SAVE="${TRIM_PKGVAR}/.port"
-MEDIA_DIR_SAVE="${TRIM_PKGVAR}/.media_dir"
-DOWNLOAD_DIR_SAVE="${TRIM_PKGVAR}/.download_dir"
-SUPERUSER_PASSWORD_SAVE="${TRIM_PKGVAR}/.superuser_password"
-
-# All wizard values get sed-patched into docker-compose.yaml directly.
-apply_media_dir() {
-    local dir="$1"
-    [ -z "$dir" ] && return
-    sed -i 's|^      - .*:/media$|      - '"${dir}"':/media|' "$COMPOSE_FILE"
-    echo "${dir}" > "$MEDIA_DIR_SAVE"
-    install_log "Patched docker-compose.yaml: media_dir=${dir}"
-}
-
-apply_download_dir() {
-    local dir="$1"
-    [ -z "$dir" ] && return
-    sed -i 's|^      - .*:/downloads$|      - '"${dir}"':/downloads|' "$COMPOSE_FILE"
-    echo "${dir}" > "$DOWNLOAD_DIR_SAVE"
-    install_log "Patched docker-compose.yaml: download_dir=${dir}"
-}
-
-apply_superuser_password() {
-    local pw="$1"
-    [ -z "$pw" ] && return
-    # Escape | for sed safety (passwords may contain it). Match the literal
-    # SUPERUSER_PASSWORD line shipped in docker-compose.yaml.
-    local escaped
-    escaped=$(printf '%s' "$pw" | sed 's:[\\&|]:\\\\&:g')
-    sed -i 's|^      - SUPERUSER_PASSWORD=.*|      - SUPERUSER_PASSWORD='"${escaped}"'|' "$COMPOSE_FILE"
-    echo "${pw}" > "$SUPERUSER_PASSWORD_SAVE"
-    chmod 600 "$SUPERUSER_PASSWORD_SAVE"
-    install_log "Patched docker-compose.yaml: SUPERUSER_PASSWORD set (length=${#pw})"
-}
-
-apply_port() {
-    local port="$1"
-    [ -z "$port" ] && return
-    sed -i 's/"[^"]*:3000"/"'"${port}"':3000"/' "$COMPOSE_FILE"
-    echo "${port}" > "$PORT_SAVE"
-    install_log "Patched docker-compose.yaml: port=${port}"
+    prepare_data_dirs
+    # 展开要几分钟，不能拖住安装回调（拖久了 fnOS 判安装失败）；丢后台，
+    # service_prestart 会用同一把锁等它完成，然后才改前缀、拉起进程。
+    unpack_payload_background
+    install_browser_system_deps
+    install_log "MoviePilot 数据目录：${CONFIG_DIR}"
 }
 
 service_postupgrade() {
-    local env_file="${TRIM_APPDEST}/docker/.env"
-
-    if [ -f "$PORT_SAVE" ]; then
-        apply_port "$(cat "$PORT_SAVE")"
-    fi
-
-    # MEDIA_DIR: prefer persisted save file; fall back to migrating from .env
-    # for users upgrading from earlier broken revisions that wrote to .env only.
-    if [ -f "$MEDIA_DIR_SAVE" ]; then
-        apply_media_dir "$(cat "$MEDIA_DIR_SAVE")"
-    elif [ -f "$env_file" ]; then
-        local v
-        v="$(grep -E '^MEDIA_DIR=' "$env_file" | head -1 | cut -d= -f2-)"
-        if [ -n "$v" ]; then
-            install_log "Migrating MEDIA_DIR from .env (legacy): $v"
-            apply_media_dir "$v"
-        fi
-    fi
-
-    if [ -f "$DOWNLOAD_DIR_SAVE" ]; then
-        apply_download_dir "$(cat "$DOWNLOAD_DIR_SAVE")"
-    elif [ -f "$env_file" ]; then
-        local v
-        v="$(grep -E '^DOWNLOAD_DIR=' "$env_file" | head -1 | cut -d= -f2-)"
-        if [ -n "$v" ]; then
-            install_log "Migrating DOWNLOAD_DIR from .env (legacy): $v"
-            apply_download_dir "$v"
-        fi
-    fi
-
-    if [ -f "$SUPERUSER_PASSWORD_SAVE" ]; then
-        apply_superuser_password "$(cat "$SUPERUSER_PASSWORD_SAVE")"
-    elif [ -f "$env_file" ]; then
-        local v
-        v="$(grep -E '^SUPERUSER_PASSWORD=' "$env_file" | head -1 | cut -d= -f2-)"
-        if [ -n "$v" ] && [ "$v" != "password" ]; then
-            install_log "Migrating SUPERUSER_PASSWORD from .env (legacy)"
-            apply_superuser_password "$v"
-        fi
-    fi
+    prepare_data_dirs
+    # 新载荷要重新展开；前缀改写留给 service_prestart，展开完才有意义
+    unpack_payload_background
 }
 
-service_postconfig() {
-    if [ -n "${wizard_port:-}" ]; then
-        apply_port "${wizard_port}"
-    fi
+service_preuninst() {
+    # The patterns below expand to the absolute install prefix at runtime, so
+    # -f is genuinely required; the trailing marker opts each line out of the
+    # footgun lint in scripts/test/static-check.sh.
+    pkill -f "${VENV_PY} -m app.main" 2>/dev/null || true                    # pkill-f-ok
+    pkill -f "${MP_ROOT}/public/service.js" 2>/dev/null || true              # pkill-f-ok
+    sleep 1
+    pkill -9 -f "${VENV_PY} -m app.main" 2>/dev/null || true                 # pkill-f-ok
+    pkill -9 -f "${MP_ROOT}/public/service.js" 2>/dev/null || true           # pkill-f-ok
+}
+
+service_poststop() {
+    service_preuninst
 }

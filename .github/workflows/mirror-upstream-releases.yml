@@ -26,11 +26,13 @@ jobs:
 
           # latest release per slug (same rule as generate-apps-json.sh),
           # skip the store app itself - we publish our own patched build
+          # moviepilot: the fork builds the NATIVE app here; upstream's Docker release
+          # must never be mirrored back (cleanup deletes its tag, mirror would re-add it)
           mapfile -t RELS < <(jq -r '
             [.[] | select(.draft == false)]
             | group_by(.tag_name | split("/")[0])
             | map(sort_by(.published_at) | last)
-            | .[] | select(.tag_name | startswith("fnos-apps-store/") | not)
+            | .[] | select((.tag_name | startswith("fnos-apps-store/")) or (.tag_name | startswith("moviepilot/")) | not)
             | [.tag_name] | @tsv' /tmp/upstream.json)
           echo "releases to consider: ${#RELS[@]}"
 
