@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-16T05:40:31Z",
+  "generated_at": "2026-09-16T06:51:05Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -931,6 +931,489 @@
       "download_count": 987,
       "app_type": "docker",
       "category": "browser"
+    },
+    {
+      "slug": "fn-VirtualHereServer",
+      "appname": "fn-VirtualHereServer",
+      "file_prefix": "fn-VirtualHereServer",
+      "display_name": "VirtualHereServer",
+      "description": "VirtualHere USB 服务端，支持通过网络远程访问 USB 设备。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "4.8.8",
+      "fpk_version": "4.8.8",
+      "release_tag": "fn-VirtualHereServer/v4.8.8",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-VirtualHereServer/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:51Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-WParted",
+      "appname": "fn-WParted",
+      "file_prefix": "fn-WParted",
+      "display_name": "WParted",
+      "description": "磁盘分区编辑器 - 创建、调整大小、删除、移动、复制、检查和格式化分区。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.2",
+      "fpk_version": "1.0.2",
+      "release_tag": "fn-WParted/v1.0.2",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-WParted/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:51Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-advancedsettings",
+      "appname": "fn-advancedsettings",
+      "file_prefix": "fn-advancedsettings",
+      "display_name": "高级设置",
+      "description": "管理启动设置、电源设置、屏幕设置、SSH设置、CPU设置、DNS设置、网络设置、代理设置、设备信息、端口信息、进程管理、服务管理、网络诊断。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.1.1",
+      "fpk_version": "1.1.1",
+      "release_tag": "fn-advancedsettings/v1.1.1",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-advancedsettings/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:54Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-appdownload",
+      "appname": "fn-appdownload",
+      "file_prefix": "fn-appdownload",
+      "display_name": "应用下载",
+      "description": "官方商店和第三方源应用下载（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.1.4",
+      "fpk_version": "1.1.4",
+      "release_tag": "fn-appdownload/v1.1.4",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-appdownload/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:54Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "store"
+    },
+    {
+      "slug": "fn-appsettings",
+      "appname": "fn-appsettings",
+      "file_prefix": "fn-appsettings",
+      "display_name": "应用设置",
+      "description": "设置已安装应用的数据（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.8",
+      "fpk_version": "1.0.8",
+      "release_tag": "fn-appsettings/v1.0.8",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-appsettings/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:53Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-audioplayer",
+      "appname": "fn-audioplayer",
+      "file_prefix": "fn-audioplayer",
+      "display_name": "音频播放器",
+      "description": "音频播放器应用，用于播放音频文件。支持包括 mp3、wav、flac、ogg、m4a、aac、wma、ape 等格式，会自动加载音频文件所在目录的歌词文件；支持客户端和服务端两种模式。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.5",
+      "fpk_version": "1.0.5",
+      "release_tag": "fn-audioplayer/v1.0.5",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-audioplayer/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:51Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "media"
+    },
+    {
+      "slug": "fn-bluetooth",
+      "appname": "fn-bluetooth",
+      "file_prefix": "fn-bluetooth",
+      "display_name": "蓝牙",
+      "description": "蓝牙设备管理工具，支持配对连接音频设备、键鼠、文件传输、共享网络等功能。支持客户端模式（扫描连接）和服务端模式（接受连接）。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.3",
+      "fpk_version": "1.0.3",
+      "release_tag": "fn-bluetooth/v1.0.3",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-bluetooth/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:52Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "network"
+    },
+    {
+      "slug": "fn-codeserver",
+      "appname": "fn-codeserver",
+      "file_prefix": "fn-codeserver",
+      "display_name": "code-server",
+      "description": "code-server 是 VS Code 的在线版本，允许您通过浏览器进行代码编辑和开发。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.1.1",
+      "fpk_version": "1.1.1",
+      "release_tag": "fn-codeserver/v1.1.1",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-codeserver/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:53Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-execute",
+      "appname": "fn-execute",
+      "file_prefix": "fn-execute",
+      "display_name": "执行器",
+      "description": "执行器可直接在可执行程序上右键执行，支持 sh、py、pl、rb、js、ts、lua、bash、zsh、fish、bin、run 等格式的文件。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.4",
+      "fpk_version": "1.0.4",
+      "release_tag": "fn-execute/v1.0.4",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-execute/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:58Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-fail2ban",
+      "appname": "fn-fail2ban",
+      "file_prefix": "fn-fail2ban",
+      "display_name": "fail2ban",
+      "description": "fail2ban 是一个开源的入侵防御工具，用于保护 Linux 服务器免受暴力破解攻击。 它通过监控日志文件，检测可疑的登录尝试，并自动封禁恶意 IP 地址，从而增强系统的安全性。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.6",
+      "fpk_version": "1.0.6",
+      "release_tag": "fn-fail2ban/v1.0.6",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-fail2ban/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:57Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-grafana-alloy",
+      "appname": "fn-grafana-alloy",
+      "file_prefix": "fn-grafana-alloy",
+      "display_name": "Grafana Alloy",
+      "description": "可观测性数据采集器，收集系统和应用日志并发送到 Loki。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.19.2",
+      "fpk_version": "1.19.2",
+      "release_tag": "fn-grafana-alloy/v1.19.2",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-grafana-alloy/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:47:11Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-iVentoy",
+      "appname": "fn-iVentoy",
+      "file_prefix": "fn-iVentoy",
+      "display_name": "iVentoy",
+      "description": "iVentoy - PXE 启动服务器，支持通过局域网网络安装操作系统。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.39-1",
+      "fpk_version": "1.0.39-1",
+      "release_tag": "fn-iVentoy/v1.0.39-1",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-iVentoy/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:53Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-influxdb",
+      "appname": "fn-influxdb",
+      "file_prefix": "fn-influxdb",
+      "display_name": "InfluxDB",
+      "description": "高性能时序数据库，适用于指标、事件和分析工作负载。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "2.9.1",
+      "fpk_version": "2.9.1",
+      "release_tag": "fn-influxdb/v2.9.1",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-influxdb/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:53Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-installer",
+      "appname": "fn-installer",
+      "file_prefix": "fn-installer",
+      "display_name": "安装器",
+      "description": "安装器，用于安装本地 FPK 应用文件。支持右键安装。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.6",
+      "fpk_version": "1.0.6",
+      "release_tag": "fn-installer/v1.0.6",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-installer/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:54Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-linux-station",
+      "appname": "fn-linux-station",
+      "file_prefix": "fn-linux-station",
+      "display_name": "linux-station",
+      "description": "Linux 工作站是一个基于 Linux 的桌面环境，旨在为用户提供一个高效、稳定和易用的工作环境。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.2",
+      "fpk_version": "1.0.2",
+      "release_tag": "fn-linux-station/v1.0.2",
+      "service_port": 5900,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-linux-station/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:53Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-p2s",
+      "appname": "fn-p2s",
+      "file_prefix": "fn-p2s",
+      "display_name": "端口代理",
+      "description": "通过 fnOS 应用网关路径访问本机端口服务。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.5",
+      "fpk_version": "1.0.5",
+      "release_tag": "fn-p2s/v1.0.5",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-p2s/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:51Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "network"
+    },
+    {
+      "slug": "fn-scheduler",
+      "appname": "fn-scheduler",
+      "file_prefix": "fn-scheduler",
+      "display_name": "任务计划",
+      "description": "轻量级的任务计划应用，支持设置定时任务以自动执行脚本或命令，同时也支持基于条件的任务触发。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.3.2",
+      "fpk_version": "1.3.2",
+      "release_tag": "fn-scheduler/v1.3.2",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-scheduler/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:53Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "automation"
+    },
+    {
+      "slug": "fn-scrutiny",
+      "appname": "fn-scrutiny",
+      "file_prefix": "fn-scrutiny",
+      "display_name": "Scrutiny",
+      "description": "硬盘 S.M.A.R.T 健康监控，集成 Scrutiny Web 与 Collector，提供可视化硬盘健康状态追踪。依赖 InfluxDB。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.70.0",
+      "fpk_version": "1.70.0",
+      "release_tag": "fn-scrutiny/v1.70.0",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-scrutiny/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:56Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-speedtest",
+      "appname": "fn-speedtest",
+      "file_prefix": "fn-speedtest",
+      "display_name": "网络测速",
+      "description": "测量客户端到服务器的速率，以及服务器到外网的出口速率。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.1",
+      "fpk_version": "1.0.1",
+      "release_tag": "fn-speedtest/v1.0.1",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-speedtest/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:52Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "network"
+    },
+    {
+      "slug": "fn-terminal",
+      "appname": "fn-terminal",
+      "file_prefix": "fn-terminal",
+      "display_name": "terminal",
+      "description": "terminal (ttyd + tmux) 是一个基于 Web 的终端应用程序，允许用户通过浏览器访问和管理服务器终端会话，提供便捷的远程终端操作体验。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.1.2",
+      "fpk_version": "1.1.2",
+      "release_tag": "fn-terminal/v1.1.2",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-terminal/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:47:00Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-vgmng",
+      "appname": "fn-vgmng",
+      "file_prefix": "fn-vgmng",
+      "display_name": "存储池管理",
+      "description": "存储池管理, 支持非飞牛存储池(其他NAS系统存储池)的管理。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.5",
+      "fpk_version": "1.0.5",
+      "release_tag": "fn-vgmng/v1.0.5",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-vgmng/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:52Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "system"
+    },
+    {
+      "slug": "fn-wifi-hotspot",
+      "appname": "fn-wifi-hotspot",
+      "file_prefix": "fn-wifi-hotspot",
+      "display_name": "无线热点",
+      "description": "无线热点创建工具，允许用户轻松地将计算机变成一个 Wi-Fi 热点，分享网络连接给其他设备。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.1.9",
+      "fpk_version": "1.1.9",
+      "release_tag": "fn-wifi-hotspot/v1.1.9",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-wifi-hotspot/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:52Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "network"
+    },
+    {
+      "slug": "fn-zerotier",
+      "appname": "fn-zerotier",
+      "file_prefix": "fn-zerotier",
+      "display_name": "ZeroTier",
+      "description": "ZeroTier 是一个无中心的虚拟网络，无需配置即可连接设备。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "version": "1.0.9",
+      "fpk_version": "1.0.9",
+      "release_tag": "fn-zerotier/v1.0.9",
+      "service_port": 0,
+      "homepage_url": "https://github.com/RROrg/fn-apps",
+      "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fn-zerotier/ICON_256.PNG",
+      "platforms": [
+        "x86",
+        "arm"
+      ],
+      "updated_at": "2026-09-16T06:46:52Z",
+      "download_count": 0,
+      "app_type": "native",
+      "category": "network"
     },
     {
       "slug": "fnclearup",
