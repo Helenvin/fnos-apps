@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-15T13:15:40Z",
+  "generated_at": "2026-09-16T04:30:33Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -1044,8 +1044,8 @@
       "display_name": "FRP Server",
       "description": "高性能内网穿透服务端（frps）：配合 frpc 客户端将 NAS 或内网服务暴露到公网服务器，内置 Web 管理面板（7500 端口，初始密码见应用日志）",
       "version": "0.71.0",
-      "fpk_version": "0.71.0",
-      "release_tag": "frps/v0.71.0",
+      "fpk_version": "0.71.0-r2",
+      "release_tag": "frps/v0.71.0-r2",
       "service_port": 7000,
       "homepage_url": "https://github.com/fatedier/frp",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/frps/fnos/ICON_256.PNG",
@@ -1053,7 +1053,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:07Z",
+      "updated_at": "2026-09-16T04:29:26Z",
       "download_count": 6,
       "app_type": "native",
       "category": "network"
@@ -1086,8 +1086,8 @@
       "display_name": "Glance",
       "description": "高颜值自托管仪表盘：一页聚合 RSS、书签、站点监控、Docker 状态、市场行情等数十种小组件",
       "version": "0.8.6",
-      "fpk_version": "0.8.6",
-      "release_tag": "glance/v0.8.6",
+      "fpk_version": "0.8.6-r2",
+      "release_tag": "glance/v0.8.6-r2",
       "service_port": 9678,
       "homepage_url": "https://github.com/glanceapp/glance",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/glance/fnos/ICON_256.PNG",
@@ -1095,7 +1095,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:11Z",
+      "updated_at": "2026-09-16T04:29:34Z",
       "download_count": 18,
       "app_type": "native",
       "category": "system"
@@ -1275,8 +1275,8 @@
       "display_name": "Homebox",
       "description": "家庭物品资产管理与库存系统：登记家当、拍照归档、位置/标签/保修期管理，搬家与理赔好帮手",
       "version": "0.26.2",
-      "fpk_version": "0.26.2",
-      "release_tag": "homebox/v0.26.2",
+      "fpk_version": "0.26.2-r2",
+      "release_tag": "homebox/v0.26.2-r2",
       "service_port": 7745,
       "homepage_url": "https://homebox.software",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/homebox/fnos/ICON_256.PNG",
@@ -1284,7 +1284,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:14Z",
+      "updated_at": "2026-09-16T04:29:33Z",
       "download_count": 8,
       "app_type": "native",
       "category": "system"
@@ -1927,9 +1927,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "latest-2026.09.14",
-      "fpk_version": "latest-2026.09.14",
-      "release_tag": "metube/vlatest-2026.09.14",
+      "version": "latest-2026.09.16",
+      "fpk_version": "latest-2026.09.16",
+      "release_tag": "metube/vlatest-2026.09.16",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -1937,7 +1937,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:27Z",
+      "updated_at": "2026-09-16T04:29:27Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
@@ -2602,8 +2602,8 @@
       "display_name": "Pocket ID",
       "description": "轻量 OIDC 单点登录/Passkey 身份提供方：为 Jellyfin、Immich、Nginx Proxy Manager 等自托管应用提供「指纹/Passkey 免密码」统一登录，无需暴露密码",
       "version": "2.14.0",
-      "fpk_version": "2.14.0",
-      "release_tag": "pocket-id/v2.14.0",
+      "fpk_version": "2.14.0-r2",
+      "release_tag": "pocket-id/v2.14.0-r2",
       "service_port": 1411,
       "homepage_url": "https://pocket-id.org",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/pocket-id/fnos/ICON_256.PNG",
@@ -2611,7 +2611,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:40Z",
+      "updated_at": "2026-09-16T04:29:35Z",
       "download_count": 6,
       "app_type": "native",
       "category": "system"
@@ -2854,8 +2854,8 @@
       "display_name": "RustDesk Server",
       "description": "开源远程桌面 RustDesk 的自建服务端（hbbs 信令 + hbbr 中继），让远程控制流量完全不经过第三方服务器；公钥位于应用数据目录，客户端填入 NAS 地址即可使用",
       "version": "1.1.16",
-      "fpk_version": "1.1.16",
-      "release_tag": "rustdesk-server/v1.1.16",
+      "fpk_version": "1.1.16-r2",
+      "release_tag": "rustdesk-server/v1.1.16-r2",
       "service_port": 21116,
       "homepage_url": "https://rustdesk.com",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/rustdesk-server/fnos/ICON_256.PNG",
@@ -2863,7 +2863,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:46Z",
+      "updated_at": "2026-09-16T04:29:22Z",
       "download_count": 6,
       "app_type": "native",
       "category": "network"
@@ -2960,8 +2960,8 @@
       "display_name": "SiYuan 思源笔记",
       "description": "隐私优先的块级笔记与双向链接知识库（内核服务器模式），支持网页端访问、多端数据同步与 S3/WebDAV 备份",
       "version": "3.8.3",
-      "fpk_version": "3.8.3",
-      "release_tag": "siyuan/v3.8.3",
+      "fpk_version": "3.8.3-r2",
+      "release_tag": "siyuan/v3.8.3-r2",
       "service_port": 6806,
       "homepage_url": "https://b3log.org/siyuan",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/siyuan/fnos/ICON_256.PNG",
@@ -2969,7 +2969,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:49Z",
+      "updated_at": "2026-09-16T04:29:17Z",
       "download_count": 10,
       "app_type": "docker",
       "category": "content"
@@ -3422,8 +3422,8 @@
       "display_name": "Vikunja",
       "description": "开源待办清单与项目看板（列表/看板/甘特/日历多视图），单文件运行、SQLite 存储，配手机 App 与 CalDAV 同步",
       "version": "2.6.0",
-      "fpk_version": "2.6.0",
-      "release_tag": "vikunja/v2.6.0",
+      "fpk_version": "2.6.0-r2",
+      "release_tag": "vikunja/v2.6.0-r2",
       "service_port": 3456,
       "homepage_url": "https://vikunja.io",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/vikunja/fnos/ICON_256.PNG",
@@ -3431,7 +3431,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T07:53:54Z",
+      "updated_at": "2026-09-16T04:30:03Z",
       "download_count": 15,
       "app_type": "native",
       "category": "content"
