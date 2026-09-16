@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-16T13:14:14Z",
+  "generated_at": "2026-09-16T13:50:40Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -2514,11 +2514,11 @@
       "appname": "moviepilot",
       "file_prefix": "moviepilot",
       "display_name": "MoviePilot",
-      "description": "影视自动化管理工具,支持自动订阅、下载、整理和通知。首次启动通过 Web UI 配置。",
+      "description": "影视自动化管理工具：订阅、站点索引、下载器联动、智能整理入库，内置浏览器仿真与 AI 助手。原生运行，不依赖 Docker。",
       "version": "3.0.3",
       "fpk_version": "3.0.3",
       "release_tag": "moviepilot/v3.0.3",
-      "service_port": 3000,
+      "service_port": 3300,
       "homepage_url": "https://github.com/jxxghp/MoviePilot",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/moviepilot/fnos/ICON_256.PNG",
       "platforms": [
@@ -2527,9 +2527,8 @@
       ],
       "updated_at": "2026-09-15T13:13:09Z",
       "download_count": 496,
-      "app_type": "docker",
-      "category": "content",
-      "post_install_note": "请在 Web UI 中设置媒体库和下载目录，确保与下载工具（如 qBittorrent）使用的路径一致。"
+      "app_type": "native",
+      "category": "media"
     },
     {
       "slug": "msf",
