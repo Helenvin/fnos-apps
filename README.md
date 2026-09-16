@@ -23,29 +23,29 @@
 
 | | App | 端口 | 说明 | 来源 | 下载 |
 |:---:|---|---:|---|:---:|:---:|
-| <img src="native-assets/fn-VirtualHereServer/ICON_256.PNG" width="28"> | **VirtualHereServer** | — | VirtualHere USB 服务端，支持通过网络远程访问 USB 设备。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-WParted/ICON_256.PNG" width="28"> | **WParted** | — | 磁盘分区编辑器 - 创建、调整大小、删除、移动、复制、检查和格式化分区。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-advancedsettings/ICON_256.PNG" width="28"> | **高级设置** | — | 管理启动设置、电源设置、屏幕设置、SSH设置、CPU设置、DNS设置、网络设置、代理设置、设备信息、端口信息、进程管理、服务管理、网络诊断。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-appdownload/ICON_256.PNG" width="28"> | **应用下载** | — | 官方商店和第三方源应用下载（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-appsettings/ICON_256.PNG" width="28"> | **应用设置** | — | 设置已安装应用的数据（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-audioplayer/ICON_256.PNG" width="28"> | **音频播放器** | — | 音频播放器应用，用于播放音频文件。支持包括 mp3、wav、flac、ogg、m4a、aac、wma、ape 等格式，会自动加载音频文件所在目录的歌词文件；支持客户端和服务端两种模式。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-bluetooth/ICON_256.PNG" width="28"> | **蓝牙** | — | 蓝牙设备管理工具，支持配对连接音频设备、键鼠、文件传输、共享网络等功能。支持客户端模式（扫描连接）和服务端模式（接受连接）。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-codeserver/ICON_256.PNG" width="28"> | **code-server** | — | code-server 是 VS Code 的在线版本，允许您通过浏览器进行代码编辑和开发。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-execute/ICON_256.PNG" width="28"> | **执行器** | — | 执行器可直接在可执行程序上右键执行，支持 sh、py、pl、rb、js、ts、lua、bash、zsh、fish、bin、run 等格式的文件。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-fail2ban/ICON_256.PNG" width="28"> | **fail2ban** | — | fail2ban 是一个开源的入侵防御工具，用于保护 Linux 服务器免受暴力破解攻击。 它通过监控日志文件，检测可疑的登录尝试，并自动封禁恶意 IP 地址，从而增强系统的安全性。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-grafana-alloy/ICON_256.PNG" width="28"> | **Grafana Alloy** | — | 可观测性数据采集器，收集系统和应用日志并发送到 Loki。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-iVentoy/ICON_256.PNG" width="28"> | **iVentoy** | — | iVentoy - PXE 启动服务器，支持通过局域网网络安装操作系统。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-influxdb/ICON_256.PNG" width="28"> | **InfluxDB** | — | 高性能时序数据库，适用于指标、事件和分析工作负载。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-installer/ICON_256.PNG" width="28"> | **安装器** | — | 安装器，用于安装本地 FPK 应用文件。支持右键安装。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-linux-station/ICON_256.PNG" width="28"> | **linux-station** | `5900` | Linux 工作站是一个基于 Linux 的桌面环境，旨在为用户提供一个高效、稳定和易用的工作环境。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-p2s/ICON_256.PNG" width="28"> | **端口代理** | — | 通过 fnOS 应用网关路径访问本机端口服务。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-scheduler/ICON_256.PNG" width="28"> | **任务计划** | — | 轻量级的任务计划应用，支持设置定时任务以自动执行脚本或命令，同时也支持基于条件的任务触发。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-scrutiny/ICON_256.PNG" width="28"> | **Scrutiny** | — | 硬盘 S.M.A.R.T 健康监控，集成 Scrutiny Web 与 Collector，提供可视化硬盘健康状态追踪。依赖 InfluxDB。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-speedtest/ICON_256.PNG" width="28"> | **网络测速** | — | 测量客户端到服务器的速率，以及服务器到外网的出口速率。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-terminal/ICON_256.PNG" width="28"> | **terminal** | — | terminal (ttyd + tmux) 是一个基于 Web 的终端应用程序，允许用户通过浏览器访问和管理服务器终端会话，提供便捷的远程终端操作体验。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-vgmng/ICON_256.PNG" width="28"> | **存储池管理** | — | 存储池管理, 支持非飞牛存储池(其他NAS系统存储池)的管理。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-wifi-hotspot/ICON_256.PNG" width="28"> | **无线热点** | — | 无线热点创建工具，允许用户轻松地将计算机变成一个 Wi-Fi 热点，分享网络连接给其他设备。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
-| <img src="native-assets/fn-zerotier/ICON_256.PNG" width="28"> | **ZeroTier** | — | ZeroTier 是一个无中心的虚拟网络，无需配置即可连接设备。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) |
+| <img src="native-assets/fn-VirtualHereServer/ICON_256.PNG" width="28"> | **VirtualHereServer** | — | VirtualHere USB 服务端，支持通过网络远程访问 USB 设备。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-VirtualHereServer] |
+| <img src="native-assets/fn-WParted/ICON_256.PNG" width="28"> | **WParted** | — | 磁盘分区编辑器 - 创建、调整大小、删除、移动、复制、检查和格式化分区。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-WParted] |
+| <img src="native-assets/fn-advancedsettings/ICON_256.PNG" width="28"> | **高级设置** | — | 管理启动设置、电源设置、屏幕设置、SSH设置、CPU设置、DNS设置、网络设置、代理设置、设备信息、端口信息、进程管理、服务管理、网络诊断。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-advancedsettings] |
+| <img src="native-assets/fn-appdownload/ICON_256.PNG" width="28"> | **应用下载** | — | 官方商店和第三方源应用下载（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-appdownload] |
+| <img src="native-assets/fn-appsettings/ICON_256.PNG" width="28"> | **应用设置** | — | 设置已安装应用的数据（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-appsettings] |
+| <img src="native-assets/fn-audioplayer/ICON_256.PNG" width="28"> | **音频播放器** | — | 音频播放器应用，用于播放音频文件。支持包括 mp3、wav、flac、ogg、m4a、aac、wma、ape 等格式，会自动加载音频文件所在目录的歌词文件；支持客户端和服务端两种模式。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-audioplayer] |
+| <img src="native-assets/fn-bluetooth/ICON_256.PNG" width="28"> | **蓝牙** | — | 蓝牙设备管理工具，支持配对连接音频设备、键鼠、文件传输、共享网络等功能。支持客户端模式（扫描连接）和服务端模式（接受连接）。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-bluetooth] |
+| <img src="native-assets/fn-codeserver/ICON_256.PNG" width="28"> | **code-server** | — | code-server 是 VS Code 的在线版本，允许您通过浏览器进行代码编辑和开发。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-codeserver] |
+| <img src="native-assets/fn-execute/ICON_256.PNG" width="28"> | **执行器** | — | 执行器可直接在可执行程序上右键执行，支持 sh、py、pl、rb、js、ts、lua、bash、zsh、fish、bin、run 等格式的文件。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-execute] |
+| <img src="native-assets/fn-fail2ban/ICON_256.PNG" width="28"> | **fail2ban** | — | fail2ban 是一个开源的入侵防御工具，用于保护 Linux 服务器免受暴力破解攻击。 它通过监控日志文件，检测可疑的登录尝试，并自动封禁恶意 IP 地址，从而增强系统的安全性。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-fail2ban] |
+| <img src="native-assets/fn-grafana-alloy/ICON_256.PNG" width="28"> | **Grafana Alloy** | — | 可观测性数据采集器，收集系统和应用日志并发送到 Loki。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-grafana-alloy] |
+| <img src="native-assets/fn-iVentoy/ICON_256.PNG" width="28"> | **iVentoy** | — | iVentoy - PXE 启动服务器，支持通过局域网网络安装操作系统。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-iVentoy] |
+| <img src="native-assets/fn-influxdb/ICON_256.PNG" width="28"> | **InfluxDB** | — | 高性能时序数据库，适用于指标、事件和分析工作负载。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-influxdb] |
+| <img src="native-assets/fn-installer/ICON_256.PNG" width="28"> | **安装器** | — | 安装器，用于安装本地 FPK 应用文件。支持右键安装。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-installer] |
+| <img src="native-assets/fn-linux-station/ICON_256.PNG" width="28"> | **linux-station** | `5900` | Linux 工作站是一个基于 Linux 的桌面环境，旨在为用户提供一个高效、稳定和易用的工作环境。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-linux-station] |
+| <img src="native-assets/fn-p2s/ICON_256.PNG" width="28"> | **端口代理** | — | 通过 fnOS 应用网关路径访问本机端口服务。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-p2s] |
+| <img src="native-assets/fn-scheduler/ICON_256.PNG" width="28"> | **任务计划** | — | 轻量级的任务计划应用，支持设置定时任务以自动执行脚本或命令，同时也支持基于条件的任务触发。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-scheduler] |
+| <img src="native-assets/fn-scrutiny/ICON_256.PNG" width="28"> | **Scrutiny** | — | 硬盘 S.M.A.R.T 健康监控，集成 Scrutiny Web 与 Collector，提供可视化硬盘健康状态追踪。依赖 InfluxDB。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-scrutiny] |
+| <img src="native-assets/fn-speedtest/ICON_256.PNG" width="28"> | **网络测速** | — | 测量客户端到服务器的速率，以及服务器到外网的出口速率。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-speedtest] |
+| <img src="native-assets/fn-terminal/ICON_256.PNG" width="28"> | **terminal** | — | terminal (ttyd + tmux) 是一个基于 Web 的终端应用程序，允许用户通过浏览器访问和管理服务器终端会话，提供便捷的远程终端操作体验。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-terminal] |
+| <img src="native-assets/fn-vgmng/ICON_256.PNG" width="28"> | **存储池管理** | — | 存储池管理, 支持非飞牛存储池(其他NAS系统存储池)的管理。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-vgmng] |
+| <img src="native-assets/fn-wifi-hotspot/ICON_256.PNG" width="28"> | **无线热点** | — | 无线热点创建工具，允许用户轻松地将计算机变成一个 Wi-Fi 热点，分享网络连接给其他设备。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-wifi-hotspot] |
+| <img src="native-assets/fn-zerotier/ICON_256.PNG" width="28"> | **ZeroTier** | — | ZeroTier 是一个无中心的虚拟网络，无需配置即可连接设备。（镜像自 RROrg/fn-apps，随上游每日自动同步） | [RROrg/fn-apps](https://github.com/RROrg/fn-apps) | [Release][r-fn-zerotier] |
 
 ### 🤖 AI
 
@@ -62,8 +62,8 @@
 | <img src="apps/ollama/fnos/ICON.PNG" width="28"> | **Ollama** | `11434` | 本地大语言模型运行引擎 | [官网](https://ollama.com) | [Release][r-ollama] |
 | <img src="apps/maxkb/fnos/ICON.PNG" width="28"> | **MaxKB** | `8083` | AI 知识库问答系统，支持 RAG 和多模型对接 | [GitHub](https://github.com/1Panel-dev/MaxKB) | [Release][r-maxkb] |
 | <img src="apps/qwenpaw/fnos/ICON.PNG" width="28"> | **QwenPaw** | `8088` | AgentScope 团队出品的自托管个人 AI 助手，多通道接入、定时任务与本地模型 | [GitHub](https://github.com/agentscope-ai/QwenPaw) | [Release][r-qwenpaw] |
-| <img src="apps/astrbot/fnos/ICON.PNG" width="28"> | **AstrBot** | `6185` | 多平台 LLM 聊天机器人框架，支持 Web 管理面板和插件扩展。 | [github.com](https://github.com/AstrBotDevs/AstrBot) |
-| <img src="apps/next-ai-draw-io/fnos/ICON.PNG" width="28"> | **Next AI Draw.io** | `3007` | 基于大语言模型的 draw.io 图表生成与编辑工具 | [github.com](https://github.com/chadkunsman/next-ai-draw-io) |
+| <img src="apps/astrbot/fnos/ICON.PNG" width="28"> | **AstrBot** | `6185` | 多平台 LLM 聊天机器人框架，支持 Web 管理面板和插件扩展。 | [github.com](https://github.com/AstrBotDevs/AstrBot) | [Release][r-astrbot] |
+| <img src="apps/next-ai-draw-io/fnos/ICON.PNG" width="28"> | **Next AI Draw.io** | `3007` | 基于大语言模型的 draw.io 图表生成与编辑工具 | [github.com](https://github.com/chadkunsman/next-ai-draw-io) | [Release][r-next-ai-draw-io] |
 
 ### 🎬 媒体服务
 
@@ -97,14 +97,14 @@
 | <img src="apps/suwayomi/fnos/ICON.PNG" width="28"> | **Suwayomi** | `4567` | 免费开源漫画阅读服务器，支持多来源扩展 | [GitHub](https://github.com/Suwayomi/Suwayomi-Server) | [Release][r-suwayomi] |
 | <img src="apps/lyranest/fnos/ICON.PNG" width="28"> | **LyraNest** | `8080` | 律巢音乐：自托管多端音乐服务，共享曲库/歌单/播放队列，支持歌词偏移与离线下载 | [GitHub](https://github.com/WHWgogogo/LyraNest) | [Release][r-lyranest] |
 | <img src="apps/miair-next/fnos/ICON.PNG" width="28"> | **MiAir Next** | `8300` | 将小米小爱音箱转换为 DLNA 渲染器与 AirPlay 接收器，含 Web 管理后台 | [GitHub](https://github.com/deerwan/miair-next) | [Release][r-miair-next] |
-| <img src="https://raw.githubusercontent.com/Helenvin/LitePan-fpk/main/LitePan-x86/ICON.PNG" width="28"> | **LitePan（原生）** | `5211` | LitePan 原生版（Go 单二进制，无需 Docker）：网盘聚合挂载、STRM 刮削、目录整理，默认端口 5211。由 Helenvin/LitePan-fpk 自动同步。 | [github.com](https://github.com/Helenvin/LitePan-fpk) |
-| <img src="apps/avdb/fnos/ICON.PNG" width="28"> | **AVdb 影音自动化** | `8000` | AVdb 影音自动化：串接 MDC-NG 刮削信息自动归档、维护映射表，并通过 docker.sock 联动重启 MDC。基于 leolitaly/avdb 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的数据库与规则数据。 | [github.com](https://github.com/Helenvin/AVdb-Only) |
-| <img src="apps/mdc/fnos/ICON.PNG" width="28"> | **MDC 影音整理** | `9208` | MDC-NG 影音刮削整理：30+ 刮削源、AI 人脸识别海报、目录监控、演员管理、Emby 联动。基于 mdcng/mdc 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的配置与媒体库路径。 | [github.com](https://github.com/Helenvin/mdc-ng) |
-| <img src="apps/melody-hub/fnos/ICON.PNG" width="28"> | **MelodyHub** | `3006` | Web 音乐搜索与下载服务，基于 lx-music 核心，支持多平台音源聚合搜索、服务器端下载和歌曲管理。 | [github.com](https://github.com/gefl24/melody-hub) |
-| <img src="apps/songloft/fnos/ICON.PNG" width="28"> | **Songloft** | `58091` | 自托管音乐服务器，支持本地音乐管理与 Web 播放 | [github.com](https://github.com/songloft-org/songloft) |
-| <img src="apps/sqmusic/fnos/ICON.PNG" width="28"> | **SQMusic 音乐下载站** | `8097` | 多源音乐下载站（simple_sq_music_plus Docker 打包）：kw/qq/qqvip/mg/netease/kg/tidal 七源搜索，歌单/专辑/单曲解析下载；网易云与 QQ 音乐歌单监听自动增量下载（QQ 公开歌单匿名添加，歌曲下载需 QQ 扫码登录），标签歌词，文件按歌手/专辑落盘适配 Emby/Jellyfin。 | [github.com](https://github.com/Helenvin/simple_sq_music_plus) |
-| <img src="apps/suggestarr/fnos/ICON.PNG" width="28"> | **SuggestArr** | `5007` | 基于观影记录自动向 Seerr/Jellyseerr 请求相似影视内容 | [github.com](https://github.com/giuseppe99barchetta/SuggestArr) |
-| <img src="apps/vibenvr/fnos/ICON.PNG" width="28"> | **VibeNVR** | `8087` | AI 网络视频录像机，支持摄像头管理、录像与硬件加速转码。 | [github.com](https://github.com/spupuz/VibeNVR) |
+| <img src="https://raw.githubusercontent.com/Helenvin/LitePan-fpk/main/LitePan-x86/ICON.PNG" width="28"> | **LitePan（原生）** | `5211` | LitePan 原生版（Go 单二进制，无需 Docker）：网盘聚合挂载、STRM 刮削、目录整理，默认端口 5211。由 Helenvin/LitePan-fpk 自动同步。 | [github.com](https://github.com/Helenvin/LitePan-fpk) | [Release][r-LitePan] |
+| <img src="apps/avdb/fnos/ICON.PNG" width="28"> | **AVdb 影音自动化** | `8000` | AVdb 影音自动化：串接 MDC-NG 刮削信息自动归档、维护映射表，并通过 docker.sock 联动重启 MDC。基于 leolitaly/avdb 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的数据库与规则数据。 | [github.com](https://github.com/Helenvin/AVdb-Only) | [Release][r-avdb] |
+| <img src="apps/mdc/fnos/ICON.PNG" width="28"> | **MDC 影音整理** | `9208` | MDC-NG 影音刮削整理：30+ 刮削源、AI 人脸识别海报、目录监控、演员管理、Emby 联动。基于 mdcng/mdc 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的配置与媒体库路径。 | [github.com](https://github.com/Helenvin/mdc-ng) | [Release][r-mdc] |
+| <img src="apps/melody-hub/fnos/ICON.PNG" width="28"> | **MelodyHub** | `3006` | Web 音乐搜索与下载服务，基于 lx-music 核心，支持多平台音源聚合搜索、服务器端下载和歌曲管理。 | [github.com](https://github.com/gefl24/melody-hub) | [Release][r-melody-hub] |
+| <img src="apps/songloft/fnos/ICON.PNG" width="28"> | **Songloft** | `58091` | 自托管音乐服务器，支持本地音乐管理与 Web 播放 | [github.com](https://github.com/songloft-org/songloft) | [Release][r-songloft] |
+| <img src="apps/sqmusic/fnos/ICON.PNG" width="28"> | **SQMusic 音乐下载站** | `8097` | 多源音乐下载站（simple_sq_music_plus Docker 打包）：kw/qq/qqvip/mg/netease/kg/tidal 七源搜索，歌单/专辑/单曲解析下载；网易云与 QQ 音乐歌单监听自动增量下载（QQ 公开歌单匿名添加，歌曲下载需 QQ 扫码登录），标签歌词，文件按歌手/专辑落盘适配 Emby/Jellyfin。 | [github.com](https://github.com/Helenvin/simple_sq_music_plus) | [Release][r-sqmusic] |
+| <img src="apps/suggestarr/fnos/ICON.PNG" width="28"> | **SuggestArr** | `5007` | 基于观影记录自动向 Seerr/Jellyseerr 请求相似影视内容 | [github.com](https://github.com/giuseppe99barchetta/SuggestArr) | [Release][r-suggestarr] |
+| <img src="apps/vibenvr/fnos/ICON.PNG" width="28"> | **VibeNVR** | `8087` | AI 网络视频录像机，支持摄像头管理、录像与硬件加速转码。 | [github.com](https://github.com/spupuz/VibeNVR) | [Release][r-vibenvr] |
 
 ### ⬇️ 下载工具
 
@@ -121,7 +121,7 @@
 | <img src="apps/cloudreve/fnos/ICON.PNG" width="28"> | **Cloudreve** | `5212` | 国产云盘系统 | [官网](https://cloudreve.org) | [Release][r-cloudreve] |
 | <img src="apps/sabnzbd/fnos/ICON.PNG" width="28"> | **SABnzbd** | `8780` | Usenet 下载客户端 | [官网](https://sabnzbd.org) | [Release][r-sabnzbd] |
 | <img src="apps/copyparty/fnos/ICON.PNG" width="28"> | **CopyParty** | `3923` | 便携文件共享服务器 | [GitHub](https://github.com/9001/copyparty) | [Release][r-copyparty] |
-| <img src="apps/verysync/fnos/ICON.PNG" width="28"> | **Verysync** | `8666` | 微力同步文件同步工具 | [www.verysync.com](https://www.verysync.com/) |
+| <img src="apps/verysync/fnos/ICON.PNG" width="28"> | **Verysync** | `8666` | 微力同步文件同步工具 | [www.verysync.com](https://www.verysync.com/) | [Release][r-verysync] |
 
 ### 📚 内容管理
 
@@ -146,15 +146,15 @@
 | <img src="apps/appflowy/fnos/ICON.PNG" width="28"> | **AppFlowy** | `8501` | Notion 开源替代品，协作文档平台 | [官网](https://appflowy.io) | [Release][r-appflowy] |
 | <img src="apps/reactive-resume/fnos/ICON.PNG" width="28"> | **Reactive Resume** | `3200` | 在线简历制作工具 | [GitHub](https://github.com/AmruthPillworking/Reactive-Resume) | [Release][r-reactive-resume] |
 | <img src="apps/lanraragi/fnos/ICON.PNG" width="28"> | **LANraragi** | `3000` | 自托管漫画/存档管理服务器，自动元数据刮削 | [GitHub](https://github.com/Difegue/LANraragi) | [Release][r-lanraragi] |
-| <img src="apps/docsify/fnos/ICON.PNG" width="28"> | **Docsify** | `4001` | 轻量级 Markdown 文档站点服务 | [github.com](https://github.com/docsifyjs/docsify) |
-| <img src="apps/feigram/fnos/ICON.PNG" width="28"> | **Feigram** | `3088` | 非官方 Telegram Web 客户端，支持多账号、聊天、媒体预览和下载缓存 | [github.com](https://github.com/g-star1024/Feigram-Public) |
-| <img src="apps/fileview/fnos/ICON.PNG" width="28"> | **Fileview** | `9000` | 新一代通用型在线文件预览引擎，支持 Office、PDF、OFD、CAD、图片、代码文件等格式。 | [github.com](https://github.com/basemetas/fileview) |
-| <img src="apps/mail-archiver/fnos/ICON.PNG" width="28"> | **Mail Archiver** | `5008` | IMAP/Microsoft 365 邮件归档、搜索与导出系统 | [github.com](https://github.com/s1t5/mail-archiver) |
-| <img src="apps/memos/fnos/ICON.PNG" width="28"> | **Memos** | `5230` | 轻量级自托管笔记服务,支持Markdown,适合个人知识管理和日常记录。 | [www.usememos.com](https://www.usememos.com) |
-| <img src="apps/nextcloud/fnos/ICON.PNG" width="28"> | **Nextcloud** | `8082` | 开源私有云存储平台,支持文件同步、在线文档协作和日历联系人管理。 | [nextcloud.com](https://nextcloud.com) |
-| <img src="apps/obsidian/fnos/ICON.PNG" width="28"> | **Obsidian** | `8080` | 基于 Docker 的 Obsidian 个人知识库 | [obsidian.md](https://obsidian.md) |
-| <img src="apps/puter/fnos/ICON.PNG" width="28"> | **Puter** | `4100` | 开源云桌面环境,在浏览器中提供完整的桌面体验,支持文件管理和应用生态。 | [puter.com](https://puter.com) |
-| <img src="apps/seafile/fnos/ICON.PNG" width="28"> | **Seafile** | `8002` | 开源文件同步与共享平台 | [github.com](https://github.com/haiwen/seafile-docker) |
+| <img src="apps/docsify/fnos/ICON.PNG" width="28"> | **Docsify** | `4001` | 轻量级 Markdown 文档站点服务 | [github.com](https://github.com/docsifyjs/docsify) | [Release][r-docsify] |
+| <img src="apps/feigram/fnos/ICON.PNG" width="28"> | **Feigram** | `3088` | 非官方 Telegram Web 客户端，支持多账号、聊天、媒体预览和下载缓存 | [github.com](https://github.com/g-star1024/Feigram-Public) | [Release][r-feigram] |
+| <img src="apps/fileview/fnos/ICON.PNG" width="28"> | **Fileview** | `9000` | 新一代通用型在线文件预览引擎，支持 Office、PDF、OFD、CAD、图片、代码文件等格式。 | [github.com](https://github.com/basemetas/fileview) | [Release][r-fileview] |
+| <img src="apps/mail-archiver/fnos/ICON.PNG" width="28"> | **Mail Archiver** | `5008` | IMAP/Microsoft 365 邮件归档、搜索与导出系统 | [github.com](https://github.com/s1t5/mail-archiver) | [Release][r-mail-archiver] |
+| <img src="apps/memos/fnos/ICON.PNG" width="28"> | **Memos** | `5230` | 轻量级自托管笔记服务,支持Markdown,适合个人知识管理和日常记录。 | [www.usememos.com](https://www.usememos.com) | [Release][r-memos] |
+| <img src="apps/nextcloud/fnos/ICON.PNG" width="28"> | **Nextcloud** | `8082` | 开源私有云存储平台,支持文件同步、在线文档协作和日历联系人管理。 | [nextcloud.com](https://nextcloud.com) | [Release][r-nextcloud] |
+| <img src="apps/obsidian/fnos/ICON.PNG" width="28"> | **Obsidian** | `8080` | 基于 Docker 的 Obsidian 个人知识库 | [obsidian.md](https://obsidian.md) | [Release][r-obsidian] |
+| <img src="apps/puter/fnos/ICON.PNG" width="28"> | **Puter** | `4100` | 开源云桌面环境,在浏览器中提供完整的桌面体验,支持文件管理和应用生态。 | [puter.com](https://puter.com) | [Release][r-puter] |
+| <img src="apps/seafile/fnos/ICON.PNG" width="28"> | **Seafile** | `8002` | 开源文件同步与共享平台 | [github.com](https://github.com/haiwen/seafile-docker) | [Release][r-seafile] |
 
 ### 🎵 媒体自动化
 
@@ -167,7 +167,7 @@
 | <img src="apps/prowlarr/fnos/ICON.PNG" width="28"> | **Prowlarr** | `9696` | 索引器管理，整合 Sonarr/Radarr 等 | [官网](https://prowlarr.com) | [Release][r-prowlarr] |
 | <img src="apps/bazarr/fnos/ICON.PNG" width="28"> | **Bazarr** | `6767` | 字幕自动下载管理 | [官网](https://www.bazarr.media) | [Release][r-bazarr] |
 | <img src="apps/jackett/fnos/ICON.PNG" width="28"> | **Jackett** | `9117` | Torrent 索引器代理，Prowlarr 替代 | [GitHub](https://github.com/Jackett/Jackett) | [Release][r-jackett] |
-| <img src="apps/zonefoundry-bridge/fnos/ICON.PNG" width="28"> | **ZoneFoundry Bridge** | `18790` | ZoneFoundry 自建桥接，连接家中 Sonos 与 ZoneFoundry 云端中继，远程通过语音 / IM / 网页操控 Sonos 音箱。 | [zonefoundry.dev](https://zonefoundry.dev) |
+| <img src="apps/zonefoundry-bridge/fnos/ICON.PNG" width="28"> | **ZoneFoundry Bridge** | `18790` | ZoneFoundry 自建桥接，连接家中 Sonos 与 ZoneFoundry 云端中继，远程通过语音 / IM / 网页操控 Sonos 音箱。 | [zonefoundry.dev](https://zonefoundry.dev) | [Release][r-zonefoundry-bridge] |
 
 ### 🔧 系统工具
 
@@ -219,16 +219,16 @@
 | <img src="apps/nvidia-driver/fnos/ICON.PNG" width="28"> | **NVIDIA Driver** | — | NVIDIA GPU 驱动（R580 LTS）+ nvidia-container-toolkit，仅 x86 | [官网](https://www.nvidia.com/drivers) | [Release][r-nvidia-driver] |
 | <img src="apps/arcane/fnos/ICON.PNG" width="28"> | **Arcane** | `3552` | 现代化 Docker 管理界面，可视化管理容器、镜像、Compose 项目与存储卷 | [GitHub](https://github.com/getarcaneapp/arcane) | [Release][r-arcane] |
 | <img src="apps/surface-battery/fnos/ICON.PNG" width="28"> | **Surface 电池驱动** | — | Microsoft Surface 电池驱动（Surface Aggregator），应用内按需编译安装，仅 x86 | [GitHub](https://github.com/xiowo/fnos_surface_battery_driver) | [Release][r-surface-battery] |
-| <img src="apps/calibre-web/fnos/ICON.PNG" width="28"> | **Calibre-Web** | `8083` | Calibre 电子书库 Web 管理与在线阅读 | [github.com](https://github.com/janeczku/calibre-web) |
-| <img src="apps/clouddrive2/fnos/ICON.PNG" width="28"> | **CloudDrive2** | `19798` | 多网盘挂载与管理工具 | [www.clouddrive2.com](https://www.clouddrive2.com/) |
-| <img src="apps/coolercontrol/fnos/ICON.PNG" width="28"> | **CoolerControl** | `11987` | Linux 风扇与散热设备监控控制面板 | [github.com](https://github.com/codifryed/coolercontrol) |
-| <img src="apps/daidai-panel/fnos/ICON.PNG" width="28"> | **Daidai Panel** | `5701` | 轻量现代的定时任务与脚本管理面板 | [github.com](https://github.com/linzixuanzz/daidai-panel) |
-| <img src="apps/fnclearup/fnos/ICON.PNG" width="28"> | **清理精灵（原生）** | — | 智能扫描已卸载应用、网盘挂载与 Docker 残留目录及重复文件，一键安全清理（Node.js 原生版，root 运行，经 fnOS 桌面打开）。安装前需先在应用中心安装 nodejs_v24 运行时；每日自动同步 FnDepot。 | [github.com](https://github.com/Wyf841015/FnDepot) |
-| <img src="apps/komari/fnos/ICON.PNG" width="28"> | **Komari** | `25774` | 轻量级自托管服务器监控工具，通过 Web 界面查看服务器状态，配合轻量 agent 采集数据。 | [github.com](https://github.com/komari-monitor/komari) |
-| <img src="apps/qinglong/fnos/ICON.PNG" width="28"> | **QingLong** | `5700` | 支持 Python/JavaScript/Shell/TypeScript 的定时任务管理面板 | [github.com](https://github.com/whyour/qinglong) |
-| <img src="apps/rocketchat/fnos/ICON.PNG" width="28"> | **Rocket.Chat** | `3003` | 开源团队协作通讯平台,支持即时消息、音视频通话和文件共享。 | [rocket.chat](https://rocket.chat) |
-| <img src="apps/sub-store/fnos/ICON.PNG" width="28"> | **Sub-Store** | `3001` | 订阅链接管理工具，支持 QX、Loon、Surge、Stash、Egern 和 Shadowrocket 等多种代理客户端的订阅聚合与转换。 | [github.com](https://github.com/sub-store-org/Sub-Store) |
-| <img src="apps/visor/fnos/ICON.PNG" width="28"> | **Visor** | `1081` | 现代化堡垒机 + 自动化运维平台，支持 SSH/RDP/VNC 在线终端、文件管理、批量操作、计划任务、主机监控。 | [github.com](https://github.com/dromara/orion-visor) |
+| <img src="apps/calibre-web/fnos/ICON.PNG" width="28"> | **Calibre-Web** | `8083` | Calibre 电子书库 Web 管理与在线阅读 | [github.com](https://github.com/janeczku/calibre-web) | [Release][r-calibre-web] |
+| <img src="apps/clouddrive2/fnos/ICON.PNG" width="28"> | **CloudDrive2** | `19798` | 多网盘挂载与管理工具 | [www.clouddrive2.com](https://www.clouddrive2.com/) | [Release][r-clouddrive2] |
+| <img src="apps/coolercontrol/fnos/ICON.PNG" width="28"> | **CoolerControl** | `11987` | Linux 风扇与散热设备监控控制面板 | [github.com](https://github.com/codifryed/coolercontrol) | [Release][r-coolercontrol] |
+| <img src="apps/daidai-panel/fnos/ICON.PNG" width="28"> | **Daidai Panel** | `5701` | 轻量现代的定时任务与脚本管理面板 | [github.com](https://github.com/linzixuanzz/daidai-panel) | [Release][r-daidai-panel] |
+| <img src="apps/fnclearup/fnos/ICON.PNG" width="28"> | **清理精灵（原生）** | — | 智能扫描已卸载应用、网盘挂载与 Docker 残留目录及重复文件，一键安全清理（Node.js 原生版，root 运行，经 fnOS 桌面打开）。安装前需先在应用中心安装 nodejs_v24 运行时；每日自动同步 FnDepot。 | [github.com](https://github.com/Wyf841015/FnDepot) | [Release][r-fnclearup] |
+| <img src="apps/komari/fnos/ICON.PNG" width="28"> | **Komari** | `25774` | 轻量级自托管服务器监控工具，通过 Web 界面查看服务器状态，配合轻量 agent 采集数据。 | [github.com](https://github.com/komari-monitor/komari) | [Release][r-komari] |
+| <img src="apps/qinglong/fnos/ICON.PNG" width="28"> | **QingLong** | `5700` | 支持 Python/JavaScript/Shell/TypeScript 的定时任务管理面板 | [github.com](https://github.com/whyour/qinglong) | [Release][r-qinglong] |
+| <img src="apps/rocketchat/fnos/ICON.PNG" width="28"> | **Rocket.Chat** | `3003` | 开源团队协作通讯平台,支持即时消息、音视频通话和文件共享。 | [rocket.chat](https://rocket.chat) | [Release][r-rocketchat] |
+| <img src="apps/sub-store/fnos/ICON.PNG" width="28"> | **Sub-Store** | `3001` | 订阅链接管理工具，支持 QX、Loon、Surge、Stash、Egern 和 Shadowrocket 等多种代理客户端的订阅聚合与转换。 | [github.com](https://github.com/sub-store-org/Sub-Store) | [Release][r-sub-store] |
+| <img src="apps/visor/fnos/ICON.PNG" width="28"> | **Visor** | `1081` | 现代化堡垒机 + 自动化运维平台，支持 SSH/RDP/VNC 在线终端、文件管理、批量操作、计划任务、主机监控。 | [github.com](https://github.com/dromara/orion-visor) | [Release][r-visor] |
 
 ### 🌐 网络工具
 
@@ -246,9 +246,9 @@
 | <img src="apps/easytier/fnos/ICON.PNG" width="28"> | **EasyTier** | `11210` | 简单安全的去中心化异地组网方案，支持 Web 管理和子网代理 | [GitHub](https://github.com/EasyTier/EasyTier) | [Release][r-easytier] |
 | <img src="apps/mihomo/fnos/ICON.PNG" width="28"> | **Mihomo** | `9097` | Clash.Meta 内核 + MetaCubeXD dashboard，含开箱即用配置模板、TUN 模式与 LAN 混合代理 | [GitHub](https://github.com/MetaCubeX/mihomo) | [Release][r-mihomo] |
 | <img src="apps/opensurge/fnos/ICON.PNG" width="28"> | **OpenSurge** | `61767` | 旁路由透明代理网关（mihomo + dnsmasq + nftables），TUN 模式与按设备分流（另用 7890/53） | [GitHub](https://github.com/funchs/opensurge-fnos) | [Release][r-opensurge] |
-| <img src="apps/msf/fnos/ICON.PNG" width="28"> | **MSF** | `7777` | MosDNS + Mihomo DNS 分流与透明代理管理面板 | [github.com](https://github.com/scoltzero/msf) |
-| <img src="apps/sakurafrp/fnos/ICON.PNG" width="28"> | **SakuraFrp** | `7102` | 樱花内网穿透客户端，免费端口映射服务。 | [www.natfrp.com](https://www.natfrp.com) |
-| <img src="apps/zerotier/fnos/ICON.PNG" width="28"> | **ZeroTier** | `3008` | ZeroTier 自托管控制器与 ZTNET Web 管理界面，支持可视化管理虚拟局域网。 | [github.com](https://github.com/sinamics/ztnet) |
+| <img src="apps/msf/fnos/ICON.PNG" width="28"> | **MSF** | `7777` | MosDNS + Mihomo DNS 分流与透明代理管理面板 | [github.com](https://github.com/scoltzero/msf) | [Release][r-msf] |
+| <img src="apps/sakurafrp/fnos/ICON.PNG" width="28"> | **SakuraFrp** | `7102` | 樱花内网穿透客户端，免费端口映射服务。 | [www.natfrp.com](https://www.natfrp.com) | [Release][r-sakurafrp] |
+| <img src="apps/zerotier/fnos/ICON.PNG" width="28"> | **ZeroTier** | `3008` | ZeroTier 自托管控制器与 ZTNET Web 管理界面，支持可视化管理虚拟局域网。 | [github.com](https://github.com/sinamics/ztnet) | [Release][r-zerotier] |
 
 ### 🌐 浏览器
 
