@@ -1,7 +1,5 @@
 {
     "defaults": {
-        "run-as": "package"
-    },
-    "username": "rustdesk-server",
-    "groupname": "rustdesk-server"
+        "run-as": "root"
+    }
 }
