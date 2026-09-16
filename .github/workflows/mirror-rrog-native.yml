@@ -1,0 +1,134 @@
+name: Mirror RROrg native releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Re-publish even when the tag already exists here'
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '23 4 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  setup-rrog:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build matrix from scripts/ci/native-mirror.json
+        id: m
+        run: |
+          set -euo pipefail
+          MATRIX=$(jq -c '[.apps[] | {slug: .slug, display_name: .display_name}]' \
+                   scripts/ci/native-mirror.json)
+          echo "matrix=$(jq -cn --argjson a "$MATRIX" '{include: $a}')" >> "$GITHUB_OUTPUT"
+
+  mirror-rrog:
+    needs: setup-rrog
+    runs-on: ubuntu-latest
+    env:
+      SRC_REPO: RROrg/fn-apps
+      SRC_URL: https://github.com/RROrg/fn-apps
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      FORCE: ${{ inputs.force }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.setup-rrog.outputs.matrix) }}
+    steps:
+      - name: Resolve upstream release tag
+        id: up
+        run: |
+          set -euo pipefail
+          # Plain HTML redirect — no API, so no rate limit from shared runner IPs.
+          URL=$(curl -sSI "${SRC_URL}/releases/latest" \
+                | tr -d '\r' | awk 'tolower($1) == "location:" { print $2 }')
+          TAG="${URL##*/tag/}"
+          if [ -z "$TAG" ] || [ "$TAG" = "$URL" ]; then
+            echo "::error::cannot resolve latest release tag of ${SRC_REPO}"
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "upstream tag: $TAG"
+
+      - name: Resolve asset name and version
+        id: asset
+        run: |
+          set -euo pipefail
+          SLUG="${{ matrix.slug }}"
+          TAG="${{ steps.up.outputs.tag }}"
+          HTML=$(curl -fsSL "${SRC_URL}/releases/expanded_assets/${TAG}")
+          ASSET=$(printf '%s' "$HTML" \
+                  | grep -oE "${SLUG}_all_v[0-9][A-Za-z0-9._-]*\.fpk" | head -n1 || true)
+          if [ -z "$ASSET" ]; then
+            echo "::error::no ${SLUG}_all_v*.fpk inside ${SRC_REPO} release ${TAG}"
+            exit 1
+          fi
+          VERSION=$(printf '%s' "$ASSET" | sed -E "s/^${SLUG}_all_v(.*)\.fpk$/\1/")
+          echo "asset=$ASSET" >> "$GITHUB_OUTPUT"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "${SLUG}: ${ASSET} -> version ${VERSION}"
+
+      - name: Skip when already mirrored
+        id: check
+        run: |
+          set -euo pipefail
+          TAG="${{ matrix.slug }}/v${{ steps.asset.outputs.version }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if [ "${FORCE}" != "true" ] \
+             && gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "$TAG already mirrored — nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Download and repackage fpk
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          SLUG="${{ matrix.slug }}"
+          TAG="${{ steps.up.outputs.tag }}"
+          ASSET="${{ steps.asset.outputs.asset }}"
+          VERSION="${{ steps.asset.outputs.version }}"
+          mkdir -p dl
+          curl -fL -o dl/upstream.fpk "${SRC_URL}/releases/download/${TAG}/${ASSET}"
+          SIZE=$(wc -c < dl/upstream.fpk)
+          if [ "$SIZE" -lt 10240 ]; then
+            echo "::error::download is only ${SIZE} bytes — not a real fpk"
+            exit 1
+          fi
+          # Upstream ships one platform=all package (arch independent). The store
+          # front end builds "<file_prefix>_<fpk_version>_<arch>.fpk", so publish
+          # the same bytes under both arch names.
+          cp dl/upstream.fpk "dl/${SLUG}_${VERSION}_x86.fpk"
+          cp dl/upstream.fpk "dl/${SLUG}_${VERSION}_arm.fpk"
+          rm -f dl/upstream.fpk
+          ls -lh dl
+
+      - name: Publish mirrored release
+        if: steps.check.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          SLUG="${{ matrix.slug }}"
+          VERSION="${{ steps.asset.outputs.version }}"
+          TAG="${{ steps.check.outputs.tag }}"
+          UP="${{ steps.up.outputs.tag }}"
+          NOTES="Mirrored from ${SRC_REPO} ${UP}. Upstream ships a platform=all package; it is republished here as x86/arm assets so the fnOS Apps store can serve it. Source: ${SRC_URL}"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" dl/*.fpk --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$TAG" dl/*.fpk \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "${SLUG} ${VERSION}" \
+              --notes "$NOTES"
+          fi
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets \
+            --jq '.assets[].name'

@@ -3,6 +3,26 @@ name: Update apps.json
 on:
   release:
     types: [published]
+  # Releases are published by other workflows using GITHUB_TOKEN, and GitHub
+  # deliberately does NOT fire `release: published` for token-authored events
+  # (recursion guard). Without this hook apps.json would only ever refresh on a
+  # manual publish. workflow_run is the supported way to chain them.
+  workflow_run:
+    workflows:
+      - Build fnOS App Packages
+      - Mirror upstream releases
+      - Mirror RROrg native releases
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'scripts/apps/**'
+      - 'scripts/ci/**'
+      - '.github/workflows/update-apps-json.yml'
+  schedule:
+    # Safety net: even if an event is missed, the store is refreshed daily.
+    - cron: '40 4 * * *'
   workflow_dispatch:
 
 # Only one instance runs at a time. When multiple builds trigger this

@@ -19,7 +19,25 @@ echo "Fetching release list from ${REPO}..."
 ALL_RELEASES=$(gh release list --repo "$REPO" --limit 1000 --json tagName,publishedAt)
 
 echo "Fetching download statistics..."
-DOWNLOAD_DATA=$(gh api "repos/${REPO}/releases" --paginate | jq '[.[] | {tag: .tag_name, downloads: ([.assets[].download_count] | add // 0)}]')
+# assets[] is kept so platforms can be derived from what was actually built —
+# some apps (e.g. nvidia-driver) are x86-only and must not be offered for arm.
+DOWNLOAD_DATA=$(gh api "repos/${REPO}/releases" --paginate | jq '[.[] | {tag: .tag_name, downloads: ([.assets[].download_count] | add // 0), assets: [.assets[].name]}]')
+
+platforms_for_tag() {
+  local tag="$1"
+  local p
+  p=$(echo "$DOWNLOAD_DATA" | jq -c \
+    --arg tag "$tag" \
+    '[.[] | select(.tag == $tag) | .assets[]]
+     | (map(select(endswith("_x86.fpk"))) | length > 0) as $x86
+     | (map(select(endswith("_arm.fpk"))) | length > 0) as $arm
+     | (if $x86 then ["x86"] else [] end) + (if $arm then ["arm"] else [] end)')
+  if [ -z "$p" ] || [ "$p" = "[]" ]; then
+    echo '["x86","arm"]'
+  else
+    echo "$p"
+  fi
+}
 
 NOW=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
@@ -188,6 +206,7 @@ for slug in LitePan fnclearup; do
     --argjson service_port "$PORT" \
     --arg homepage_url "$HOMEPAGE" \
     --arg icon_url "$ICON" \
+    --argjson platforms "$(platforms_for_tag "$release_tag")" \
     --arg updated_at "$updated_at" \
     --argjson download_count 0 \
     --arg app_type "native" \
@@ -197,13 +216,77 @@ for slug in LitePan fnclearup; do
       display_name: $display_name, description: $description,
       version: $version, fpk_version: $fpk_version, release_tag: $release_tag,
       service_port: $service_port, homepage_url: $homepage_url, icon_url: $icon_url,
-      platforms: ["x86", "arm"], updated_at: $updated_at, download_count: $download_count,
+      platforms: $platforms, updated_at: $updated_at, download_count: $download_count,
       app_type: $app_type, category: $category
     }')
 
   APPS_JSON=$(echo "$APPS_JSON" | jq --argjson app "$app_obj" '. + [$app]')
   echo "  + native ${slug} -> ${release_tag}"
 done
+
+# --- Native apps mirrored from RROrg/fn-apps (data driven) ---
+# The list lives in scripts/ci/native-mirror.json and is shared with
+# .github/workflows/mirror-rrog-native.yml, which publishes the fpk under
+# tag "<slug>/v<version>" with x86/arm asset names.
+MIRROR_CONF="${REPO_ROOT}/scripts/ci/native-mirror.json"
+if [ -f "$MIRROR_CONF" ]; then
+  mirror_total=$(jq '.apps | length' "$MIRROR_CONF")
+  i=0
+  while [ "$i" -lt "$mirror_total" ]; do
+    m_slug=$(jq -r ".apps[$i].slug" "$MIRROR_CONF")
+    m_appname=$(jq -r ".apps[$i].appname" "$MIRROR_CONF")
+    m_prefix=$(jq -r ".apps[$i].file_prefix" "$MIRROR_CONF")
+    m_display=$(jq -r ".apps[$i].display_name" "$MIRROR_CONF")
+    m_desc=$(jq -r ".apps[$i].desc" "$MIRROR_CONF")
+    m_port=$(jq -r ".apps[$i].port" "$MIRROR_CONF")
+    m_cat=$(jq -r ".apps[$i].category" "$MIRROR_CONF")
+    i=$((i + 1))
+
+    latest_release=$(echo "$ALL_RELEASES" | jq -r \
+      --arg prefix "${m_slug}/" \
+      '[.[] | select(.tagName | startswith($prefix))] | sort_by(.publishedAt) | last // empty')
+
+    if [ -z "$latest_release" ] || [ "$latest_release" = "null" ]; then
+      echo "[WARN] No mirrored release for ${m_slug} yet, skipping" >&2
+      continue
+    fi
+
+    release_tag=$(echo "$latest_release" | jq -r '.tagName')
+    updated_at=$(echo "$latest_release" | jq -r '.publishedAt')
+    tag_version="${release_tag#${m_slug}/v}"
+    version="${tag_version%%-r[0-9]*}"
+    fpk_version="$tag_version"
+
+    icon_url="https://raw.githubusercontent.com/${REPO}/main/native-assets/${m_slug}/ICON_256.PNG"
+
+    app_obj=$(jq -n \
+      --arg slug "$m_slug" \
+      --arg appname "$m_appname" \
+      --arg file_prefix "$m_prefix" \
+      --arg display_name "$m_display" \
+      --arg description "$m_desc" \
+      --arg version "$version" \
+      --arg fpk_version "$fpk_version" \
+      --arg release_tag "$release_tag" \
+      --argjson service_port "$m_port" \
+      --arg homepage_url "https://github.com/RROrg/fn-apps" \
+      --arg icon_url "$icon_url" \
+      --argjson platforms "$(platforms_for_tag "$release_tag")" \
+      --arg updated_at "$updated_at" \
+      --arg category "$m_cat" \
+      '{
+        slug: $slug, appname: $appname, file_prefix: $file_prefix,
+        display_name: $display_name, description: $description,
+        version: $version, fpk_version: $fpk_version, release_tag: $release_tag,
+        service_port: $service_port, homepage_url: $homepage_url, icon_url: $icon_url,
+        platforms: $platforms, updated_at: $updated_at, download_count: 0,
+        app_type: "native", category: $category
+      }')
+
+    APPS_JSON=$(echo "$APPS_JSON" | jq --argjson app "$app_obj" '. + [$app]')
+    echo "  + mirrored ${m_slug} -> ${release_tag}"
+  done
+fi
 
 APPS_JSON=$(echo "$APPS_JSON" | jq 'sort_by(.slug)')
 

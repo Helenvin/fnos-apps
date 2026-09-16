@@ -1,0 +1,236 @@
+{
+  "source": "RROrg/fn-apps",
+  "apps": [
+    {
+      "slug": "fn-VirtualHereServer",
+      "appname": "fn-VirtualHereServer",
+      "file_prefix": "fn-VirtualHereServer",
+      "display_name": "VirtualHereServer",
+      "desc": "VirtualHere USB 服务端，支持通过网络远程访问 USB 设备。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-VirtualHereServer_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-WParted",
+      "appname": "fn-WParted",
+      "file_prefix": "fn-WParted",
+      "display_name": "WParted",
+      "desc": "磁盘分区编辑器 - 创建、调整大小、删除、移动、复制、检查和格式化分区。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-WParted_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-advancedsettings",
+      "appname": "fn-advancedsettings",
+      "file_prefix": "fn-advancedsettings",
+      "display_name": "高级设置",
+      "desc": "管理启动设置、电源设置、屏幕设置、SSH设置、CPU设置、DNS设置、网络设置、代理设置、设备信息、端口信息、进程管理、服务管理、网络诊断。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-advancedsettings_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-appdownload",
+      "appname": "fn-appdownload",
+      "file_prefix": "fn-appdownload",
+      "display_name": "应用下载",
+      "desc": "官方商店和第三方源应用下载（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "store",
+      "asset": "fn-appdownload_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-appsettings",
+      "appname": "fn-appsettings",
+      "file_prefix": "fn-appsettings",
+      "display_name": "应用设置",
+      "desc": "设置已安装应用的数据（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-appsettings_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-audioplayer",
+      "appname": "fn-audioplayer",
+      "file_prefix": "fn-audioplayer",
+      "display_name": "音频播放器",
+      "desc": "音频播放器应用，用于播放音频文件。支持包括 mp3、wav、flac、ogg、m4a、aac、wma、ape 等格式，会自动加载音频文件所在目录的歌词文件；支持客户端和服务端两种模式。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "media",
+      "asset": "fn-audioplayer_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-bluetooth",
+      "appname": "fn-bluetooth",
+      "file_prefix": "fn-bluetooth",
+      "display_name": "蓝牙",
+      "desc": "蓝牙设备管理工具，支持配对连接音频设备、键鼠、文件传输、共享网络等功能。支持客户端模式（扫描连接）和服务端模式（接受连接）。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "network",
+      "asset": "fn-bluetooth_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-codeserver",
+      "appname": "fn-codeserver",
+      "file_prefix": "fn-codeserver",
+      "display_name": "code-server",
+      "desc": "code-server 是 VS Code 的在线版本，允许您通过浏览器进行代码编辑和开发。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-codeserver_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-execute",
+      "appname": "fn-execute",
+      "file_prefix": "fn-execute",
+      "display_name": "执行器",
+      "desc": "执行器可直接在可执行程序上右键执行，支持 sh、py、pl、rb、js、ts、lua、bash、zsh、fish、bin、run 等格式的文件。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-execute_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-fail2ban",
+      "appname": "fn-fail2ban",
+      "file_prefix": "fn-fail2ban",
+      "display_name": "fail2ban",
+      "desc": "fail2ban 是一个开源的入侵防御工具，用于保护 Linux 服务器免受暴力破解攻击。 它通过监控日志文件，检测可疑的登录尝试，并自动封禁恶意 IP 地址，从而增强系统的安全性。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-fail2ban_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-grafana-alloy",
+      "appname": "fn-grafana-alloy",
+      "file_prefix": "fn-grafana-alloy",
+      "display_name": "Grafana Alloy",
+      "desc": "可观测性数据采集器，收集系统和应用日志并发送到 Loki。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-grafana-alloy_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-iVentoy",
+      "appname": "fn-iVentoy",
+      "file_prefix": "fn-iVentoy",
+      "display_name": "iVentoy",
+      "desc": "iVentoy - PXE 启动服务器，支持通过局域网网络安装操作系统。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-iVentoy_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-influxdb",
+      "appname": "fn-influxdb",
+      "file_prefix": "fn-influxdb",
+      "display_name": "InfluxDB",
+      "desc": "高性能时序数据库，适用于指标、事件和分析工作负载。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-influxdb_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-installer",
+      "appname": "fn-installer",
+      "file_prefix": "fn-installer",
+      "display_name": "安装器",
+      "desc": "安装器，用于安装本地 FPK 应用文件。支持右键安装。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-installer_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-linux-station",
+      "appname": "fn-linux-station",
+      "file_prefix": "fn-linux-station",
+      "display_name": "linux-station",
+      "desc": "Linux 工作站是一个基于 Linux 的桌面环境，旨在为用户提供一个高效、稳定和易用的工作环境。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 5900,
+      "category": "system",
+      "asset": "fn-linux-station_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-p2s",
+      "appname": "fn-p2s",
+      "file_prefix": "fn-p2s",
+      "display_name": "端口代理",
+      "desc": "通过 fnOS 应用网关路径访问本机端口服务。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "network",
+      "asset": "fn-p2s_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-scheduler",
+      "appname": "fn-scheduler",
+      "file_prefix": "fn-scheduler",
+      "display_name": "任务计划",
+      "desc": "轻量级的任务计划应用，支持设置定时任务以自动执行脚本或命令，同时也支持基于条件的任务触发。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "automation",
+      "asset": "fn-scheduler_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-scrutiny",
+      "appname": "fn-scrutiny",
+      "file_prefix": "fn-scrutiny",
+      "display_name": "Scrutiny",
+      "desc": "硬盘 S.M.A.R.T 健康监控，集成 Scrutiny Web 与 Collector，提供可视化硬盘健康状态追踪。依赖 InfluxDB。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-scrutiny_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-speedtest",
+      "appname": "fn-speedtest",
+      "file_prefix": "fn-speedtest",
+      "display_name": "网络测速",
+      "desc": "测量客户端到服务器的速率，以及服务器到外网的出口速率。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "network",
+      "asset": "fn-speedtest_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-terminal",
+      "appname": "fn-terminal",
+      "file_prefix": "fn-terminal",
+      "display_name": "terminal",
+      "desc": "terminal (ttyd + tmux) 是一个基于 Web 的终端应用程序，允许用户通过浏览器访问和管理服务器终端会话，提供便捷的远程终端操作体验。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-terminal_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-vgmng",
+      "appname": "fn-vgmng",
+      "file_prefix": "fn-vgmng",
+      "display_name": "存储池管理",
+      "desc": "存储池管理, 支持非飞牛存储池(其他NAS系统存储池)的管理。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "system",
+      "asset": "fn-vgmng_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-wifi-hotspot",
+      "appname": "fn-wifi-hotspot",
+      "file_prefix": "fn-wifi-hotspot",
+      "display_name": "无线热点",
+      "desc": "无线热点创建工具，允许用户轻松地将计算机变成一个 Wi-Fi 热点，分享网络连接给其他设备。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "network",
+      "asset": "fn-wifi-hotspot_all_v{version}.fpk"
+    },
+    {
+      "slug": "fn-zerotier",
+      "appname": "fn-zerotier",
+      "file_prefix": "fn-zerotier",
+      "display_name": "ZeroTier",
+      "desc": "ZeroTier 是一个无中心的虚拟网络，无需配置即可连接设备。（镜像自 RROrg/fn-apps，随上游每日自动同步）",
+      "port": 0,
+      "category": "network",
+      "asset": "fn-zerotier_all_v{version}.fpk"
+    }
+  ],
+  "note": "Data-driven list of native apps mirrored from RROrg/fn-apps. Consumed by scripts/ci/generate-apps-json.sh and .github/workflows/mirror-native-releases.yml. Add an app here + drop its ICON_256.PNG into native-assets/<slug>/ and both the store listing and the daily mirror pick it up automatically."
+}
