@@ -1,7 +1,5 @@
 {
     "defaults": {
-        "run-as": "package"
-    },
-    "username": "glance",
-    "groupname": "glance"
+        "run-as": "root"
+    }
 }
