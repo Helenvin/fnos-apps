@@ -1,7 +1,5 @@
 {
     "defaults": {
-        "run-as": "package"
-    },
-    "username": "pocket-id",
-    "groupname": "pocket-id"
+        "run-as": "root"
+    }
 }
