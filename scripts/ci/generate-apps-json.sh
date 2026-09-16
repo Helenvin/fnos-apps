@@ -290,12 +290,18 @@ fi
 
 APPS_JSON=$(echo "$APPS_JSON" | jq 'sort_by(.slug)')
 
+# The app array can exceed Linux's 128 KiB single-argument limit (MAX_ARG_STRLEN),
+# so hand it to jq through a file instead of --argjson. Passing it inline used to
+# fail with "Argument list too long" once apps.json grew past ~190 entries.
+APPS_JSON_TMP="$(mktemp)"
+printf '%s' "$APPS_JSON" > "$APPS_JSON_TMP"
+
 jq -n \
   --argjson schema_version 1 \
   --arg generated_at "$NOW" \
   --arg source_name "$REPO" \
   --arg source_url "https://github.com/${REPO}" \
-  --argjson apps "$APPS_JSON" \
+  --slurpfile apps "$APPS_JSON_TMP" \
   '{
     schema_version: $schema_version,
     generated_at: $generated_at,
@@ -303,8 +309,10 @@ jq -n \
       name: $source_name,
       url: $source_url
     },
-    apps: $apps
+    apps: $apps[0]
   }' > "$OUTPUT"
+
+rm -f "$APPS_JSON_TMP"
 
 app_count=$(jq '.apps | length' "$OUTPUT")
 echo ""
