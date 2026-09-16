@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-16T13:13:50Z",
+  "generated_at": "2026-09-16T13:14:14Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -1841,9 +1841,9 @@
       "file_prefix": "jackett",
       "display_name": "Jackett",
       "description": "Torrent 索引器代理，为 Sonarr/Radarr 等工具提供统一的搜索接口。",
-      "version": "0.24.2595",
-      "fpk_version": "0.24.2595",
-      "release_tag": "jackett/v0.24.2595",
+      "version": "0.24.2601",
+      "fpk_version": "0.24.2601",
+      "release_tag": "jackett/v0.24.2601",
       "service_port": 9117,
       "homepage_url": "https://github.com/Jackett/Jackett",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/jackett/fnos/ICON_256.PNG",
@@ -1851,7 +1851,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T13:13:15Z",
+      "updated_at": "2026-09-16T13:13:52Z",
       "download_count": 165,
       "app_type": "native",
       "category": "automation"
@@ -2558,9 +2558,9 @@
       "file_prefix": "n8n",
       "display_name": "n8n",
       "description": "可视化工作流自动化工具，支持连接数百种服务和 API。",
-      "version": "2.39.5",
-      "fpk_version": "2.39.5",
-      "release_tag": "n8n/v2.39.5",
+      "version": "2.39.6",
+      "fpk_version": "2.39.6",
+      "release_tag": "n8n/v2.39.6",
       "service_port": 5678,
       "homepage_url": "https://n8n.io",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/n8n/fnos/ICON_256.PNG",
@@ -2568,7 +2568,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T13:13:13Z",
+      "updated_at": "2026-09-16T13:13:46Z",
       "download_count": 73,
       "app_type": "docker",
       "category": "system"
@@ -3568,9 +3568,9 @@
       "file_prefix": "sub-store",
       "display_name": "Sub-Store",
       "description": "订阅链接管理工具，支持 QX、Loon、Surge、Stash、Egern 和 Shadowrocket 等多种代理客户端的订阅聚合与转换。",
-      "version": "2.39.6",
-      "fpk_version": "2.39.6",
-      "release_tag": "sub-store/v2.39.6",
+      "version": "2.39.8",
+      "fpk_version": "2.39.8",
+      "release_tag": "sub-store/v2.39.8",
       "service_port": 3001,
       "homepage_url": "https://github.com/sub-store-org/Sub-Store",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sub-store/fnos/ICON_256.PNG",
@@ -3578,7 +3578,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:37:50Z",
+      "updated_at": "2026-09-16T13:13:48Z",
       "download_count": 88,
       "app_type": "docker",
       "category": "system"
@@ -3589,9 +3589,9 @@
       "file_prefix": "suggestarr",
       "display_name": "SuggestArr",
       "description": "基于观影记录自动向 Seerr/Jellyseerr 请求相似影视内容",
-      "version": "2.14.1",
-      "fpk_version": "2.14.1",
-      "release_tag": "suggestarr/v2.14.1",
+      "version": "2.15.0",
+      "fpk_version": "2.15.0",
+      "release_tag": "suggestarr/v2.15.0",
       "service_port": 5007,
       "homepage_url": "https://github.com/giuseppe99barchetta/SuggestArr",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/suggestarr/fnos/ICON_256.PNG",
@@ -3599,7 +3599,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T13:13:13Z",
+      "updated_at": "2026-09-16T13:13:48Z",
       "download_count": 18,
       "app_type": "docker",
       "category": "media"
@@ -3799,9 +3799,9 @@
       "file_prefix": "transmission",
       "display_name": "Transmission",
       "description": "Transmission 是一个轻量级的 BitTorrent 客户端，以简洁高效著称，支持 Web 远程管理。",
-      "version": "latest-2026.09.15",
-      "fpk_version": "latest-2026.09.15",
-      "release_tag": "transmission/vlatest-2026.09.15",
+      "version": "latest-2026.09.16",
+      "fpk_version": "latest-2026.09.16",
+      "release_tag": "transmission/vlatest-2026.09.16",
       "service_port": 9091,
       "homepage_url": "https://transmissionbt.com",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/transmission/fnos/ICON_256.PNG",
@@ -3809,7 +3809,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T13:13:10Z",
+      "updated_at": "2026-09-16T13:13:46Z",
       "download_count": 61,
       "app_type": "docker",
       "category": "download"
