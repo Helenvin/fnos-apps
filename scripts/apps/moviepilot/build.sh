@@ -55,3 +55,30 @@ du -sh app_root/runtime/* | sort -h
 # app.tgz 的形状由共享库统一保证：载荷收成一个不透明的 payload.tar.gz，并剔掉随包
 # Chromium。外层必须是 3 个成员，fnOS 的安装器才解得动——细节见那个库的注释。
 pack_runtime_payload app_root app.tgz
+
+# ⚠️ cmd 三件套必须随 app.tgz 进 TRIM_APPDEST（r2 真机踩坑，2026-09-16）：
+# fnOS 只把 fpk 顶层的 cmd/ 部署到桩目录 /var/apps/<app>/cmd/（供 cmd/main 调用），
+# 而安装目录 ${TRIM_APPDEST}（/vol1/@appcenter/<app>）的内容完全来自 app.tgz 的解压。
+# service-setup / run_service / unpack_runtime 相互引用全部基于 ${TRIM_APPDEST}/cmd/，
+# 少这一份就是 "run_service: No such file or directory" → 两个 pid 秒死 →
+# start_daemon 30s 判失败 → 应用中心永远「启用中」。所以这里把 fnos/cmd 的脚本
+# 追加进 app.tgz：最终成员 = ./ + payload.tar.gz + BUILD-INFO + cmd/ + 3 个脚本，
+# 仍然远低于 pack_runtime_payload 拦截的 10 成员上限，fnOS 安装器解得动。
+CMD_STAGE="$(mktemp -d)"
+cleanup_cmd_stage() { rm -rf "$CMD_STAGE"; }
+trap cleanup_cmd_stage EXIT
+tar -xzf app.tgz -C "$CMD_STAGE"
+mkdir -p "$CMD_STAGE/cmd"
+for f in "$REPO_ROOT"/apps/moviepilot/fnos/cmd/*; do
+    case "$(basename "$f")" in
+        *.md|*.MD) continue ;;
+    esac
+    cp "$f" "$CMD_STAGE/cmd/"
+done
+chmod +x "$CMD_STAGE"/cmd/* 2>/dev/null || true
+echo "==> 把 cmd 三件套补进 app.tgz（TRIM_APPDEST/cmd/ 需要，见上方注释）:"
+ls -l "$CMD_STAGE/cmd/"
+tar -czf app.tgz.new -C "$CMD_STAGE" .
+mv app.tgz.new app.tgz
+members=$(tar -tzf app.tgz | wc -l | tr -d ' ')
+echo "==> app.tgz 重组完成，成员数 ${members}（应为 ~7）"
