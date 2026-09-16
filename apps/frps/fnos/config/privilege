@@ -1,7 +1,5 @@
 {
     "defaults": {
-        "run-as": "package"
-    },
-    "username": "frps",
-    "groupname": "frps"
+        "run-as": "root"
+    }
 }
