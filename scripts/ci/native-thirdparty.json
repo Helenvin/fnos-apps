@@ -1,0 +1,18 @@
+{
+  "note": "Data-driven list of third-party native apps mirrored from their OWN GitHub Releases (unlike RROrg/fn-apps, which has its own list in native-mirror.json). Consumed by scripts/ci/generate-apps-json.sh and .github/workflows/mirror-thirdparty-native.yml. Each entry must publish release tag \"<slug>/v<version>\" with assets named \"<file_prefix>_<version>_x86.fpk\" and \"<file_prefix>_<version>_arm.fpk\", because the store front end builds that URL by concatenation. Add an app here, drop its native-assets/<slug>/ICON_256.PNG, and both the store listing and the daily mirror pick it up automatically.",
+  "apps": [
+    {
+      "slug": "fn-knock",
+      "source": "kci-lnk/fn-knock-turborepo",
+      "appname": "fn-knock",
+      "file_prefix": "fn-knock",
+      "display_name": "敲门 Knock（标准版）",
+      "desc": "面向 NAS、家庭服务器的高性能零信任安全网关：把相册、下载器和自建应用收敛到同一个入口，访客先登录再访问，默认拒绝所有未授权连接。内置反向代理、TOTP/Passkey/密码认证、ACME 证书、DDNS、IP 白名单、WAF、内网穿透（FRP / Cloudflared）与运维监控，网关默认端口 7999，以 root 运行、经 fnOS 桌面图标进入管理面板。注意：应用商店另有非 root 精简版 knock Lite，缺少直连授权、宿主机防火墙管理、自动 HTTPS 与应用内更新，公网暴露场景建议用本版本。安装包镜像自 kci-lnk/fn-knock-turborepo。",
+      "port": 0,
+      "category": "network",
+      "homepage": "https://www.fnknock.cn/",
+      "asset_x86": "fn-knock-{version}-fnos-amd64.fpk",
+      "asset_arm": "fn-knock-{version}-fnos-arm64.fpk"
+    }
+  ]
+}

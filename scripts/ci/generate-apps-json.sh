@@ -288,6 +288,74 @@ if [ -f "$MIRROR_CONF" ]; then
   done
 fi
 
+# --- Third-party native apps mirrored from their own GitHub Releases (data driven) ---
+# The list lives in scripts/ci/native-thirdparty.json and is shared with
+# .github/workflows/mirror-thirdparty-native.yml, which publishes the fpk under
+# tag "<slug>/v<version>" with x86/arm asset names. Unlike the RROrg list above,
+# the homepage comes from the manifest entry so non-RROrg projects are labelled
+# correctly.
+THIRDPARTY_CONF="${REPO_ROOT}/scripts/ci/native-thirdparty.json"
+if [ -f "$THIRDPARTY_CONF" ]; then
+  tp_total=$(jq '.apps | length' "$THIRDPARTY_CONF")
+  i=0
+  while [ "$i" -lt "$tp_total" ]; do
+    t_slug=$(jq -r ".apps[$i].slug" "$THIRDPARTY_CONF")
+    t_appname=$(jq -r ".apps[$i].appname" "$THIRDPARTY_CONF")
+    t_prefix=$(jq -r ".apps[$i].file_prefix" "$THIRDPARTY_CONF")
+    t_display=$(jq -r ".apps[$i].display_name" "$THIRDPARTY_CONF")
+    t_desc=$(jq -r ".apps[$i].desc" "$THIRDPARTY_CONF")
+    t_port=$(jq -r ".apps[$i].port" "$THIRDPARTY_CONF")
+    t_cat=$(jq -r ".apps[$i].category" "$THIRDPARTY_CONF")
+    t_home=$(jq -r ".apps[$i].homepage // empty" "$THIRDPARTY_CONF")
+    i=$((i + 1))
+
+    latest_release=$(echo "$ALL_RELEASES" | jq -r \
+      --arg prefix "${t_slug}/" \
+      '[.[] | select(.tagName | startswith($prefix))] | sort_by(.publishedAt) | last // empty')
+
+    if [ -z "$latest_release" ] || [ "$latest_release" = "null" ]; then
+      echo "[WARN] No mirrored release for ${t_slug} yet, skipping" >&2
+      continue
+    fi
+
+    release_tag=$(echo "$latest_release" | jq -r '.tagName')
+    updated_at=$(echo "$latest_release" | jq -r '.publishedAt')
+    tag_version="${release_tag#${t_slug}/v}"
+    version="${tag_version%%-r[0-9]*}"
+    fpk_version="$tag_version"
+
+    icon_url="https://raw.githubusercontent.com/${REPO}/main/native-assets/${t_slug}/ICON_256.PNG"
+    homepage_url="${t_home:-https://github.com/${REPO}}"
+
+    app_obj=$(jq -n \
+      --arg slug "$t_slug" \
+      --arg appname "$t_appname" \
+      --arg file_prefix "$t_prefix" \
+      --arg display_name "$t_display" \
+      --arg description "$t_desc" \
+      --arg version "$version" \
+      --arg fpk_version "$fpk_version" \
+      --arg release_tag "$release_tag" \
+      --argjson service_port "$t_port" \
+      --arg homepage_url "$homepage_url" \
+      --arg icon_url "$icon_url" \
+      --argjson platforms "$(platforms_for_tag "$release_tag")" \
+      --arg updated_at "$updated_at" \
+      --arg category "$t_cat" \
+      '{
+        slug: $slug, appname: $appname, file_prefix: $file_prefix,
+        display_name: $display_name, description: $description,
+        version: $version, fpk_version: $fpk_version, release_tag: $release_tag,
+        service_port: $service_port, homepage_url: $homepage_url, icon_url: $icon_url,
+        platforms: $platforms, updated_at: $updated_at, download_count: 0,
+        app_type: "native", category: $category
+      }')
+
+    APPS_JSON=$(echo "$APPS_JSON" | jq --argjson app "$app_obj" '. + [$app]')
+    echo "  + thirdparty ${t_slug} -> ${release_tag}"
+  done
+fi
+
 APPS_JSON=$(echo "$APPS_JSON" | jq 'sort_by(.slug)')
 
 # The app array can exceed Linux's 128 KiB single-argument limit (MAX_ARG_STRLEN),

@@ -1,0 +1,145 @@
+name: Mirror third-party native releases
+
+on:
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Re-publish even when the tag already exists here'
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '37 4 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build matrix from scripts/ci/native-thirdparty.json
+        id: m
+        run: |
+          set -euo pipefail
+          MATRIX=$(jq -c '[.apps[] | {slug: .slug, source: .source, file_prefix: .file_prefix, asset_x86: .asset_x86, asset_arm: .asset_arm}]' \
+                   scripts/ci/native-thirdparty.json)
+          echo "matrix=$(jq -cn --argjson a "$MATRIX" '{include: $a}')" >> "$GITHUB_OUTPUT"
+
+  mirror:
+    needs: setup
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      SRC_URL: https://github.com/${{ matrix.source }}
+      FORCE: ${{ inputs.force }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.setup.outputs.matrix) }}
+    steps:
+      - name: Resolve upstream release tag
+        id: up
+        run: |
+          set -euo pipefail
+          # Plain HTML redirect — no API call, so shared runner IPs never get rate-limited.
+          URL=$(curl -sSI "${SRC_URL}/releases/latest" \
+                | tr -d '\r' | awk 'tolower($1) == "location:" { print $2 }')
+          TAG="${URL##*/tag/}"
+          if [ -z "$TAG" ] || [ "$TAG" = "$URL" ]; then
+            echo "::error::cannot resolve latest release tag of ${{ matrix.source }}"
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+          echo "upstream tag: $TAG"
+
+      - name: Skip when already mirrored
+        id: check
+        run: |
+          set -euo pipefail
+          TAG="${{ matrix.slug }}/v${{ steps.up.outputs.version }}"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+          if [ "${FORCE}" != "true" ] \
+             && gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "$TAG already mirrored — nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Mirror store icon from the fpk (idempotent)
+        env:
+          SLUG: ${{ matrix.slug }}
+          VER: ${{ steps.up.outputs.version }}
+        run: |
+          set -euo pipefail
+          ICON_PATH="native-assets/${SLUG}/ICON_256.PNG"
+          if gh api "repos/${GITHUB_REPOSITORY}/contents/${ICON_PATH}" >/dev/null 2>&1; then
+            echo "${ICON_PATH} already present — nothing to do."
+            exit 0
+          fi
+          # ICON_256.PNG ships inside the fpk, so take it from the package itself
+          # instead of depending on a raw upstream path that may move.
+          NAME=$(printf '%s' '${{ matrix.asset_x86 }}' | sed "s/{version}/${VER}/")
+          curl -fL -o /tmp/icon-src.fpk "${SRC_URL}/releases/download/${{ steps.up.outputs.tag }}/${NAME}"
+          tar -xf /tmp/icon-src.fpk ICON_256.PNG -C /tmp
+          B64=$(base64 -w0 /tmp/ICON_256.PNG)
+          gh api -X PUT "repos/${GITHUB_REPOSITORY}/contents/${ICON_PATH}" \
+            -f message="chore: add ${SLUG} store icon (extracted from upstream fpk)" \
+            -f content="$B64" >/dev/null
+          echo "icon mirrored to ${ICON_PATH}"
+
+      - name: Download upstream fpks
+        if: steps.check.outputs.skip == 'false'
+        env:
+          VER: ${{ steps.up.outputs.version }}
+        run: |
+          set -euo pipefail
+          mkdir -p dl
+          for ARCH in x86 arm; do
+            if [ "$ARCH" = "x86" ]; then
+              NAME=$(printf '%s' '${{ matrix.asset_x86 }}' | sed "s/{version}/${VER}/")
+            else
+              NAME=$(printf '%s' '${{ matrix.asset_arm }}' | sed "s/{version}/${VER}/")
+            fi
+            curl -fL -o "dl/${ARCH}.fpk" \
+              "${SRC_URL}/releases/download/${{ steps.up.outputs.tag }}/${NAME}"
+            SIZE=$(wc -c < "dl/${ARCH}.fpk")
+            if [ "$SIZE" -lt 102400 ]; then
+              echo "::error::${NAME} is only ${SIZE} bytes — not a real fpk"
+              exit 1
+            fi
+            echo "downloaded ${NAME} (${SIZE} bytes)"
+          done
+          # Upstream ships separate amd64/arm64 fnOS packages. The store front end
+          # builds "<file_prefix>_<fpk_version>_<arch>.fpk", so rename both.
+          for ARCH in x86 arm; do
+            mv "dl/${ARCH}.fpk" "dl/${{ matrix.file_prefix }}_${VER}_${ARCH}.fpk"
+          done
+          ls -lh dl
+
+      - name: Publish mirrored release
+        if: steps.check.outputs.skip == 'false'
+        env:
+          SLUG: ${{ matrix.slug }}
+          VER: ${{ steps.up.outputs.version }}
+          SRC: ${{ matrix.source }}
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.check.outputs.tag }}"
+          NOTES=$(printf 'Native fpk mirrored from %s %s.\nUpstream ships separate amd64/arm64 fnOS packages; they are republished here as x86/arm assets under the store file-name convention.\nSource: %s' \
+            "${SRC}" "${{ steps.up.outputs.tag }}" "https://github.com/${SRC}")
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" dl/*.fpk --repo "$GITHUB_REPOSITORY" --clobber
+          else
+            gh release create "$TAG" dl/*.fpk \
+              --repo "$GITHUB_REPOSITORY" \
+              --title "${SLUG} ${VER}" \
+              --notes "$NOTES"
+          fi
+          gh release view "$TAG" --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name'

@@ -1,7 +1,7 @@
 # fnOS Apps
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-![Apps](https://img.shields.io/badge/apps-194-2ea44f)
+![Apps](https://img.shields.io/badge/apps-195-2ea44f)
 ![Platform](https://img.shields.io/badge/fnOS-third--party-orange)
 
 面向飞牛 fnOS 的第三方应用打包仓库。自动跟踪上游版本，构建可直接安装的 `.fpk` 包。
@@ -249,6 +249,7 @@
 | <img src="apps/msf/fnos/ICON.PNG" width="28"> | **MSF** | `7777` | MosDNS + Mihomo DNS 分流与透明代理管理面板 | [github.com](https://github.com/scoltzero/msf) | [Release][r-msf] |
 | <img src="apps/sakurafrp/fnos/ICON.PNG" width="28"> | **SakuraFrp** | `7102` | 樱花内网穿透客户端，免费端口映射服务。 | [www.natfrp.com](https://www.natfrp.com) | [Release][r-sakurafrp] |
 | <img src="apps/zerotier/fnos/ICON.PNG" width="28"> | **ZeroTier** | `3008` | ZeroTier 自托管控制器与 ZTNET Web 管理界面，支持可视化管理虚拟局域网。 | [github.com](https://github.com/sinamics/ztnet) | [Release][r-zerotier] |
+| <img src="native-assets/fn-knock/ICON_256.PNG" width="28"> | **敲门 Knock（标准版）** | — | 零信任安全网关：把相册、下载器与自建应用收敛到同一个入口，访客先登录再访问，默认拒绝未授权连接。内置反向代理、TOTP/Passkey 认证、ACME 证书、DDNS、IP 白名单、WAF、内网穿透与运维监控。网关端口 `7999`，以 root 运行、经 fnOS 桌面图标打开管理面板（商店另有非 root 精简版 knock Lite，公网暴露场景建议用本版本）。镜像自 kci-lnk/fn-knock-turborepo，随上游每日自动同步 | [官网](https://www.fnknock.cn/) | [Release][r-fn-knock] |
 
 ### 🌐 浏览器
 
@@ -317,6 +318,7 @@ fnos-apps/
 - 统一使用 `reusable-build-app.yml` 实现版本检查、矩阵构建、发布
 - 标签策略由 `scripts/ci/resolve-release-tag.sh` 管理，支持 `-r2/-r3` 修订版自动递增
 - 日常构建由定时任务和手动触发驱动，push 触发仅构建变更的应用
+- 现成的第三方原生 fpk 由 `mirror-rrog-native.yml`、`mirror-thirdparty-native.yml` 每日跟踪上游发布，自动镜像为商店命名规范并刷新 `apps.json`
 
 ## 变更记录
 
@@ -329,7 +331,7 @@ fnos-apps/
 ## 安全与透明
 
 - 本仓库仅下载并重打包官方发布内容，不修改上游业务逻辑
-- 当前应用均按非 root 用户运行（提升默认安全性）
+- 应用默认按非 root 用户运行（提升默认安全性）；个别需要宿主机权限的原生应用（清理精灵、敲门 Knock）以 root 运行，已在其说明中标注
 - 构建脚本、CI 流程与发布记录均公开可审计
 
 <!-- Release Links -->
@@ -498,6 +500,7 @@ fnos-apps/
 [r-fn-wifi-hotspot]: https://github.com/Helenvin/fnos-apps/releases?q=fn-wifi-hotspot
 [r-fn-zerotier]: https://github.com/Helenvin/fnos-apps/releases?q=fn-zerotier
 [r-fnclearup]: https://github.com/Helenvin/fnos-apps/releases?q=fnclearup
+[r-fn-knock]: https://github.com/Helenvin/fnos-apps/releases?q=fn-knock
 [r-komari]: https://github.com/Helenvin/fnos-apps/releases?q=komari
 [r-mail-archiver]: https://github.com/Helenvin/fnos-apps/releases?q=mail-archiver
 [r-mdc]: https://github.com/Helenvin/fnos-apps/releases?q=mdc

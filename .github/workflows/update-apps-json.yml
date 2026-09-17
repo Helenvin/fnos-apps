@@ -12,6 +12,7 @@ on:
       - Build fnOS App Packages
       - Mirror upstream releases
       - Mirror RROrg native releases
+      - Mirror third-party native releases
     types: [completed]
   push:
     branches: [main]
