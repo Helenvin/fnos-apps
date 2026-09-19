@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-18T12:47:53Z",
+  "generated_at": "2026-09-19T07:24:37Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -1442,9 +1442,9 @@
       "file_prefix": "fnclearup",
       "display_name": "清理精灵（原生）",
       "description": "智能扫描已卸载应用、网盘挂载与 Docker 残留目录及重复文件，一键安全清理（Node.js 原生版，root 运行，经 fnOS 桌面打开）。安装前需先在应用中心安装 nodejs_v24 运行时；每日自动同步 FnDepot。",
-      "version": "0.9.8",
-      "fpk_version": "0.9.8",
-      "release_tag": "fnclearup/v0.9.8",
+      "version": "0.11.0",
+      "fpk_version": "0.11.0",
+      "release_tag": "fnclearup/v0.11.0",
       "service_port": 0,
       "homepage_url": "https://github.com/Wyf841015/FnDepot",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/native-assets/fnclearup/ICON_256.PNG",
@@ -1452,7 +1452,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:23:57Z",
+      "updated_at": "2026-09-19T07:24:22Z",
       "download_count": 0,
       "app_type": "native",
       "category": "system"
