@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-21T14:56:19Z",
+  "generated_at": "2026-09-22T07:47:54Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -475,9 +475,9 @@
       "file_prefix": "clouddrive2",
       "display_name": "CloudDrive2",
       "description": "多网盘挂载与管理工具",
-      "version": "1.0.20",
-      "fpk_version": "1.0.20",
-      "release_tag": "clouddrive2/v1.0.20",
+      "version": "1.0.19",
+      "fpk_version": "1.0.19",
+      "release_tag": "clouddrive2/v1.0.19",
       "service_port": 19798,
       "homepage_url": "https://www.clouddrive2.com/",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/clouddrive2/fnos/ICON_256.PNG",
@@ -485,7 +485,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-21T14:55:24Z",
+      "updated_at": "2026-09-22T07:47:28Z",
       "download_count": 237,
       "app_type": "docker",
       "category": "system"
@@ -2578,9 +2578,9 @@
       "file_prefix": "n8n",
       "display_name": "n8n",
       "description": "可视化工作流自动化工具，支持连接数百种服务和 API。",
-      "version": "2.39.10",
-      "fpk_version": "2.39.10",
-      "release_tag": "n8n/v2.39.10",
+      "version": "2.39.9",
+      "fpk_version": "2.39.9",
+      "release_tag": "n8n/v2.39.9",
       "service_port": 5678,
       "homepage_url": "https://n8n.io",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/n8n/fnos/ICON_256.PNG",
@@ -2588,7 +2588,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-21T14:55:27Z",
+      "updated_at": "2026-09-22T07:47:31Z",
       "download_count": 73,
       "app_type": "docker",
       "category": "system"
@@ -3104,9 +3104,9 @@
       "file_prefix": "pocket-id",
       "display_name": "Pocket ID",
       "description": "轻量 OIDC 单点登录/Passkey 身份提供方：为 Jellyfin、Immich、Nginx Proxy Manager 等自托管应用提供「指纹/Passkey 免密码」统一登录，无需暴露密码",
-      "version": "2.15.0",
-      "fpk_version": "2.15.0",
-      "release_tag": "pocket-id/v2.15.0",
+      "version": "2.16.0",
+      "fpk_version": "2.16.0",
+      "release_tag": "pocket-id/v2.16.0",
       "service_port": 1411,
       "homepage_url": "https://pocket-id.org",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/pocket-id/fnos/ICON_256.PNG",
@@ -3114,7 +3114,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-20T12:55:48Z",
+      "updated_at": "2026-09-22T07:47:33Z",
       "download_count": 6,
       "app_type": "native",
       "category": "system"
