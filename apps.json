@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-23T13:27:00Z",
+  "generated_at": "2026-09-24T07:40:49Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -97,8 +97,8 @@
       "display_name": "Aellus",
       "description": "轻量局域网文件互传工具：手机 / 电脑浏览器访问 NAS 地址即可上传、浏览与下载文件，零配置、免流量、不经过中转服务器。文件按设备名归档、自动加时间戳防覆盖；删除与路径修改仅限本机（飞牛桌面打开）操作，远程设备只读，防误删。",
       "version": "1.0.3",
-      "fpk_version": "1.0.3",
-      "release_tag": "aellus/v1.0.3",
+      "fpk_version": "1.0.3-r1",
+      "release_tag": "aellus/v1.0.3-r1",
       "service_port": 8000,
       "homepage_url": "https://github.com/YGQ8988/Aellus",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/aellus/fnos/ICON_256.PNG",
@@ -106,7 +106,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-22T13:11:02Z",
+      "updated_at": "2026-09-24T07:40:20Z",
       "download_count": 8,
       "app_type": "native",
       "category": "network"
@@ -2431,9 +2431,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "latest-2026.09.23",
-      "fpk_version": "latest-2026.09.23",
-      "release_tag": "metube/vlatest-2026.09.23",
+      "version": "2026.09.23",
+      "fpk_version": "2026.09.23",
+      "release_tag": "metube/v2026.09.23",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -2441,7 +2441,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-23T13:26:08Z",
+      "updated_at": "2026-09-24T07:40:24Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
