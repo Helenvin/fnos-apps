@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-26T12:45:11Z",
+  "generated_at": "2026-09-26T12:46:31Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -496,9 +496,9 @@
       "file_prefix": "cloudflared",
       "display_name": "Cloudflare Tunnel",
       "description": "Cloudflare 内网穿透隧道，通过 Web 界面管理 Tunnel Token 配置",
-      "version": "2026.9.1",
-      "fpk_version": "2026.9.1",
-      "release_tag": "cloudflared/v2026.9.1",
+      "version": "2026.9.3",
+      "fpk_version": "2026.9.3",
+      "release_tag": "cloudflared/v2026.9.3",
       "service_port": 14333,
       "homepage_url": "https://github.com/WisdomSky/Cloudflared-web",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/cloudflared/fnos/ICON_256.PNG",
@@ -506,7 +506,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:28:21Z",
+      "updated_at": "2026-09-26T12:45:52Z",
       "download_count": 158,
       "app_type": "docker",
       "category": "network"
