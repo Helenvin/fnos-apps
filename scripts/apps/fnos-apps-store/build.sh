@@ -12,7 +12,9 @@ APP_FNOS_DIR="$REPO_ROOT/apps/fnos-apps-store/fnos"
 
 echo "==> Building fnos-apps-store ${VERSION} for ${TARBALL_ARCH}"
 
-DOWNLOAD_URL="https://github.com/conversun/fnos-store/releases/download/v${VERSION}/store-server-linux-${TARBALL_ARCH}"
+# Helenvin patch: the store binary is released from this fork (Helenvin/fnos-store),
+# not upstream — the hv* tags only exist here.
+DOWNLOAD_URL="https://github.com/Helenvin/fnos-store/releases/download/v${VERSION}/store-server-linux-${TARBALL_ARCH}"
 curl -fL -o store-server "$DOWNLOAD_URL"
 chmod +x store-server
 
