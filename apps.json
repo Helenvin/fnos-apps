@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-30T10:43:48Z",
+  "generated_at": "2026-09-30T14:42:31Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -706,9 +706,9 @@
       "file_prefix": "dpanel",
       "display_name": "DPanel",
       "description": "轻量级 Docker 可视化管理面板，支持容器管理和镜像操作。",
-      "version": "1.10.10",
-      "fpk_version": "1.10.10",
-      "release_tag": "dpanel/v1.10.10",
+      "version": "1.11.0",
+      "fpk_version": "1.11.0",
+      "release_tag": "dpanel/v1.11.0",
       "service_port": 8807,
       "homepage_url": "https://github.com/donknap/dpanel",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/dpanel/fnos/ICON_256.PNG",
@@ -716,7 +716,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-14T14:48:27Z",
+      "updated_at": "2026-09-30T14:42:08Z",
       "download_count": 185,
       "app_type": "docker",
       "category": "system"
@@ -2431,9 +2431,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "2026.09.29",
-      "fpk_version": "2026.09.29",
-      "release_tag": "metube/v2026.09.29",
+      "version": "latest-2026.09.30",
+      "fpk_version": "latest-2026.09.30",
+      "release_tag": "metube/vlatest-2026.09.30",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -2441,7 +2441,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-30T08:44:14Z",
+      "updated_at": "2026-09-30T14:42:11Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
@@ -3525,9 +3525,9 @@
       "file_prefix": "songloft",
       "display_name": "Songloft",
       "description": "自托管音乐服务器，支持本地音乐管理与 Web 播放",
-      "version": "2.12.1",
-      "fpk_version": "2.12.1",
-      "release_tag": "songloft/v2.12.1",
+      "version": "2.13.0",
+      "fpk_version": "2.13.0",
+      "release_tag": "songloft/v2.13.0",
       "service_port": 58091,
       "homepage_url": "https://github.com/songloft-org/songloft",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/songloft/fnos/ICON_256.PNG",
@@ -3535,7 +3535,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-15T13:13:15Z",
+      "updated_at": "2026-09-30T14:42:10Z",
       "download_count": 208,
       "app_type": "docker",
       "category": "media"
