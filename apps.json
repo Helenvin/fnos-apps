@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-02T10:43:43Z",
+  "generated_at": "2026-10-02T14:32:24Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -643,9 +643,9 @@
       "file_prefix": "danmu-api",
       "display_name": "Danmu API",
       "description": "弹幕 API 服务器：支持爱优腾芒哔咪人韩巴狐乐西埋帆红弹幕直接获取，兼容弹弹play 搜索/详情/弹幕接口规范，提供日志记录与 Web 管理界面",
-      "version": "1.21.3",
-      "fpk_version": "1.21.3",
-      "release_tag": "danmu-api/v1.21.3",
+      "version": "1.21.4",
+      "fpk_version": "1.21.4",
+      "release_tag": "danmu-api/v1.21.4",
       "service_port": 9321,
       "homepage_url": "https://github.com/huangxd-/danmu_api",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/danmu-api/fnos/ICON_256.PNG",
@@ -653,7 +653,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-26T12:44:09Z",
+      "updated_at": "2026-10-02T14:31:59Z",
       "download_count": 71,
       "app_type": "docker",
       "category": "content"
@@ -2431,9 +2431,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "latest-2026.10.01",
-      "fpk_version": "latest-2026.10.01",
-      "release_tag": "metube/vlatest-2026.10.01",
+      "version": "latest-2026.10.02",
+      "fpk_version": "latest-2026.10.02",
+      "release_tag": "metube/vlatest-2026.10.02",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -2441,7 +2441,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-01T15:11:36Z",
+      "updated_at": "2026-10-02T14:32:05Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
@@ -3903,9 +3903,9 @@
       "file_prefix": "vibenvr",
       "display_name": "VibeNVR",
       "description": "AI 网络视频录像机，支持摄像头管理、录像与硬件加速转码。",
-      "version": "1.36.1",
-      "fpk_version": "1.36.1",
-      "release_tag": "vibenvr/v1.36.1",
+      "version": "1.36.2",
+      "fpk_version": "1.36.2",
+      "release_tag": "vibenvr/v1.36.2",
       "service_port": 8087,
       "homepage_url": "https://github.com/spupuz/VibeNVR",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/vibenvr/fnos/ICON_256.PNG",
@@ -3913,7 +3913,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-02T08:40:33Z",
+      "updated_at": "2026-10-02T14:32:03Z",
       "download_count": 51,
       "app_type": "docker",
       "category": "media"
