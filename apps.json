@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-05T11:50:02Z",
+  "generated_at": "2026-10-05T16:53:41Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -286,9 +286,9 @@
       "file_prefix": "avdb",
       "display_name": "AVdb 影音自动化",
       "description": "AVdb 影音自动化：串接 MDC-NG 刮削信息自动归档、维护映射表，并通过 docker.sock 联动重启 MDC。基于 leolitaly/avdb 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的数据库与规则数据。",
-      "version": "2026.9.9-1521",
-      "fpk_version": "2026.9.9-1521-r3",
-      "release_tag": "avdb/v2026.9.9-1521-r3",
+      "version": "2026.10.5-1351",
+      "fpk_version": "2026.10.5-1351",
+      "release_tag": "avdb/v2026.10.5-1351",
       "service_port": 8000,
       "homepage_url": "https://github.com/Helenvin/AVdb-Only",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/avdb/fnos/ICON_256.PNG",
@@ -296,7 +296,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T14:55:12Z",
+      "updated_at": "2026-10-05T16:53:19Z",
       "download_count": 4,
       "app_type": "docker",
       "category": "media"
@@ -1736,9 +1736,9 @@
       "file_prefix": "homarr",
       "display_name": "Homarr",
       "description": "可视化应用仪表盘，深度集成 *arr 套件状态展示",
-      "version": "2.1.2",
-      "fpk_version": "2.1.2",
-      "release_tag": "homarr/v2.1.2",
+      "version": "2.2.0",
+      "fpk_version": "2.2.0",
+      "release_tag": "homarr/v2.2.0",
       "service_port": 7575,
       "homepage_url": "https://homarr.dev",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/homarr/fnos/ICON_256.PNG",
@@ -1746,7 +1746,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-04T13:46:17Z",
+      "updated_at": "2026-10-05T16:53:19Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "system"
@@ -2431,9 +2431,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "latest-2026.10.04",
-      "fpk_version": "latest-2026.10.04",
-      "release_tag": "metube/vlatest-2026.10.04",
+      "version": "latest-2026.10.05",
+      "fpk_version": "latest-2026.10.05",
+      "release_tag": "metube/vlatest-2026.10.05",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -2441,7 +2441,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-04T13:46:24Z",
+      "updated_at": "2026-10-05T16:53:23Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
