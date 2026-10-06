@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-06T11:30:02Z",
+  "generated_at": "2026-10-06T14:49:17Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -2431,9 +2431,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "2026.09.29",
-      "fpk_version": "2026.09.29",
-      "release_tag": "metube/v2026.09.29",
+      "version": "latest-2026.10.06",
+      "fpk_version": "latest-2026.10.06",
+      "release_tag": "metube/vlatest-2026.10.06",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -2441,7 +2441,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-06T09:07:29Z",
+      "updated_at": "2026-10-06T14:48:56Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
@@ -2452,9 +2452,9 @@
       "file_prefix": "miair-next",
       "display_name": "MiAir Next",
       "description": "将小米小爱音箱转换为 DLNA 与 AirPlay 接收器，提供 Web 管理后台",
-      "version": "0.6.0",
-      "fpk_version": "0.6.0",
-      "release_tag": "miair-next/v0.6.0",
+      "version": "0.6.1",
+      "fpk_version": "0.6.1",
+      "release_tag": "miair-next/v0.6.1",
       "service_port": 8300,
       "homepage_url": "https://github.com/deerwan/miair-next",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/miair-next/fnos/ICON_256.PNG",
@@ -2462,7 +2462,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:34:04Z",
+      "updated_at": "2026-10-06T14:49:03Z",
       "download_count": 77,
       "app_type": "docker",
       "category": "media"
@@ -2999,9 +2999,9 @@
       "file_prefix": "penpot",
       "display_name": "Penpot",
       "description": "开源设计和原型工具，Figma 的自托管替代方案，支持团队协作",
-      "version": "2.18.2",
-      "fpk_version": "2.18.2",
-      "release_tag": "penpot/v2.18.2",
+      "version": "2.18.3",
+      "fpk_version": "2.18.3",
+      "release_tag": "penpot/v2.18.3",
       "service_port": 9001,
       "homepage_url": "https://github.com/penpot/penpot",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/penpot/fnos/ICON_256.PNG",
@@ -3009,7 +3009,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-05T16:53:55Z",
+      "updated_at": "2026-10-06T14:49:03Z",
       "download_count": 17,
       "app_type": "docker",
       "category": "system"
@@ -3588,9 +3588,9 @@
       "file_prefix": "sub-store",
       "display_name": "Sub-Store",
       "description": "订阅链接管理工具，支持 QX、Loon、Surge、Stash、Egern 和 Shadowrocket 等多种代理客户端的订阅聚合与转换。",
-      "version": "2.42.2",
-      "fpk_version": "2.42.2",
-      "release_tag": "sub-store/v2.42.2",
+      "version": "2.42.3",
+      "fpk_version": "2.42.3",
+      "release_tag": "sub-store/v2.42.3",
       "service_port": 3001,
       "homepage_url": "https://github.com/sub-store-org/Sub-Store",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/sub-store/fnos/ICON_256.PNG",
@@ -3598,7 +3598,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-27T08:21:30Z",
+      "updated_at": "2026-10-06T14:49:03Z",
       "download_count": 88,
       "app_type": "docker",
       "category": "system"
