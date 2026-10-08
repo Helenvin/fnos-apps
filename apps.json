@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-08T11:36:30Z",
+  "generated_at": "2026-10-08T15:18:05Z",
   "source": {
     "name": "Helenvin/fnos-apps",
     "url": "https://github.com/Helenvin/fnos-apps"
@@ -286,9 +286,9 @@
       "file_prefix": "avdb",
       "display_name": "AVdb 影音自动化",
       "description": "AVdb 影音自动化：串接 MDC-NG 刮削信息自动归档、维护映射表，并通过 docker.sock 联动重启 MDC。基于 leolitaly/avdb 多架构镜像的 Docker 打包，安装向导默认接管既有手动部署的数据库与规则数据。",
-      "version": "2026.10.5-1351",
-      "fpk_version": "2026.10.5-1351",
-      "release_tag": "avdb/v2026.10.5-1351",
+      "version": "2026.10.8-1257",
+      "fpk_version": "2026.10.8-1257",
+      "release_tag": "avdb/v2026.10.8-1257",
       "service_port": 8000,
       "homepage_url": "https://github.com/Helenvin/AVdb-Only",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/avdb/fnos/ICON_256.PNG",
@@ -296,7 +296,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-05T16:53:19Z",
+      "updated_at": "2026-10-08T15:17:43Z",
       "download_count": 4,
       "app_type": "docker",
       "category": "media"
@@ -2431,9 +2431,9 @@
       "file_prefix": "metube",
       "display_name": "MeTube",
       "description": "网页版 yt-dlp 下载器：粘贴链接即下，支持 YouTube/B 站等上千站点、多任务队列与音视频格式选择，文件自动落盘到 NAS",
-      "version": "latest-2026.10.06",
-      "fpk_version": "latest-2026.10.06",
-      "release_tag": "metube/vlatest-2026.10.06",
+      "version": "latest-2026.10.08",
+      "fpk_version": "latest-2026.10.08",
+      "release_tag": "metube/vlatest-2026.10.08",
       "service_port": 8281,
       "homepage_url": "https://github.com/alexta69/metube",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/metube/fnos/ICON_256.PNG",
@@ -2441,7 +2441,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-06T14:48:56Z",
+      "updated_at": "2026-10-08T15:17:45Z",
       "download_count": 45,
       "app_type": "docker",
       "category": "download"
@@ -2789,9 +2789,9 @@
       "file_prefix": "node-red",
       "display_name": "Node-RED",
       "description": "可视化流程编排工具，支持 IoT 和智能家居自动化。",
-      "version": "5.0.7",
-      "fpk_version": "5.0.7",
-      "release_tag": "node-red/v5.0.7",
+      "version": "5.0.8",
+      "fpk_version": "5.0.8",
+      "release_tag": "node-red/v5.0.8",
       "service_port": 1880,
       "homepage_url": "https://github.com/node-red/node-red",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/node-red/fnos/ICON_256.PNG",
@@ -2799,7 +2799,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-09-12T18:35:10Z",
+      "updated_at": "2026-10-08T15:17:50Z",
       "download_count": 59,
       "app_type": "docker",
       "category": "system"
@@ -3609,9 +3609,9 @@
       "file_prefix": "suggestarr",
       "display_name": "SuggestArr",
       "description": "基于观影记录自动向 Seerr/Jellyseerr 请求相似影视内容",
-      "version": "2.16.0",
-      "fpk_version": "2.16.0",
-      "release_tag": "suggestarr/v2.16.0",
+      "version": "2.16.1",
+      "fpk_version": "2.16.1",
+      "release_tag": "suggestarr/v2.16.1",
       "service_port": 5007,
       "homepage_url": "https://github.com/giuseppe99barchetta/SuggestArr",
       "icon_url": "https://raw.githubusercontent.com/Helenvin/fnos-apps/main/apps/suggestarr/fnos/ICON_256.PNG",
@@ -3619,7 +3619,7 @@
         "x86",
         "arm"
       ],
-      "updated_at": "2026-10-08T09:10:21Z",
+      "updated_at": "2026-10-08T15:17:47Z",
       "download_count": 18,
       "app_type": "docker",
       "category": "media"
